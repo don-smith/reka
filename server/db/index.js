@@ -1,7 +1,8 @@
-var {createHost, getHosts, getHost} = require('./hosts')
-var {createEvent, getEvents, getEvent} = require('./events')
-var {createGuest, getGuests, getGuest} = require('./guests')
-var {createOffering, getOfferings, getOffering} = require('./offerings')
+const {createHost, getHosts, getHost} = require('./hosts')
+const {createEvent, getEvents, getEvent} = require('./events')
+const {createGuest, getGuests, getGuest} = require('./guests')
+const {createOffering, getOfferings, getOffering} = require('./offerings')
+const {createUser, userExists, getUserById, getUserByName} = require('./users')
 
 module.exports = {
   createHost,
@@ -15,5 +16,9 @@ module.exports = {
   getGuest,
   createOffering,
   getOfferings,
-  getOffering
+  getOffering,
+  createUser,
+  userExists,
+  getUserById,
+  getUserByName
 }
