@@ -1,5 +1,5 @@
-var environment = process.env.NODE_ENV || 'development'
-var config = require('../../knexfile')[environment]
-var dbConn = require('knex')(config)
+const environment = process.env.NODE_ENV || 'development'
+const config = require('../../knexfile')[environment]
+const connection = require('knex')(config)
 
-module.exports = dbConn
+module.exports = connection

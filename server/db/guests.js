@@ -1,4 +1,4 @@
-const dbConn = require('./connection')
+const connection = require('./connection')
 
 module.exports = {
   getGuest,
@@ -6,23 +6,27 @@ module.exports = {
   createGuest
 }
 
-function getGuest (id) {
-  return dbConn('guests')
+function getGuest (id, conn) {
+  const db = conn || connection
+  return db('guests')
     .select('id', 'name', 'event_id as eventId')
     .where('id', id)
+    .first()
 }
 
-function getGuests (eventId) {
-  return dbConn('guests')
+function getGuests (eventId, conn) {
+  const db = conn || connection
+  return db('guests')
     .select('id', 'name', 'event_id as eventId')
     .where('event_id', eventId)
 }
 
-function createGuest (guest, eventId) {
+function createGuest (guest, eventId, conn) {
+  const db = conn || connection
   const newGuest = {
     name: guest.name,
     event_id: eventId
   }
-  return dbConn('guests')
+  return db('guests')
     .insert(newGuest)
 }
