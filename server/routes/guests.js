@@ -22,6 +22,7 @@ router.get('/:id', (req, res) => {
 })
 
 // used in events route
+// GET /events/:id/guests
 function getGuests (req, res) {
   db.getGuests(Number(req.params.id))
     .then(guests => {
@@ -33,6 +34,7 @@ function getGuests (req, res) {
 }
 
 // used in events route
+// POST /events/:id/guests
 function createGuest (req, res) {
   db.createGuest(req.body, Number(req.params.id))
     .then(() => {
