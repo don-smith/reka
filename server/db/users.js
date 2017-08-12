@@ -1,5 +1,5 @@
-const dbConn = require('./connection')
-const crypto = require('../auth/crypto')
+const connection = require('./connection')
+// const crypto = require('../auth/crypto')
 
 module.exports = {
   createUser,
@@ -8,14 +8,16 @@ module.exports = {
   getUserByName
 }
 
-function createUser (username, password) {
-  const hash = crypto.getHash(password)
-  return dbConn('users')
-    .insert({username, hash})
+function createUser (username, password, conn) {
+  // const hash = crypto.getHash(password)
+  const db = conn || connection
+  return db('users')
+    .insert({username, hash: ''})
 }
 
-function userExists (username) {
-  return dbConn('users')
+function userExists (username, conn) {
+  const db = conn || connection
+  return db('users')
     .count('id as n')
     .where('username', username)
     .then(count => {
@@ -23,14 +25,18 @@ function userExists (username) {
     })
 }
 
-function getUserById (id) {
-  return dbConn('users')
+function getUserById (id, conn) {
+  const db = conn || connection
+  return db('users')
     .select('id', 'username')
     .where('id', id)
+    .first()
 }
 
-function getUserByName (username) {
-  return dbConn('users')
+function getUserByName (username, conn) {
+  const db = conn || connection
+  return db('users')
     .select()
     .where('username', username)
+    .first()
 }

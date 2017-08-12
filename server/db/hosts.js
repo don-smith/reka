@@ -1,4 +1,4 @@
-const dbConn = require('./connection')
+const connection = require('./connection')
 
 module.exports = {
   createHost,
@@ -6,18 +6,22 @@ module.exports = {
   getHost
 }
 
-function createHost (host) {
-  return dbConn('hosts')
+function createHost (host, conn) {
+  const db = conn || connection
+  return db('hosts')
     .insert(host)
 }
 
-function getHosts () {
-  return dbConn('hosts')
+function getHosts (conn) {
+  const db = conn || connection
+  return db('hosts')
     .select()
 }
 
-function getHost (id) {
-  return dbConn('hosts')
+function getHost (id, conn) {
+  const db = conn || connection
+  return db('hosts')
     .select()
     .where('id', id)
+    .first()
 }

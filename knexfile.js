@@ -1,49 +1,58 @@
-// Update with your config settings.
+const path = require('path')
+
+const defaults = {
+  migrations: {
+    tableName: 'knex_migrations',
+    directory: path.join(__dirname, '/server/db/migrations')
+  }
+}
+
+const sqliteDefaults = Object.assign({
+  client: 'sqlite3',
+  useNullAsDefault: true,
+  seeds: {
+    directory: path.join(__dirname, '/test/server/db/seeds')
+  },
+  pool: {
+    afterCreate: (conn, cb) =>
+      conn.run('PRAGMA foreign_keys = ON', cb)
+  }
+}, defaults)
+
+const postgresDefaults = Object.assign({
+  client: 'postgresql',
+  pool: {
+    min: 2,
+    max: 10
+  }
+}, defaults)
 
 module.exports = {
-
-  development: {
-    client: 'sqlite3',
+  development: Object.assign({
     connection: {
       filename: './dev.sqlite'
-    },
-    pool: {
-      afterCreate: (conn, cb) =>
-        conn.run('PRAGMA foreign_keys = ON', cb)
-    },
-    useNullAsDefault: true
-  },
+    }
+  }, sqliteDefaults),
 
-  staging: {
-    client: 'postgresql',
+  test: Object.assign({
+    connection: {
+      filename: ':memory:'
+    }
+  }, sqliteDefaults),
+
+  staging: Object.assign({
     connection: {
       database: 'my_db',
       user: 'username',
       password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
     }
-  },
+  }, postgresDefaults),
 
-  production: {
-    client: 'postgresql',
+  production: Object.assign({
     connection: {
       database: 'my_db',
       user: 'username',
       password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
     }
-  }
-
+  }, postgresDefaults)
 }
