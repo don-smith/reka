@@ -5,4 +5,5 @@ exports.seed = (knex, Promise) => {
     .then(empty('guests'))
     .then(empty('events'))
     .then(empty('hosts'))
+    .then(empty('users'))
 }
