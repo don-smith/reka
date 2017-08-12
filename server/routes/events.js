@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   db.createEvent(req.body)
     .then(() => {
-      res.status(201)
+      res.status(201).end()
     })
     .catch(err => {
       res.status(500).send(err.message)

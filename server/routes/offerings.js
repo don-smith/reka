@@ -22,6 +22,7 @@ router.get('/:id', (req, res) => {
 })
 
 // used in events route
+// GET /events/:id/offerings
 function getOfferings (req, res) {
   db.getOfferings(Number(req.params.id))
     .then(offerings => {
@@ -33,6 +34,7 @@ function getOfferings (req, res) {
 }
 
 // used in events route
+// POST /events/:id/offerings
 function createOffering (req, res) {
   db.createOffering(req.body, Number(req.params.id))
     .then(() => {
