@@ -1,7 +1,6 @@
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
-const passport = require('passport')
 
 const authRoutes = require('./routes/auth')
 const hostRoutes = require('./routes/hosts')
@@ -10,7 +9,6 @@ const guestRoutes = require('./routes/guests')
 const offeringRoutes = require('./routes/offerings')
 
 const server = express()
-server.use(passport.initialize())
 server.use(express.static(path.join(__dirname, '../public')))
 server.use(bodyParser.json())
 

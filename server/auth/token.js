@@ -1,12 +1,14 @@
 const jwt = require('jsonwebtoken')
+const verifyJwt = require('express-jwt')
 
 const db = require('../db/users')
 
 module.exports = {
-  issue
+  issue,
+  decode
 }
 
-function issue (req, res, next) {
+function issue (req, res) {
   db.getUserByName(req.body.username)
     .then(user => {
       const token = createToken(user, process.env.JWT_SECRET)
@@ -15,7 +17,12 @@ function issue (req, res, next) {
         token
       })
     })
-    .then(next)
+}
+
+function decode (req, res, next) {
+  verifyJwt({
+    secret: getSecret
+  })(req, res, next)
 }
 
 function createToken (user, secret) {
@@ -23,6 +30,10 @@ function createToken (user, secret) {
     id: user.id,
     username: user.username
   }, secret, {
-    expiresIn: 60 * 60 * 24
+    expiresIn: '1d'
   })
+}
+
+function getSecret (req, payload, done) {
+  done(null, process.env.JWT_SECRET)
 }
