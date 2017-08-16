@@ -1,6 +1,7 @@
 const express = require('express')
 
 const db = require('../db')
+const token = require('../auth/token.js')
 
 const router = express.Router()
 
@@ -29,7 +30,7 @@ router.get('/:id', (req, res) => {
 })
 
 // POST /hosts
-router.post('/', (req, res) => {
+router.post('/', token.decode, (req, res) => {
   db.createHost(req.body)
     .then(() => {
       res.status(201).end()

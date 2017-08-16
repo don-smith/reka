@@ -1,7 +1,7 @@
 const express = require('express')
 
-const {userExists, createUser} = require('../db/users')
 const token = require('../auth/token.js')
+const {userExists, createUser} = require('../db/users')
 
 const router = express.Router()
 
@@ -11,21 +11,18 @@ function register (req, res, next) {
   userExists(req.body.username)
     .then(exists => {
       if (exists) {
-        return res.status(400).send({ message: 'User exists' })
+        return res.status(400).send({
+          errorType: 'USERNAME_UNAVAILABLE'
+        })
       }
       createUser(req.body.username, req.body.password)
         .then(() => next())
     })
-    .catch(err => {
-      res.status(400).send({ message: err.message })
+    .catch(() => {
+      res.status(400).send({
+        errorType: 'DATABASE_ERROR'
+      })
     })
 }
-
-// This is just a temporary test
-router.get('/username', token.decode, (req, res) => {
-  res.json({
-    username: req.user.username
-  })
-})
 
 module.exports = router
