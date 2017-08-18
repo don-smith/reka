@@ -1,7 +1,7 @@
 const express = require('express')
 
 const db = require('../db')
-const token = require('../auth/token.js')
+const token = require('../auth/token')
 
 const router = express.Router()
 
