@@ -2,3 +2,8 @@
   color: red;
   font-weight: bold;
 }
+
+.auth-actions a {
+  display: inline-block;
+  margin-right: 1em;
+}

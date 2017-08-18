@@ -10,7 +10,7 @@ export function isAuthenticated () {
     const expiry = payload.exp
 
     if (expiry < new Date().getTime() / 1000) {
-      logout()
+      logOff()
       return false
     }
     return true
@@ -29,6 +29,6 @@ export function getAuthToken () {
   return authToken ? decode(authToken) : null
 }
 
-export function logout () {
+export function logOff () {
   saveToken(null)
 }

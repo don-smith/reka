@@ -18,4 +18,9 @@ server.use('/api/v1/events', eventRoutes)
 server.use('/api/v1/guests', guestRoutes.router)
 server.use('/api/v1/offerings', offeringRoutes.router)
 
+// Default route for non-API requests
+server.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'))
+})
+
 module.exports = server
