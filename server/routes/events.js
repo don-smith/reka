@@ -1,6 +1,6 @@
 const express = require('express')
 
-const token = require('../auth/token.js')
+const token = require('../auth/token')
 const {getGuests, createGuest} = require('./guests')
 const {getOfferings, createOffering} = require('./offerings')
 
