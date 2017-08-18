@@ -26,7 +26,7 @@ class Register extends React.Component {
     const {register} = this.props
     const {username, password, confirm, showMatch, match} = this.state
     return (
-      <div>
+      <div className='register auth-form'>
         <label>
           <input name='username'
             placeholder='username'
@@ -43,7 +43,7 @@ class Register extends React.Component {
         <label>
           <input name='confirm'
             type='password'
-            placeholder='confirm'
+            placeholder='confirm password'
             onChange={this.handleChange}
             value={this.state.confirm} />
         </label>

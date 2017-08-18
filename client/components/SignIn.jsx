@@ -17,7 +17,7 @@ class SignIn extends React.Component {
     const {signIn} = this.props
     const {username, password} = this.state
     return (
-      <div>
+      <div className='sign-in auth-form'>
         <label>
           <input name='username'
             placeholder='username'

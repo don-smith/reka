@@ -7,3 +7,11 @@
   display: inline-block;
   margin-right: 1em;
 }
+
+.auth-form {
+  margin-top: 2rem;
+}
+
+.auth-form label {
+  display: block;
+}
