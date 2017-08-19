@@ -2,6 +2,8 @@ import test from 'ava'
 import request from 'supertest'
 import mock from 'mock-require'
 
+import getToken from './get-token'
+
 mock('../../../server/db', {
   getHosts: () => Promise.resolve([
     {id: 1, name: 'host1', userId: 1},
@@ -13,6 +15,7 @@ mock('../../../server/db', {
   createHost: (newHost) => Promise.resolve()
 })
 
+// This line must go after mocking out the database
 const server = require('../../../server/server')
 
 test('GET /hosts returns all hosts', t => {
@@ -40,6 +43,7 @@ test('POST /hosts creates a new hosts', t => {
   return request(server)
     .post('/api/v1/hosts')
     .send({name: 'testname'})
+    .set('Authorization', `Bearer ${getToken()}`)
     .expect(201)
     .then(res => {
       t.pass()

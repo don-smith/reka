@@ -2,6 +2,8 @@ import test from 'ava'
 import request from 'supertest'
 import mock from 'mock-require'
 
+import getToken from './get-token'
+
 mock('../../../server/db', {
   getOfferings: (eventId) => Promise.resolve([
     {id: 1, name: 'wine1', eventId: eventId},
@@ -13,6 +15,7 @@ mock('../../../server/db', {
   createOffering: (newOffering, eventId) => Promise.resolve()
 })
 
+// This line must go after mocking out the database
 const server = require('../../../server/server')
 
 test('GET /events/:id/offerings returns all event offerings', t => {
@@ -40,6 +43,7 @@ test('POST /events/:id/offerings creates a new event offering', t => {
   return request(server)
     .post('/api/v1/events/5/offerings')
     .send({name: 'test beverage'})
+    .set('Authorization', `Bearer ${getToken()}`)
     .expect(201)
     .then(res => {
       t.pass()
