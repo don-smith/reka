@@ -9,10 +9,18 @@ module.exports = {
 }
 
 function createUser (username, password, conn) {
-  const passwordHash = hash.generate(password)
   const db = conn || connection
-  return db('users')
-    .insert({username, hash: passwordHash})
+  return userExists(username, db)
+    .then(exists => {
+      if (exists) {
+        return Promise.reject(new Error('User exists'))
+      }
+    })
+    .then(() => {
+      const passwordHash = hash.generate(password)
+      return db('users')
+        .insert({username, hash: passwordHash})
+    })
 }
 
 function userExists (username, conn) {
