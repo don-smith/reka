@@ -1,5 +1,6 @@
 const express = require('express')
 
+const token = require('../auth/token')
 const {getGuests, createGuest} = require('./guests')
 const {getOfferings, createOffering} = require('./offerings')
 
@@ -32,7 +33,7 @@ router.get('/:id', (req, res) => {
 })
 
 // POST /events
-router.post('/', (req, res) => {
+router.post('/', token.decode, (req, res) => {
   db.createEvent(req.body)
     .then(() => {
       res.status(201).end()
@@ -46,10 +47,10 @@ router.post('/', (req, res) => {
 router.get('/:id/guests', getGuests)
 
 // POST /events/:id/guests
-router.post('/:id/guests', createGuest)
+router.post('/:id/guests', token.decode, createGuest)
 
 // GET /events/:id/offerings
 router.get('/:id/offerings', getOfferings)
 
 // POST /events/:id/offerings
-router.post('/:id/offerings', createOffering)
+router.post('/:id/offerings', token.decode, createOffering)

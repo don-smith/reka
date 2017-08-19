@@ -66,4 +66,10 @@ test('createUser creates a new user', t => {
     .catch(err => t.fail(err.message))
 })
 
-test.todo('createUser fails if username already exists')
+test('createUser fails if username already exists', t => {
+  const createNewUser = () => {
+    return db.createUser('iamnew', 'password', t.context.connection)
+  }
+  return createNewUser()
+    .then(() => t.throws(createNewUser()))
+})

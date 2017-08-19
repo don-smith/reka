@@ -1,7 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+
+import {clearError} from '../actions/error'
 
 const ErrorMessage = (props) => {
+  props.history.listen(() => {
+    props.dispatch(clearError())
+  })
   return (
     <div className='error'>
       {props.errorMessage}
@@ -15,4 +21,6 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps)(ErrorMessage)
+export default withRouter(
+  connect(mapStateToProps)(ErrorMessage)
+)

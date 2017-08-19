@@ -1,3 +1,4 @@
+require('dotenv').config()
 var server = require('./server')
 
 var PORT = process.env.PORT || 3000

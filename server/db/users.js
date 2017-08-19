@@ -1,5 +1,5 @@
 const connection = require('./connection')
-// const crypto = require('../auth/crypto')
+const hash = require('../auth/hash')
 
 module.exports = {
   createUser,
@@ -9,10 +9,18 @@ module.exports = {
 }
 
 function createUser (username, password, conn) {
-  // const hash = crypto.getHash(password)
   const db = conn || connection
-  return db('users')
-    .insert({username, hash: ''})
+  return userExists(username, db)
+    .then(exists => {
+      if (exists) {
+        return Promise.reject(new Error('User exists'))
+      }
+    })
+    .then(() => {
+      const passwordHash = hash.generate(password)
+      return db('users')
+        .insert({username, hash: passwordHash})
+    })
 }
 
 function userExists (username, conn) {
