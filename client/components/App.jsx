@@ -5,6 +5,7 @@ import Home from './Home'
 import Header from './Header'
 import SignIn from './SignIn'
 import Register from './Register'
+import Events from './events/Events'
 import ErrorMessage from './ErrorMessage'
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route exact path='/' component={Home} />
         <Route path='/register' component={Register} />
         <Route path='/signin' component={SignIn} />
+        <Route path='/events' component={Events} />
       </div>
     </Router>
   )
