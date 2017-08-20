@@ -1,4 +1,4 @@
-# tasting.social
+# Reka
 
 This is an app that helps you host a tasting event.
 
