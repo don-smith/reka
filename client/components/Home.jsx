@@ -8,7 +8,7 @@ const Home = () => {
         <div className='splash'>
           <h1 className='splash-head'>Reka</h1>
           <p className='splash-subhead'>
-            Enabling falvourful interactions
+            Enabling flavourful interactions
           </p>
           <p>
             <Link to='/events/new' className='pure-button pure-button-primary'>
