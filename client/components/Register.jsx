@@ -20,35 +20,40 @@ class Register extends React.Component {
       }
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   render () {
-    const {register} = this.props
     const {username, password, confirm, showMatch, match} = this.state
     return (
-      <div className='register auth-form'>
-        <label>
-          <input name='username'
-            placeholder='username'
-            onChange={this.handleChange}
-            value={this.state.username} />
-        </label>
-        <label>
-          <input name='password'
-            type='password'
-            placeholder='password'
-            onChange={this.handleChange}
-            value={this.state.password} />
-        </label>
-        <label>
-          <input name='confirm'
-            type='password'
-            placeholder='confirm password'
-            onChange={this.handleChange}
-            value={this.state.confirm} />
-        </label>
-        {showMatch && !match && <span style={this.styles.match}>*</span>}
-        <button onClick={() => register(username, password, confirm)}>Register</button>
+      <div className='register'>
+        <div className='page-content-wrapper'>
+          <div className='content'>
+            <form className='pure-form pure-form-stacked'>
+              <fieldset>
+                <legend>Register</legend>
+
+                <label htmlFor='username'>Username</label>
+                <input id='username' name='username' placeholder='username'
+                  onChange={this.handleChange} value={username} />
+
+                <label htmlFor='password'>Password</label>
+                <input id='password' name='password'
+                  type='password' placeholder='password'
+                  onChange={this.handleChange} value={password} />
+
+                <label htmlFor='confirm'>Confirm password</label>
+                <input id='confirm' name='confirm'
+                  type='password' placeholder='confirm password'
+                  onChange={this.handleChange} value={confirm} />
+
+                {showMatch && !match && <span style={this.styles.match}>*</span>}
+                <button className='pure-button pure-button-primary'
+                  onClick={this.handleSubmit}>Register</button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
       </div>
     )
   }
@@ -63,6 +68,13 @@ class Register extends React.Component {
       showMatch: this.state.showMatch || name === 'confirm',
       match: match
     })
+  }
+
+  handleSubmit (e) {
+    const {register} = this.props
+    const {username, password, confirm} = this.state
+    register(username, password, confirm)
+    e.preventDefault()
   }
 }
 

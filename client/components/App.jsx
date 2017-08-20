@@ -1,19 +1,19 @@
 import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
+import Home from './Home'
+import Header from './Header'
 import SignIn from './SignIn'
 import Register from './Register'
-import AuthActions from './AuthActions'
 import ErrorMessage from './ErrorMessage'
-import WaitIndicator from './WaitIndicator'
 
 const App = () => {
   return (
     <Router>
-      <div className='app'>
+      <div>
+        <Route path='/' component={Header} />
         <ErrorMessage />
-        <Route path='/' component={WaitIndicator} />
-        <Route path='/' component={AuthActions} />
+        <Route exact path='/' component={Home} />
         <Route path='/register' component={Register} />
         <Route path='/signin' component={SignIn} />
       </div>
