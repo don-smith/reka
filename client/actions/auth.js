@@ -7,6 +7,8 @@ export const REQUEST_SIGNIN = 'REQUEST_SIGNIN'
 export const RECEIVE_SIGNIN = 'RECEIVE_SIGNIN'
 export const REQUEST_REGISTRATION = 'REQUEST_REGISTRATION'
 export const RECEIVE_REGISTRATION = 'RECEIVE_REGISTRATION'
+export const REQUEST_USER_DETAILS = 'REQUEST_USER_DETAILS'
+export const RECEIVE_USER_DETAILS = 'RECEIVE_USER_DETAILS'
 
 const requestRegistration = () => {
   return {
@@ -41,6 +43,39 @@ export const logOff = () => {
   }
 }
 
+const requestUserDetails = () => {
+  return {
+    type: REQUEST_USER_DETAILS
+  }
+}
+
+const receiveUserDetails = (user) => {
+  return {
+    type: RECEIVE_USER_DETAILS,
+    user
+  }
+}
+
+export function register (newUser) {
+  return (dispatch) => {
+    dispatch(requestRegistration())
+    request('post', '/auth/register', newUser)
+      .then(res => {
+        saveAuthToken(res.body.token)
+        dispatch(receiveRegistration(res.body))
+        dispatch(clearError())
+      })
+      .catch(err => {
+        const res = err.response.body
+        const msg = 'This username is unavailable'
+        if (res && res.errorType === 'USERNAME_UNAVAILABLE') {
+          return dispatch(showError(msg))
+        }
+        dispatch(showError('An unexpected error has occurred.'))
+      })
+  }
+}
+
 export function signIn (user) {
   return (dispatch) => {
     dispatch(requestSignIn())
@@ -61,21 +96,15 @@ export function signIn (user) {
   }
 }
 
-export function register (newUser) {
+export function getUserDetails (userId) {
   return (dispatch) => {
-    dispatch(requestRegistration())
-    request('post', '/auth/register', newUser)
+    dispatch(requestUserDetails())
+    request('get', `/auth/user/${userId}`)
       .then(res => {
-        saveAuthToken(res.body.token)
-        dispatch(receiveRegistration(res.body))
+        dispatch(receiveUserDetails(res.body))
         dispatch(clearError())
       })
-      .catch(err => {
-        const res = err.response.body
-        const msg = 'This username is unavailable'
-        if (res && res.errorType === 'USERNAME_UNAVAILABLE') {
-          return dispatch(showError(msg))
-        }
+      .catch(() => {
         dispatch(showError('An unexpected error has occurred.'))
       })
   }

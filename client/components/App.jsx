@@ -13,7 +13,7 @@ const App = () => {
     <Router>
       <div>
         <Route path='/' component={Header} />
-        <ErrorMessage />
+        <Route path='/' component={ErrorMessage} />
         <Route exact path='/' component={Home} />
         <Route path='/register' component={Register} />
         <Route path='/signin' component={SignIn} />

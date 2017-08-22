@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom'
 import {clearError} from '../actions/error'
 
 const ErrorMessage = (props) => {
+  // TODO: Move this. It's creating a new event handler during each render.
   props.history.listen(() => {
     props.dispatch(clearError())
   })
