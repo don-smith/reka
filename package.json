@@ -8,7 +8,7 @@
     "knex": "knex",
     "test": "NODE_ENV=test ava -v test/**/*.test.js",
     "start": "node server",
-    "postinstall": "webpack"
+    "postinstall": "webpack && knex migrate:latest"
   },
   "keywords": [
     "react",
@@ -23,6 +23,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.24.1",
     "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "eslint": "^3.3.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.1",
@@ -31,7 +32,7 @@
     "express": "^4.15.3",
     "jwt-decode": "^2.2.0",
     "knex": "^0.13.0",
-    "pg": "^7.1.0",
+    "pg": "^7.2.0",
     "prop-types": "^15.5.10",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
