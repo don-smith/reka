@@ -118,7 +118,7 @@ a.pure-button-primary {
     top: 8%;
 }
 
-.wait-indicator {
+.busy-indicator {
   width: 40px;
   height: 40px;
   display: inline-block;
