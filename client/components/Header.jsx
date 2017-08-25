@@ -46,8 +46,8 @@ class AuthActions extends React.Component {
   }
 }
 
-function mapStateToProps ({signedIn}) {
-  return {signedIn}
+function mapStateToProps ({userDetails}) {
+  return {signedIn: !!userDetails}
 }
 
 export default withRouter(

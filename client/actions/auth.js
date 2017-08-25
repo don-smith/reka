@@ -61,8 +61,9 @@ export function register (newUser) {
     dispatch(requestRegistration())
     request('post', '/auth/register', newUser)
       .then(res => {
-        saveAuthToken(res.body.token)
+        const token = saveAuthToken(res.body.token)
         dispatch(receiveRegistration(res.body))
+        dispatch(getUserDetails(token.id))
         dispatch(clearError())
       })
       .catch(err => {
