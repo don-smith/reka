@@ -1,13 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const BusyIndicator = (props) => {
+const BusyIndicator = ({busy}) => {
   return (
     <div className='busy-indicator'>
-      {
-        props.waiting &&
-        <img src='/animated-circle.gif' />
-      }
+      {busy && <img src='/animated-circle.gif' />}
     </div>
   )
 }
