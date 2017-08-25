@@ -4,22 +4,26 @@ import {withRouter} from 'react-router-dom'
 
 import {clearError} from '../actions/error'
 
-const ErrorMessage = (props) => {
-  // TODO: Move this. It's creating a new event handler during each render.
-  props.history.listen(() => {
-    props.dispatch(clearError())
-  })
-  return (
-    <div className='red error pl3'>
-      {props.errorMessage}
-    </div>
-  )
+class ErrorMessage extends React.Component {
+  constructor (props) {
+    super(props)
+
+    props.history.listen(() => {
+      props.dispatch(clearError())
+    })
+  }
+
+  render () {
+    return (
+      <div className='red error pl3'>
+        {this.props.errorMessage}
+      </div>
+    )
+  }
 }
 
-function mapStateToProps (state) {
-  return {
-    errorMessage: state.errorMessage
-  }
+function mapStateToProps ({errorMessage}) {
+  return {errorMessage}
 }
 
 export default withRouter(
