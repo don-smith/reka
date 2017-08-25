@@ -10,7 +10,7 @@ const ErrorMessage = (props) => {
     props.dispatch(clearError())
   })
   return (
-    <div className='error'>
+    <div className='red error pl3'>
       {props.errorMessage}
     </div>
   )
