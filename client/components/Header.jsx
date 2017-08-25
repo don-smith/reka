@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 
 import {logOff} from '../actions/auth'
-import WaitIndicator from './WaitIndicator'
+import BusyIndicator from './BusyIndicator'
 
 class AuthActions extends React.Component {
   constructor (props) {
@@ -17,7 +17,7 @@ class AuthActions extends React.Component {
       <div className='header'>
         <div className='home-menu pure-menu pure-menu-horizontal pure-menu-fixed'>
           <Link to='/' className='pure-menu-heading'>Reka</Link>
-          <WaitIndicator />
+          <BusyIndicator />
           <ul className='pure-menu-list'>
             <li className='pure-menu-item pure-menu-selected'>
               <Link to='/' className='pure-menu-link'>Home</Link>
