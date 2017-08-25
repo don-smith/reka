@@ -49,10 +49,10 @@ const requestUserDetails = () => {
   }
 }
 
-const receiveUserDetails = (user) => {
+const receiveUserDetails = (userDetails) => {
   return {
     type: RECEIVE_USER_DETAILS,
-    user
+    userDetails
   }
 }
 
@@ -81,8 +81,9 @@ export function signIn (user) {
     dispatch(requestSignIn())
     request('post', '/auth/signin', user)
       .then(res => {
-        saveAuthToken(res.body.token)
+        const token = saveAuthToken(res.body.token)
         dispatch(receiveSignIn(res.body))
+        dispatch(getUserDetails(token.id))
         dispatch(clearError())
       })
       .catch(err => {
@@ -99,7 +100,7 @@ export function signIn (user) {
 export function getUserDetails (userId) {
   return (dispatch) => {
     dispatch(requestUserDetails())
-    request('get', `/auth/user/${userId}`)
+    request('get', `/users/${userId}`)
       .then(res => {
         dispatch(receiveUserDetails(res.body))
         dispatch(clearError())

@@ -9,6 +9,7 @@ import Events from './events/Events'
 import ErrorMessage from './ErrorMessage'
 
 const App = () => {
+  // TODO: Style the ErrorMessage
   return (
     <Router>
       <div>
