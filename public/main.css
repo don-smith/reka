@@ -113,6 +113,10 @@ a.pure-button-primary {
     color: #AECFE5;
 }
 
+.error {
+    position: absolute;
+    top: 8%;
+}
 
 /*
  * -- SPLASH STYLES --
@@ -178,7 +182,7 @@ a.pure-button-primary {
 .page-content-wrapper {
     /* These styles are required for the "scroll-over" effect */
     position: absolute;
-    top: 10%;
+    top: 11%;
     width: 100%;
     min-height: 12%;
     z-index: 2;
