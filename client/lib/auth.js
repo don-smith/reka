@@ -29,6 +29,10 @@ export function getAuthToken () {
   return authToken ? decode(authToken) : null
 }
 
+export function getEncodedToken () {
+  return getToken()
+}
+
 export function logOff () {
   saveToken(null)
 }

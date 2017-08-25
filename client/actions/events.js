@@ -24,8 +24,7 @@ export function addNewEvent (event) {
         dispatch(receiveAddEvent())
         dispatch(clearError())
       })
-      .catch(err => {
-        console.log(err.message) // TODO: remove
+      .catch(() => {
         dispatch(showError('An unexpected error has occurred.'))
       })
   }

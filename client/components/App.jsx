@@ -9,11 +9,12 @@ import Events from './events/Events'
 import ErrorMessage from './ErrorMessage'
 
 const App = () => {
+  // TODO: Style the ErrorMessage
   return (
     <Router>
       <div>
         <Route path='/' component={Header} />
-        <ErrorMessage />
+        <Route path='/' component={ErrorMessage} />
         <Route exact path='/' component={Home} />
         <Route path='/register' component={Register} />
         <Route path='/signin' component={SignIn} />
