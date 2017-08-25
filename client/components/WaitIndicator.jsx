@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 const WaitIndicator = (props) => {
   return (
-    <div className='error'>
+    <div className='wait-indicator'>
       {
         props.waiting &&
         <img src='/animated-circle.gif' />
@@ -12,10 +12,8 @@ const WaitIndicator = (props) => {
   )
 }
 
-function mapStateToProps (state) {
-  return {
-    waiting: state.waiting
-  }
+function mapStateToProps ({waiting}) {
+  return {waiting}
 }
 
 export default connect(mapStateToProps)(WaitIndicator)
