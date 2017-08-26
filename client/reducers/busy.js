@@ -3,10 +3,12 @@ import {
   REQUEST_SIGNIN,
   RECEIVE_SIGNIN,
   REQUEST_REGISTRATION,
-  RECEIVE_REGISTRATION} from '../actions/auth'
+  RECEIVE_REGISTRATION,
+  REQUEST_USER_DETAILS,
+  RECEIVE_USER_DETAILS} from '../actions/auth'
 import {RECEIVE_ADD_EVENT, REQUEST_ADD_EVENT} from '../actions/events'
 
-const waiting = (state = false, action) => {
+const busy = (state = false, action) => {
   switch (action.type) {
     case REQUEST_REGISTRATION:
       return true
@@ -26,6 +28,12 @@ const waiting = (state = false, action) => {
     case RECEIVE_ADD_EVENT:
       return false
 
+    case REQUEST_USER_DETAILS:
+      return true
+
+    case RECEIVE_USER_DETAILS:
+      return false
+
     case SHOW_ERROR:
       return false
 
@@ -34,4 +42,4 @@ const waiting = (state = false, action) => {
   }
 }
 
-export default waiting
+export default busy

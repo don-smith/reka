@@ -118,6 +118,14 @@ a.pure-button-primary {
     top: 8%;
 }
 
+.busy-indicator {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  padding-top: .4em;
+  float: left;
+}
+
 /*
  * -- SPLASH STYLES --
  * This is the blue top section that appears on the page.
