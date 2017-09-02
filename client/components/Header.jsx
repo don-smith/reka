@@ -2,13 +2,22 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 
-import {logOff} from '../actions/auth'
+import {getUserDetails, logOff} from '../actions/auth'
+import {isAuthenticated, getAuthToken} from '../lib/auth'
 import BusyIndicator from './BusyIndicator'
 
 class AuthActions extends React.Component {
   constructor (props) {
     super(props)
     this.handleLogOff = this.handleLogOff.bind(this)
+  }
+
+  componentDidMount () {
+    // populate the store with user details if an auth token is in localStorage
+    if (this.props.signedIn && !this.props.userDetails) {
+      const token = getAuthToken()
+      this.props.dispatch(getUserDetails(token.id))
+    }
   }
 
   render () {
@@ -49,7 +58,10 @@ class AuthActions extends React.Component {
 }
 
 function mapStateToProps ({userDetails}) {
-  return {signedIn: !!userDetails}
+  return {
+    signedIn: isAuthenticated(),
+    userDetails
+  }
 }
 
 export default withRouter(
