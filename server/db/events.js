@@ -1,9 +1,10 @@
 const connection = require('./connection')
 
 module.exports = {
+  getEvent,
   createEvent,
-  getEvents,
-  getEvent
+  getHostedEvents,
+  getAttendedEvents
 }
 
 function createEvent (event, conn) {
@@ -12,13 +13,25 @@ function createEvent (event, conn) {
     .insert(event)
 }
 
-function getEvents (conn) {
+function getHostedEvents (id, conn) {
   const db = conn || connection
   return db('events')
-    .select('id',
-      'host_id as hostId',
+    .select('id', 'name',
+      'user_id as userId',
       'offering_type as offeringType',
-      'location')
+      'location', 'description')
+    .where('user_id', id)
+}
+
+function getAttendedEvents (id, conn) {
+  const db = conn || connection
+  return db('events')
+    .join('guests', 'event_id', 'events.id')
+    .select('events.id as id', 'events.name',
+      'events.user_id as userId',
+      'offering_type as offeringType',
+      'location', 'description')
+    .where('guests.user_id', id)
 }
 
 function getEvent (id, conn) {

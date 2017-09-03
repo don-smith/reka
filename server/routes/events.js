@@ -11,9 +11,15 @@ const router = express.Router()
 module.exports = router
 
 // GET /events
-router.get('/', (req, res) => {
-  db.getEvents()
-    .then(events => {
+router.get('/', token.decode, (req, res) => {
+  const events = {}
+  db.getHostedEvents(req.user.id)
+    .then(hosted => {
+      events.hosted = hosted
+      return db.getAttendedEvents(req.user.id)
+    })
+    .then(attended => {
+      events.attended = attended
       res.json(events)
     })
     .catch(err => {
