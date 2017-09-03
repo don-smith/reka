@@ -9,7 +9,7 @@ module.exports = {
 function getGuest (id, conn) {
   const db = conn || connection
   return db('guests')
-    .select('id', 'name', 'event_id as eventId')
+    .select('id', 'name', 'user_id as userId', 'event_id as eventId')
     .where('id', id)
     .first()
 }
@@ -17,7 +17,7 @@ function getGuest (id, conn) {
 function getGuests (eventId, conn) {
   const db = conn || connection
   return db('guests')
-    .select('id', 'name', 'event_id as eventId')
+    .select('id', 'name', 'user_id as userId', 'event_id as eventId')
     .where('event_id', eventId)
 }
 

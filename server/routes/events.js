@@ -29,8 +29,15 @@ router.get('/', token.decode, (req, res) => {
 
 // GET /events/:id
 router.get('/:id', (req, res) => {
-  db.getEvent(Number(req.params.id))
-    .then(event => {
+  const id = Number(req.params.id)
+  const event = {}
+  db.getEvent(id)
+    .then(details => {
+      event.details = details
+      return db.getGuests(id)
+    })
+    .then(guests => {
+      event.guests = guests
       res.json(event)
     })
     .catch(err => {
