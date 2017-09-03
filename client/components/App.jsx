@@ -1,6 +1,11 @@
 import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
+import 'font-awesome/css/font-awesome.min.css'
+import 'tachyons/css/tachyons.min.css'
+import 'purecss/build/pure-min.css'
+import '../styling/main.css'
+
 import Home from './Home'
 import Header from './Header'
 import SignIn from './SignIn'

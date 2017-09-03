@@ -38,6 +38,9 @@ class AuthActions extends React.Component {
               <Link to='/signin' className='pure-menu-link'>Sign in</Link>
             </li>}
             {signedIn && <li className='pure-menu-item'>
+              <Link to='/events' className='pure-menu-link'>Events</Link>
+            </li>}
+            {signedIn && <li className='pure-menu-item'>
               <Link to='/profile' className='pure-menu-link'>Profile</Link>
             </li>}
             {signedIn && <li className='pure-menu-item'>
