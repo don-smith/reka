@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 
 import NewEvent from './NewEvent'
 import EventList from './EventList'
@@ -10,9 +10,11 @@ const Events = () => {
     <div className='events'>
       <div className='page-content-wrapper'>
         <div className='content'>
-          <Route exact path='/events' component={EventList} />
-          <Route exact path='/events/new' component={NewEvent} />
-          <Route exact path='/events/:id' component={EventDetails} />
+          <Switch>
+            <Route exact path='/events' component={EventList} />
+            <Route path='/events/new' component={NewEvent} />
+            <Route path='/events/:id' component={EventDetails} />
+          </Switch>
         </div>
       </div>
     </div>
