@@ -293,3 +293,26 @@ a.pure-button-primary {
         font-size: 300%;
     }
 }
+
+.add-event-button {
+  margin-top: 1em;
+}
+
+/*
+ * Overrides the InputMoment control's styling
+ */
+div.m-input-moment button.btn-save {
+  margin-top: 60px;
+}
+
+div.m-input-moment {
+  display: block;
+  margin: 10% auto;
+}
+
+/*
+ * Overrides the ReactModal control's styling
+ */
+.ReactModal__Overlay {
+  z-index: 5;
+}
