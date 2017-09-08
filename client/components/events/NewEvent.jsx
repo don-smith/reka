@@ -25,6 +25,7 @@ class NewEvent extends React.Component {
     this.handleDateTimeSave = this.handleDateTimeSave.bind(this)
     this.handleDateTimeShow = this.handleDateTimeShow.bind(this)
     this.handleDateTimeChange = this.handleDateTimeChange.bind(this)
+    this.handleModalCloseRequest = this.handleModalCloseRequest.bind(this)
   }
 
   handleChange (e) {
@@ -53,6 +54,12 @@ class NewEvent extends React.Component {
       showingDateTimeSelector: true
     })
     e.preventDefault()
+  }
+
+  handleModalCloseRequest (e) {
+    this.setState({
+      showingDateTimeSelector: false
+    })
   }
 
   handleSubmit (e) {
@@ -116,7 +123,20 @@ class NewEvent extends React.Component {
               <a href='#' onClick={this.handleDateTimeShow}>Change date/time</a>
             </div>
             <ReactModal contentLabel='DateTime Modal'
-              isOpen={this.state.showingDateTimeSelector}>
+              isOpen={this.state.showingDateTimeSelector}
+              onRequestClose={this.handleModalCloseRequest}
+              style={{
+                overlay: {
+                  zIndex: 5,
+                  backgroundColor: 'rgba(0, 0, 0, 0.75)'
+                },
+                content: {
+                  top: '10%',
+                  right: '20%',
+                  bottom: '20%',
+                  left: '20%'
+                }
+              }}>
               <InputMoment moment={this.state.dateTime}
                 onChange={this.handleDateTimeChange}
                 onSave={this.handleDateTimeSave} />
