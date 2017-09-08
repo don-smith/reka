@@ -12,8 +12,10 @@ function createEvent (event, conn) {
   const newEvent = {
     name: event.name,
     user_id: event.userId,
+    location: event.location,
     date_time: event.dateTime,
-    description: event.description
+    description: event.description,
+    offering_type: event.offeringType
   }
   return db('events')
     .insert(newEvent)

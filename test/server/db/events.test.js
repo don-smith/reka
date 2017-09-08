@@ -20,11 +20,22 @@ test('getEvent returns undefined for a nonexistent event id', t => {
     .catch(err => t.fail(err.message))
 })
 
-test('getEvents returns all events', t => {
-  return db.getEvents(t.context.connection)
+test('getHostedEvents returns all hosted events', t => {
+  const userId = 1
+  return db.getHostedEvents(userId, t.context.connection)
     .then(events => {
-      t.is(events.length, 2, 'should return 1 events')
+      t.is(events.length, 2, 'should return 2 events')
       t.is(events[1].location, '123 Yum Drive', 'should return Yum Drive')
+    })
+    .catch(err => t.fail(err.message))
+})
+
+test('getAttendedEvents returns all attended events', t => {
+  const userId = 1
+  return db.getAttendedEvents(userId, t.context.connection)
+    .then(events => {
+      t.is(events.length, 1, 'should return 1 events')
+      t.is(events[0].location, '123 Cocoa Road', 'should return Cocoa Road')
     })
     .catch(err => t.fail(err.message))
 })

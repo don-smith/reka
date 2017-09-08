@@ -12,8 +12,12 @@ class NewEvent extends React.Component {
     super(props)
     this.state = {
       name: '',
+      location: '',
       description: '',
       dateTime: moment(),
+      offeringType: 'wine',
+      otherOfferingType: '',
+      showingOtherOffering: false,
       showingDateTimeSelector: false
     }
     this.handleChange = this.handleChange.bind(this)
@@ -25,8 +29,12 @@ class NewEvent extends React.Component {
 
   handleChange (e) {
     const {name, value} = e.target
+    const showOther = name === 'offeringType'
+      ? value === 'other'
+      : this.state.showingOtherOffering
     this.setState({
-      [name]: value
+      [name]: value,
+      showingOtherOffering: showOther
     })
   }
 
@@ -48,11 +56,16 @@ class NewEvent extends React.Component {
   }
 
   handleSubmit (e) {
+    const {
+      name, location, description, offeringType, otherOfferingType, dateTime
+    } = this.state
     const newEvent = {
-      name: this.state.name,
+      name,
+      location,
+      description,
       userId: this.props.userId,
-      description: this.state.description,
-      dateTime: this.state.dateTime.valueOf()
+      dateTime: dateTime.valueOf(),
+      offeringType: offeringType === 'other' ? otherOfferingType : offeringType
     }
     this.props.dispatch(addNewEvent(newEvent))
     e.preventDefault()
@@ -71,10 +84,31 @@ class NewEvent extends React.Component {
               placeholder="Example: Jana's dark chocolate extravaganza"
               className='pure-input-1' />
 
+            <label htmlFor='location'>Location</label>
+            <input id='location' name='location' onChange={this.handleChange}
+              placeholder='Example: 123 Tasty Lane'
+              className='pure-input-1' />
+
             <label htmlFor='description'>Description</label>
             <textarea id='description' name='description' className='pure-input-1 h4'
               onChange={this.handleChange}
               placeholder={`Include what they should bring, suggestions on where they might purchase, if you have a sponsor (and who it is, where they are located, ect), and any information about your theme.`} />
+
+            <label htmlFor='offeringType'>What will you be tasting?</label>
+            <select id='offeringType' name='offeringType' onChange={this.handleChange}
+              placeholder='Example: 123 Tasty Lane'
+              className='pure-input-1'>
+              <option value='wine'>Wine</option>
+              <option value='beer'>Beer</option>
+              <option value='chocolate'>Chocolate</option>
+              <option value='other'>Other</option>
+            </select>
+
+            {this.state.showingOtherOffering &&
+              <input name='otherOfferingType' onChange={this.handleChange}
+                placeholder='What you will be tasting'
+                className='pure-input-1' />
+            }
 
             <label htmlFor='date'>Date and time</label>
             <div>
