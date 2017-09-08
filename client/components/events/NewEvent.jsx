@@ -48,7 +48,13 @@ class NewEvent extends React.Component {
   }
 
   handleSubmit (e) {
-    this.props.dispatch(addNewEvent({...this.state}))
+    const newEvent = {
+      name: this.state.name,
+      userId: this.props.userId,
+      description: this.state.description,
+      dateTime: this.state.dateTime.valueOf()
+    }
+    this.props.dispatch(addNewEvent(newEvent))
     e.preventDefault()
   }
 
@@ -75,7 +81,8 @@ class NewEvent extends React.Component {
               <span className='b'>{this.state.dateTime.format(dateTimeFormat)}</span>{' '}
               <a href='#' onClick={this.handleDateTimeShow}>Change date/time</a>
             </div>
-            <ReactModal isOpen={this.state.showingDateTimeSelector}>
+            <ReactModal contentLabel='DateTime Modal'
+              isOpen={this.state.showingDateTimeSelector}>
               <InputMoment moment={this.state.dateTime}
                 onChange={this.handleDateTimeChange}
                 onSave={this.handleDateTimeSave} />
@@ -90,4 +97,11 @@ class NewEvent extends React.Component {
   }
 }
 
-export default connect()(NewEvent)
+function mapStateToProps ({userDetails}) {
+  // Set to zero until the userDetails are populated (like during a refresh)
+  return {
+    userId: userDetails ? userDetails.id : 0
+  }
+}
+
+export default connect(mapStateToProps)(NewEvent)

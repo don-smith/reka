@@ -9,8 +9,14 @@ module.exports = {
 
 function createEvent (event, conn) {
   const db = conn || connection
+  const newEvent = {
+    name: event.name,
+    user_id: event.userId,
+    date_time: event.dateTime,
+    description: event.description
+  }
   return db('events')
-    .insert(event)
+    .insert(newEvent)
 }
 
 function getHostedEvents (id, conn) {
