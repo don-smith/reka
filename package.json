@@ -55,8 +55,11 @@
     "webpack": "^2.6.1"
   },
   "ava": {
-    "require": "babel-register",
-    "babel": "inherit"
+    "babel": "inherit",
+    "require": [
+      "babel-register",
+      "./test/client/setup-env.js"
+    ]
   },
   "babel": {
     "presets": [
@@ -68,8 +71,11 @@
   "devDependencies": {
     "ava": "^0.19.1",
     "enzyme": "^2.8.2",
+    "jsdom": "^10.1.0",
     "mock-require": "^2.0.2",
     "nodemon": "^1.11.0",
+    "react-test-renderer": "^15.5.4",
+    "sinon": "^2.0.0-pre.5",
     "sqlite3": "^3.1.9",
     "supertest": "^3.0.0",
     "webpack-dev-server": "^2.4.5"
