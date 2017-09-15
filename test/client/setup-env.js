@@ -13,3 +13,8 @@ global.window = dom.window
 global.document = dom.window.document
 global.navigator = dom.window.navigator
 
+global.window.localStorage = {
+  getItem: name => {},
+  removeItem: name => {},
+  setItem: (name, value) => {}
+}

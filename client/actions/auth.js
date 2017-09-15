@@ -73,11 +73,11 @@ const receiveUpdateProfile = () => {
 export function register (newUser) {
   return (dispatch) => {
     dispatch(requestRegistration())
-    request('post', '/auth/register', newUser)
+    return request('post', '/auth/register', newUser)
       .then(res => {
         const token = saveAuthToken(res.body.token)
         dispatch(receiveRegistration(res.body))
-        dispatch(getUserDetails(token.id))
+        dispatch(exports.getUserDetails(token.id))
         dispatch(clearError())
       })
       .catch(err => {
