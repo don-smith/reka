@@ -1,38 +1,44 @@
-const test = require('ava')
-
+const env = require('./test-environment')
 const db = require('../../../server/db/offerings')
 
-require('./configure-environment')(test)
+let testDb = null
 
-test('getOffering returns an offering given its id', t => {
-  return db.getOffering(5, t.context.connection)
-    .then(offering => {
-      t.is(offering.name, 'beer 2', 'should return beer 2')
-      t.is(offering.eventId, 2, 'should return event_id 2')
-    })
-    .catch(err => t.fail(err.message))
+beforeEach(() => {
+  testDb = env.getTestDb()
+  return env.initialise(testDb)
 })
 
-test('getOffering returns undefined for a nonexistent offering id', t => {
-  return db.getOffering(9999, t.context.connection)
+afterEach(() => env.cleanup(testDb))
+
+test('getOffering returns an offering given its id', () => {
+  return db.getOffering(5, testDb)
     .then(offering => {
-      t.falsy(offering, 'should not return offering 9999')
+      expect(offering.name).toBe('beer 2')
+      expect(offering.eventId).toBe(2)
     })
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })
 
-test('getOfferings returns all offerings at an event', t => {
-  return db.getOfferings(2, t.context.connection)
+test('getOffering returns undefined for a nonexistent offering id', () => {
+  return db.getOffering(9999, testDb)
+    .then(offering => {
+      expect(offering).toBeFalsy()
+    })
+    .catch(err => expect(err).toBeNull())
+})
+
+test('getOfferings returns all offerings at an event', () => {
+  return db.getOfferings(2, testDb)
     .then(offerings => {
-      t.is(offerings.length, 3, 'should return 3 offerings')
-      t.is(offerings[1].name, 'beer 2', 'should return beer 2')
-      t.is(offerings[1].photoUrl, '/beer2.jpg', 'should return photo url')
-      t.is(offerings[1].description, 'Very nice beer', 'should return description')
+      expect(offerings.length).toBe(3)
+      expect(offerings[1].name).toBe('beer 2')
+      expect(offerings[1].photoUrl).toBe('/beer2.jpg')
+      expect(offerings[1].description).toBe('Very nice beer')
     })
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })
 
-test('createOffering creates a new offering at an event', t => {
+test('createOffering creates a new offering at an event', () => {
   const eventId = 2
   const newOffering = {
     guestIds: [5],
@@ -41,13 +47,13 @@ test('createOffering creates a new offering at an event', t => {
     photoUrl: '/new-offering.jpg'
   }
   const validateNewOffering = id => {
-    return db.getOffering(id, t.context.connection)
+    return db.getOffering(id, testDb)
       .then(offering => {
-        t.is(offering.eventId, eventId, 'should create new offering id ' + id)
+        expect(offering.eventId).toBe(eventId)
         return id
       })
   }
-  return db.createOffering(newOffering, eventId, t.context.connection)
+  return db.createOffering(newOffering, eventId, testDb)
     .then(validateNewOffering)
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })

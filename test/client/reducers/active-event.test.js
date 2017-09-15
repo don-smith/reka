@@ -1,12 +1,10 @@
-import test from 'ava'
-
 import {
   REQUEST_EVENT_DETAILS,
   RECEIVE_EVENT_DETAILS
 } from '../../../client/actions/events'
 import activeEvent from '../../../client/reducers/active-event'
 
-test('activeEvent returns the event during RECEIVE_EVENT_DETAILS', t => {
+test('activeEvent returns the event during RECEIVE_EVENT_DETAILS', () => {
   const currentState = {}
   const action = {
     type: RECEIVE_EVENT_DETAILS,
@@ -17,10 +15,10 @@ test('activeEvent returns the event during RECEIVE_EVENT_DETAILS', t => {
     }
   }
   const newState = activeEvent(currentState, action)
-  t.is(newState.details.name, action.event.details.name)
+  expect(newState.details.name).toBe(action.event.details.name)
 })
 
-test('activeEvent returns the initial state during REQUEST_EVENT_DETAILS', t => {
+test('activeEvent returns the initial state during REQUEST_EVENT_DETAILS', () => {
   const currentState = {
     details: {},
     guests: ['test guest']
@@ -29,10 +27,10 @@ test('activeEvent returns the initial state during REQUEST_EVENT_DETAILS', t => 
     type: REQUEST_EVENT_DETAILS
   }
   const newState = activeEvent(currentState, action)
-  t.is(newState.guests.length, 0)
+  expect(newState.guests.length).toBe(0)
 })
 
-test('activeEvent returns the current state by default', t => {
+test('activeEvent returns the current state by default', () => {
   const currentState = {
     details: {},
     guests: ['test guest']
@@ -41,5 +39,5 @@ test('activeEvent returns the current state by default', t => {
     type: 'UNKNOWN_ACTION_TYPE'
   }
   const newState = activeEvent(currentState, action)
-  t.is(newState.guests.length, 1)
+  expect(newState.guests.length).toBe(1)
 })

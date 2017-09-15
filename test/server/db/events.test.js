@@ -1,46 +1,52 @@
-const test = require('ava')
-
+const env = require('./test-environment')
 const db = require('../../../server/db/events')
 
-require('./configure-environment')(test)
+let testDb = null
 
-test('getEvent returns an event given its id', t => {
-  return db.getEvent(1, t.context.connection)
+beforeEach(() => {
+  testDb = env.getTestDb()
+  return env.initialise(testDb)
+})
+
+afterEach(() => env.cleanup(testDb))
+
+test('getEvent returns an event given its id', () => {
+  return db.getEvent(1, testDb)
     .then(event => {
-      t.is(event.location, '123 Happy Lane', 'should return Happy Lane')
+      expect(event.location).toBe('123 Happy Lane')
     })
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })
 
-test('getEvent returns undefined for a nonexistent event id', t => {
-  return db.getEvent(9999, t.context.connection)
+test('getEvent returns undefined for a nonexistent event id', () => {
+  return db.getEvent(9999, testDb)
     .then(event => {
-      t.falsy(event, 'should not return event 9999')
+      expect(event).toBeFalsy()
     })
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })
 
-test('getHostedEvents returns all hosted events', t => {
+test('getHostedEvents returns all hosted events', () => {
   const userId = 1
-  return db.getHostedEvents(userId, t.context.connection)
+  return db.getHostedEvents(userId, testDb)
     .then(events => {
-      t.is(events.length, 2, 'should return 2 events')
-      t.is(events[1].location, '123 Yum Drive', 'should return Yum Drive')
+      expect(events.length).toBe(2)
+      expect(events[1].location).toBe('123 Yum Drive')
     })
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })
 
-test('getAttendedEvents returns all attended events', t => {
+test('getAttendedEvents returns all attended events', () => {
   const userId = 1
-  return db.getAttendedEvents(userId, t.context.connection)
+  return db.getAttendedEvents(userId, testDb)
     .then(events => {
-      t.is(events.length, 1, 'should return 1 events')
-      t.is(events[0].location, '123 Cocoa Road', 'should return Cocoa Road')
+      expect(events.length).toBe(1)
+      expect(events[0].location).toBe('123 Cocoa Road')
     })
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })
 
-test('createEvent creates a new event', t => {
+test('createEvent creates a new event', () => {
   const newEvent = {
     host_id: 1,
     offering_type: 'chocolate',
@@ -48,12 +54,12 @@ test('createEvent creates a new event', t => {
   }
   const validateNewEvent = newIds => {
     const id = newIds[0]
-    return db.getEvent(id, t.context.connection)
+    return db.getEvent(id, testDb)
       .then(event => {
-        t.is(event.location, newEvent.location, 'should create event id ' + id)
+        expect(event.location).toBe(newEvent.location)
       })
   }
-  return db.createEvent(newEvent, t.context.connection)
+  return db.createEvent(newEvent, testDb)
     .then(validateNewEvent)
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })

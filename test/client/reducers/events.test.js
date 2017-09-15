@@ -1,12 +1,10 @@
-import test from 'ava'
-
 import {
   REQUEST_EVENT_LIST,
   RECEIVE_EVENT_LIST
 } from '../../../client/actions/events'
 import events from '../../../client/reducers/events'
 
-test('events returns the event during RECEIVE_EVENT_LIST', t => {
+test('events returns the event during RECEIVE_EVENT_LIST', () => {
   const currentState = {}
   const action = {
     type: RECEIVE_EVENT_LIST,
@@ -16,11 +14,11 @@ test('events returns the event during RECEIVE_EVENT_LIST', t => {
     }
   }
   const newState = events(currentState, action)
-  t.is(newState.hosted[0], action.events.hosted[0])
-  t.is(newState.attended[0], action.events.attended[0])
+  expect(newState.hosted[0]).toBe(action.events.hosted[0])
+  expect(newState.attended[0]).toBe(action.events.attended[0])
 })
 
-test('events returns the initial state during REQUEST_EVENT_LIST', t => {
+test('events returns the initial state during REQUEST_EVENT_LIST', () => {
   const currentState = {
     hosted: [{name: 'test hosted event'}],
     attended: [{name: 'test attended event'}]
@@ -29,11 +27,11 @@ test('events returns the initial state during REQUEST_EVENT_LIST', t => {
     type: REQUEST_EVENT_LIST
   }
   const newState = events(currentState, action)
-  t.is(newState.hosted.length, 0)
-  t.is(newState.attended.length, 0)
+  expect(newState.hosted.length).toBe(0)
+  expect(newState.attended.length).toBe(0)
 })
 
-test('activeEvent returns the current state by default', t => {
+test('activeEvent returns the current state by default', () => {
   const currentState = {
     details: {},
     guests: ['test guest']
@@ -42,5 +40,5 @@ test('activeEvent returns the current state by default', t => {
     type: 'UNKNOWN_ACTION_TYPE'
   }
   const newState = events(currentState, action)
-  t.is(newState.guests.length, 1)
+  expect(newState.guests.length).toBe(1)
 })

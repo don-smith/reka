@@ -1,46 +1,52 @@
-const test = require('ava')
-
+const env = require('./test-environment')
 const db = require('../../../server/db/guests')
 
-require('./configure-environment')(test)
+let testDb = null
 
-test('getGuest returns a guest given their id', t => {
-  return db.getGuest(3, t.context.connection)
-    .then(guest => {
-      t.is(guest.name, 'Jim', 'should return Jim')
-      t.is(guest.eventId, 1, 'should return event_id 1')
-    })
-    .catch(err => t.fail(err.message))
+beforeEach(() => {
+  testDb = env.getTestDb()
+  return env.initialise(testDb)
 })
 
-test('getGuest returns undefined for a nonexistent guest id', t => {
-  return db.getGuest(9999, t.context.connection)
+afterEach(() => env.cleanup(testDb))
+
+test('getGuest returns a guest given their id', () => {
+  return db.getGuest(3, testDb)
     .then(guest => {
-      t.falsy(guest, 'should not return guest 9999')
+      expect(guest.name).toBe('Jim')
+      expect(guest.eventId).toBe(1)
     })
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })
 
-test('getGuests returns all guests for an event', t => {
-  return db.getGuests(2, t.context.connection)
+test('getGuest returns undefined for a nonexistent guest id', () => {
+  return db.getGuest(9999, testDb)
+    .then(guest => {
+      expect(guest).toBeFalsy()
+    })
+    .catch(err => expect(err).toBeNull())
+})
+
+test('getGuests returns all guests for an event', () => {
+  return db.getGuests(2, testDb)
     .then(guests => {
-      t.is(guests.length, 3, 'should return 3 guests')
-      t.is(guests[2].name, 'Janet', 'should return Janet')
+      expect(guests.length).toBe(3)
+      expect(guests[2].name).toBe('Janet')
     })
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })
 
-test('createGuest creates a new guest for an event', t => {
+test('createGuest creates a new guest for an event', () => {
   const eventId = 2
   const newGuest = {name: 'newtestguest'}
   const validateNewGuest = newIds => {
     const id = newIds[0]
-    return db.getGuest(id, t.context.connection)
+    return db.getGuest(id, testDb)
       .then(guest => {
-        t.is(guest.eventId, eventId, 'should create new guest id ' + id)
+        expect(guest.eventId).toBe(eventId)
       })
   }
-  return db.createGuest(newGuest, eventId, t.context.connection)
+  return db.createGuest(newGuest, eventId, testDb)
     .then(validateNewGuest)
-    .catch(err => t.fail(err.message))
+    .catch(err => expect(err).toBeNull())
 })

@@ -1,5 +1,3 @@
-import test from 'ava'
-
 import {SHOW_ERROR} from '../../../client/actions/error'
 import {
   REQUEST_SIGNIN,
@@ -15,63 +13,63 @@ import busy from '../../../client/reducers/busy'
 
 const state = false
 
-test('busy returns true for REQUEST_REGISTRATION', t => {
+test('busy returns true for REQUEST_REGISTRATION', () => {
   const action = {type: REQUEST_REGISTRATION}
   const newState = busy(state, action)
-  t.is(newState, true)
+  expect(newState).toBe(true)
 })
 
-test('busy returns false for RECEIVE_REGISTRATION', t => {
+test('busy returns false for RECEIVE_REGISTRATION', () => {
   const action = {type: RECEIVE_REGISTRATION}
   const newState = busy(state, action)
-  t.is(newState, false)
+  expect(newState).toBe(false)
 })
 
-test('busy returns true for REQUEST_SIGNIN', t => {
+test('busy returns true for REQUEST_SIGNIN', () => {
   const action = {type: REQUEST_SIGNIN}
   const newState = busy(state, action)
-  t.is(newState, true)
+  expect(newState).toBe(true)
 })
 
-test('busy returns false for RECEIVE_SIGNIN', t => {
+test('busy returns false for RECEIVE_SIGNIN', () => {
   const action = {type: RECEIVE_SIGNIN}
   const newState = busy(state, action)
-  t.is(newState, false)
+  expect(newState).toBe(false)
 })
 
-test('busy returns true for REQUEST_ADD_EVENT', t => {
+test('busy returns true for REQUEST_ADD_EVENT', () => {
   const action = {type: REQUEST_ADD_EVENT}
   const newState = busy(state, action)
-  t.is(newState, true)
+  expect(newState).toBe(true)
 })
 
-test('busy returns false for RECEIVE_ADD_EVENT', t => {
+test('busy returns false for RECEIVE_ADD_EVENT', () => {
   const action = {type: RECEIVE_ADD_EVENT}
   const newState = busy(state, action)
-  t.is(newState, false)
+  expect(newState).toBe(false)
 })
 
-test('busy returns true for REQUEST_USER_DETAILS', t => {
+test('busy returns true for REQUEST_USER_DETAILS', () => {
   const action = {type: REQUEST_USER_DETAILS}
   const newState = busy(state, action)
-  t.is(newState, true)
+  expect(newState).toBe(true)
 })
 
-test('busy returns false for RECEIVE_USER_DETAILS', t => {
+test('busy returns false for RECEIVE_USER_DETAILS', () => {
   const action = {type: RECEIVE_USER_DETAILS}
   const newState = busy(state, action)
-  t.is(newState, false)
+  expect(newState).toBe(false)
 })
 
-test('busy returns false for SHOW_ERROR', t => {
+test('busy returns false for SHOW_ERROR', () => {
   const action = {type: SHOW_ERROR}
   const newState = busy(state, action)
-  t.is(newState, false)
+  expect(newState).toBe(false)
 })
 
-test('busy returns the current state by default', t => {
+test('busy returns the current state by default', () => {
   const currentState = true
   const action = {type: 'UNKNOWN_ACTION_TYPE'}
   const newState = busy(currentState, action)
-  t.is(newState, currentState)
+  expect(newState).toBe(currentState)
 })
