@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "An app to help host a tasting event",
   "main": "server",
+  "author": "Don Smith",
+  "license": "GPL-3.0",
   "scripts": {
     "dev": "nodemon --watch server & webpack --watch",
     "knex": "knex",
@@ -10,12 +12,18 @@
     "start": "node server",
     "postinstall": "webpack && knex migrate:latest"
   },
-  "keywords": [
-    "react",
-    "redux"
-  ],
-  "author": "Don Smith",
-  "license": "GPL-3.0",
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  },
   "dependencies": {
     "babel-core": "^6.13.2",
     "babel-jest": "^21.0.2",
@@ -36,6 +44,7 @@
     "express-jwt": "^5.3.0",
     "font-awesome": "^4.7.0",
     "input-moment": "^0.3.5",
+    "jsdom": "^11.2.0",
     "jsonwebtoken": "^7.4.3",
     "jwt-decode": "^2.2.0",
     "knex": "^0.13.0",
@@ -57,23 +66,10 @@
     "tachyons": "^4.8.1",
     "webpack": "^2.6.1"
   },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react",
-      "stage-0"
-    ]
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(css|less)$": "identity-obj-proxy"
-    }
-  },
   "devDependencies": {
     "enzyme": "^2.8.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^21.1.0",
-    "jsdom": "^10.1.0",
     "nodemon": "^1.11.0",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.5.4",

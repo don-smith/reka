@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
@@ -15,11 +16,19 @@ class ErrorMessage extends React.Component {
 
   render () {
     return (
-      <div className='red error pl3'>
+      <div className='error-message red error pl3'>
         {this.props.errorMessage}
       </div>
     )
   }
+}
+
+ErrorMessage.propTypes = {
+  dispatch: PropTypes.func,
+  history: PropTypes.shape({
+    listen: PropTypes.func
+  }),
+  errorMessage: PropTypes.string
 }
 
 function mapStateToProps ({errorMessage}) {

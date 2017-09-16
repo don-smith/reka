@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 
@@ -6,7 +7,7 @@ import {getUserDetails, logOff} from '../actions/auth'
 import {isAuthenticated, getAuthToken} from '../lib/auth'
 import BusyIndicator from './BusyIndicator'
 
-class AuthActions extends React.Component {
+class Header extends React.Component {
   constructor (props) {
     super(props)
     this.handleLogOff = this.handleLogOff.bind(this)
@@ -60,6 +61,15 @@ class AuthActions extends React.Component {
   }
 }
 
+Header.propTypes = {
+  dispatch: PropTypes.func,
+  history: PropTypes.shape({
+    listen: PropTypes.func
+  }),
+  signedIn: PropTypes.bool,
+  userDetails: PropTypes.object
+}
+
 function mapStateToProps ({userDetails}) {
   return {
     signedIn: isAuthenticated(),
@@ -68,5 +78,5 @@ function mapStateToProps ({userDetails}) {
 }
 
 export default withRouter(
-  connect(mapStateToProps)(AuthActions)
+  connect(mapStateToProps)(Header)
 )
