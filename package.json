@@ -9,7 +9,7 @@
     "start": "node server",
     "dev": "nodemon --watch server & webpack --watch",
     "knex": "knex",
-    "e2e": "nightwatch test/e2e",
+    "e2e": "nightwatch -c ./test/e2e/config/nightwatch.conf.js",
     "e2e-init": "selenium-standalone install",
     "test": "jest test/client test/server",
     "add-pre-commit-hook": "echo 'npm test && npm run e2e' >> .git/hooks/pre-commit",
@@ -70,6 +70,7 @@
     "webpack": "^2.6.1"
   },
   "devDependencies": {
+    "babel-register": "^6.26.0",
     "enzyme": "^2.8.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^21.1.0",

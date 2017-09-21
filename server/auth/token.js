@@ -39,7 +39,7 @@ function createToken (user, secret) {
 function getSecret (req, payload, done) {
   const secret = process.env.JWT_SECRET || jwtTestSecret
   if (secret === jwtTestSecret) {
-    console.warn('ATTENTION: Using the JWT Test secret')
+    // console.warn('ATTENTION: Using the JWT Test secret')
   }
   done(null, secret)
 }
