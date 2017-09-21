@@ -9,9 +9,9 @@
     "start": "node server",
     "dev": "nodemon --watch server & webpack --watch",
     "knex": "knex",
-    "e2e": "nightwatch -c ./test/e2e/config/nightwatch.conf.js",
-    "e2e-init": "selenium-standalone install",
     "test": "jest test/client test/server",
+    "e2e-init": "selenium-standalone install",
+    "e2e": "nightwatch -c ./test/e2e/config/nightwatch.conf.js",
     "add-pre-commit-hook": "echo 'npm test && npm run e2e' >> .git/hooks/pre-commit",
     "postinstall": "webpack && knex migrate:latest"
   },
