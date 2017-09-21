@@ -7,13 +7,13 @@
   "license": "GPL-3.0",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon --watch server & webpack --watch",
+    "dev": "nodemon --watch server & webpack --config ./client/webpack.config.js --watch",
     "knex": "knex --knexfile ./server/db/knexfile.js",
     "test": "jest test/client test/server",
     "e2e-init": "selenium-standalone install",
     "e2e": "nightwatch -c ./test/e2e/config/nightwatch.conf.js",
     "add-pre-commit-hook": "echo 'npm test && npm run e2e' >> .git/hooks/pre-commit",
-    "postinstall": "webpack && knex migrate:latest"
+    "postinstall": "webpack --config ./client/webpack.config.js && knex migrate:latest"
   },
   "babel": {
     "presets": [
