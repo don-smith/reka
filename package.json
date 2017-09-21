@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node server",
     "dev": "nodemon --watch server & webpack --watch",
-    "knex": "knex",
+    "knex": "knex --knexfile ./server/db/knexfile.js",
     "test": "jest test/client test/server",
     "e2e-init": "selenium-standalone install",
     "e2e": "nightwatch -c ./test/e2e/config/nightwatch.conf.js",

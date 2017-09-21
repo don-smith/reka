@@ -3,7 +3,7 @@ const path = require('path')
 const defaults = {
   migrations: {
     tableName: 'knex_migrations',
-    directory: path.join(__dirname, '/server/db/migrations')
+    directory: path.join(__dirname, '/migrations')
   }
 }
 
@@ -11,7 +11,7 @@ const sqliteDefaults = Object.assign({
   client: 'sqlite3',
   useNullAsDefault: true,
   seeds: {
-    directory: path.join(__dirname, '/test/server/db/seeds')
+    directory: path.join(__dirname, '../../test/server/db/seeds')
   },
   pool: {
     afterCreate: (conn, cb) =>
@@ -30,7 +30,7 @@ const postgresDefaults = Object.assign({
 module.exports = {
   development: Object.assign({
     connection: {
-      filename: './dev.sqlite'
+      filename: path.join(__dirname, 'dev.sqlite')
     }
   }, sqliteDefaults),
 
