@@ -6,12 +6,13 @@
   "author": "Don Smith",
   "license": "GPL-3.0",
   "scripts": {
+    "start": "node server",
     "dev": "nodemon --watch server & webpack --watch",
     "knex": "knex",
-    "test": "jest",
-    "start": "node server",
     "e2e": "nightwatch test/e2e",
     "e2e-init": "selenium-standalone install",
+    "test": "jest test/client test/server",
+    "add-pre-commit-hook": "echo 'npm test && npm run e2e' >> .git/hooks/pre-commit",
     "postinstall": "webpack && knex migrate:latest"
   },
   "babel": {
