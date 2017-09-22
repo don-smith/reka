@@ -91,7 +91,7 @@ export function register (newUser) {
   }
 }
 
-export function signIn (user) {
+export function signIn (user, confirmSuccess) {
   return (dispatch) => {
     dispatch(requestSignIn())
     request('post', '/auth/signin', user)
@@ -100,6 +100,7 @@ export function signIn (user) {
         dispatch(receiveSignIn(res.body))
         dispatch(getUserDetails(token.id))
         dispatch(clearError())
+        confirmSuccess()
       })
       .catch(err => {
         const res = err.response.body

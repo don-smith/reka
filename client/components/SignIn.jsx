@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {signIn} from '../actions/auth'
 import {clearError} from '../actions/error'
+import {withRouter} from 'react-router-dom'
 
 class SignIn extends React.Component {
   constructor (props) {
@@ -52,18 +54,29 @@ class SignIn extends React.Component {
 
   handleSubmit (e) {
     const {username, password} = this.state
-    this.props.signIn(username, password)
+    const goToEvents = () => this.props.history.push('/events')
+    this.props.signIn(username, password, goToEvents)
     e.preventDefault()
   }
 }
 
+SignIn.propTypes = {
+  dispatch: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  signIn: PropTypes.func
+}
+
 function mapDispatchToProps (dispatch) {
   return {
-    signIn: (username, password) => {
+    signIn: (username, password, onSuccess) => {
       dispatch(clearError())
-      dispatch(signIn({username, password}))
+      dispatch(signIn({username, password}, onSuccess))
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(SignIn)
+export default withRouter(
+  connect(null, mapDispatchToProps)(SignIn)
+)
