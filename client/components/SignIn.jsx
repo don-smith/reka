@@ -61,7 +61,6 @@ class SignIn extends React.Component {
 }
 
 SignIn.propTypes = {
-  dispatch: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func
   }),
