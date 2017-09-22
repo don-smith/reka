@@ -22,14 +22,14 @@ class Header extends React.Component {
   }
 
   render () {
-    const {signedIn} = this.props
+    const {signedIn, atHome, atEvents, atProfile} = this.props
     return (
       <div className='header'>
         <div className='home-menu pure-menu pure-menu-horizontal pure-menu-fixed'>
           <Link to='/' className='pure-menu-heading'>Reka</Link>
           <BusyIndicator />
           <ul className='pure-menu-list'>
-            <li className='pure-menu-item pure-menu-selected'>
+            <li className={`pure-menu-item ${atHome && 'pure-menu-selected'}`}>
               <Link to='/' className='home pure-menu-link'>Home</Link>
             </li>
             {!signedIn && <li className='pure-menu-item'>
@@ -38,10 +38,10 @@ class Header extends React.Component {
             {!signedIn && <li className='pure-menu-item'>
               <Link to='/signin' className='signin pure-menu-link'>Sign in</Link>
             </li>}
-            {signedIn && <li className='pure-menu-item'>
+            {signedIn && <li className={`pure-menu-item ${atEvents && 'pure-menu-selected'}`}>
               <Link to='/events' className='events pure-menu-link'>Events</Link>
             </li>}
-            {signedIn && <li className='pure-menu-item'>
+            {signedIn && <li className={`pure-menu-item ${atProfile && 'pure-menu-selected'}`}>
               <Link to='/profile' className='profile pure-menu-link'>Profile</Link>
             </li>}
             {signedIn && <li className='pure-menu-item'>
@@ -67,11 +67,18 @@ Header.propTypes = {
     listen: PropTypes.func
   }),
   signedIn: PropTypes.bool,
-  userDetails: PropTypes.object
+  userDetails: PropTypes.object,
+  atHome: PropTypes.bool,
+  atEvents: PropTypes.bool,
+  atProfile: PropTypes.bool
 }
 
-function mapStateToProps ({userDetails}) {
+function mapStateToProps ({userDetails}, ownProps) {
+  const path = ownProps.history.location.pathname
   return {
+    atHome: path === '/',
+    atEvents: path.includes('events'),
+    atProfile: path.includes('profile'),
     signedIn: isAuthenticated(),
     userDetails
   }
