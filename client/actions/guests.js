@@ -1,18 +1,18 @@
 import request from '../lib/api'
 import {showError, clearError} from './error'
 
-export const REQUEST_REGISTRATION = 'REQUEST_REGISTRATION'
-export const RECEIVE_REGISTRATION = 'RECEIVE_REGISTRATION'
+export const REQUEST_EVENT_REGISTRATION = 'REQUEST_EVENT_REGISTRATION'
+export const RECEIVE_EVENT_REGISTRATION = 'RECEIVE_EVENT_REGISTRATION'
 
 const requestRegistration = () => {
   return {
-    type: REQUEST_REGISTRATION
+    type: REQUEST_EVENT_REGISTRATION
   }
 }
 
 const receiveRegistration = () => {
   return {
-    type: RECEIVE_REGISTRATION
+    type: RECEIVE_EVENT_REGISTRATION
   }
 }
 
