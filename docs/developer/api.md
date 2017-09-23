@@ -154,7 +154,21 @@ Response:
 ```
 
 
-## `POST /events/:id/guests`*
+## `POST /events/:id/guests`
+
+Request:
+
+```js
+{
+  name: string,
+  userId: number or null
+}
+```
+
+Response: HTTP status `202` or `500`
+
+
+## `DELETE /events/:id/guests`
 
 Request:
 
@@ -164,7 +178,7 @@ Request:
 }
 ```
 
-Response: HTTP status `202` or `500`
+Response: HTTP status `204` or `500`
 
 
 ## `GET /guests/:id`

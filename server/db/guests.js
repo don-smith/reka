@@ -3,7 +3,8 @@ const connection = require('./connection')
 module.exports = {
   getGuest,
   getGuests,
-  createGuest
+  createGuest,
+  deleteGuest
 }
 
 function getGuest (id, conn) {
@@ -25,8 +26,19 @@ function createGuest (guest, eventId, conn) {
   const db = conn || connection
   const newGuest = {
     name: guest.name,
+    user_id: guest.id,
     event_id: eventId
   }
   return db('guests')
     .insert(newGuest)
+}
+
+function deleteGuest (guestName, eventId, conn) {
+  const db = conn || connection
+  return db('guests')
+    .delete()
+    .where({
+      name: guestName,
+      event_id: eventId
+    })
 }

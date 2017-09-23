@@ -45,7 +45,15 @@ function getAttendedEvents (id, conn) {
 function getEvent (id, conn) {
   const db = conn || connection
   return db('events')
-    .select()
+    .select(
+      'id',
+      'name',
+      'description',
+      'location',
+      'user_id as userID',
+      'date_time as dateTime',
+      'offering_type as offeringType'
+    )
     .where('id', id)
     .first()
 }

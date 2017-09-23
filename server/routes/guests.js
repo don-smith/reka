@@ -7,7 +7,8 @@ const router = express.Router()
 module.exports = {
   router,
   getGuests,
-  createGuest
+  createGuest,
+  deleteGuest
 }
 
 // GET /guests/:id
@@ -39,6 +40,20 @@ function createGuest (req, res) {
   db.createGuest(req.body, Number(req.params.id))
     .then(() => {
       res.status(201).end()
+    })
+    .catch(err => {
+      res.status(500).send(err.message)
+    })
+}
+
+// used in events route
+// DELETE /events/:id/guests
+function deleteGuest (req, res) {
+  const guestName = req.body.name
+  const eventId = Number(req.params.id)
+  db.deleteGuest(guestName, eventId)
+    .then(() => {
+      res.status(204).end()
     })
     .catch(err => {
       res.status(500).send(err.message)

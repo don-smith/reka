@@ -1,8 +1,8 @@
 const express = require('express')
 
 const token = require('../auth/token')
-const {getGuests, createGuest} = require('./guests')
 const {getOfferings, createOffering} = require('./offerings')
+const {getGuests, createGuest, deleteGuest} = require('./guests')
 
 const db = require('../db')
 
@@ -61,6 +61,9 @@ router.get('/:id/guests', getGuests)
 
 // POST /events/:id/guests
 router.post('/:id/guests', token.decode, createGuest)
+
+// DELETE /events/:id/guests
+router.delete('/:id/guests', token.decode, deleteGuest)
 
 // GET /events/:id/offerings
 router.get('/:id/offerings', getOfferings)
