@@ -12,7 +12,8 @@
     "test": "jest test/client test/server",
     "e2e-init": "selenium-standalone install",
     "e2e": "nightwatch -c ./test/e2e/config/nightwatch.conf.js",
-    "add-pre-commit-hook": "echo 'npm test && npm run e2e' >> .git/hooks/pre-commit",
+    "lint": "eslint client server test --ignore-pattern 'bundle.js'",
+    "add-pre-commit-hook": "echo 'npm run lint && npm test && npm run e2e' >> .git/hooks/pre-commit",
     "postinstall": "webpack --config ./client/webpack.config.js && knex migrate:latest"
   },
   "babel": {

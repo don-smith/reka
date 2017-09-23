@@ -36,7 +36,7 @@ export function register (isRegistering, registration) {
           dispatch(receiveRegistration())
           dispatch(clearError())
         })
-        .catch((err) => {
+        .catch(() => {
           dispatch(showError('An unexpected error has occurred.'))
         })
     }

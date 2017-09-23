@@ -49,5 +49,5 @@ Currently, this repo targets Node.js version 6.11.3, the latest LTS (long-term s
   npm run add-pre-commit-hook
   ```
 
-  This causes all unit and integration tests to run during a `git commit`. They will all need to pass before the commit is successful.
+  This performs linting verification and runs all unit and integration tests during a `git commit`. For a commit to be permitted, there must not be any linting errors or failing tests. This check can be bypassed by using `git commit --no-verify` instead.
 
