@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
-import {register} from '../../actions/guests'
+import {register} from '../../actions/registrations'
 import {getEventDetails} from '../../actions/events'
 
 class EventDetails extends React.PureComponent {
@@ -20,30 +20,30 @@ class EventDetails extends React.PureComponent {
 
   componentWillReceiveProps (nextProps) {
     // When the component mounts, we make an API call to get the event details,
-    // which includes the guests. If the signed in user has registered, we need
+    // which includes the registrations. If the signed in user has registered, we need
     // to set the state with their name so they are able to unregister.
-    if (nextProps.guests !== this.props.guests) {
-      const guest = nextProps.guests.find(guest => {
-        return guest.userId === this.props.userDetails.id
+    if (nextProps.registrations !== this.props.registrations) {
+      const registration = nextProps.registrations.find(registration => {
+        return registration.userId === this.props.userDetails.id
       })
-      this.setState({name: (guest && guest.name) || ''})
+      this.setState({name: (registration && registration.name) || ''})
     }
   }
 
   render () {
-    const {eventDetails, guests, register, userDetails} = this.props
+    const {eventDetails, registrations, register, userDetails} = this.props
     const {name, description} = eventDetails
     const {id: userId, username} = userDetails || {}
     const dateTime = moment(eventDetails.dateTime)
     const date = dateTime.format('dddd, MMMM Do YYYY [at] hh:mm a')
     const isRegistrationOpen = dateTime.add(5, 'hours') > moment()
-    const isRegistered = !!guests.find(guest => {
-      return guest.userId === userId
+    const isRegistered = !!registrations.find(registration => {
+      return registration.userId === userId
     })
     const registration = {
       eventId: eventDetails.id,
-      guestName: this.state.name,
-      guestUserId: userId
+      registrationUserId: userId,
+      registrationName: this.state.name
     }
     return (
       <div className='event-details'>
@@ -76,9 +76,9 @@ class EventDetails extends React.PureComponent {
 
         <h3>Registered Guests</h3>
         <ul>
-          {guests.map(guest => (
-            <li key={guest.id}>
-              <Link to={`/guests/${guest.id}`}>{guest.name}</Link>
+          {registrations.map(registration => (
+            <li key={registration.id}>
+              <Link to={`/registrations/${registration.id}`}>{registration.name}</Link>
             </li>
           ))}
         </ul>
@@ -103,15 +103,15 @@ EventDetails.propTypes = {
     })
   }),
   register: PropTypes.func,
-  guests: PropTypes.array,
+  registrations: PropTypes.array,
   eventDetails: PropTypes.object
 }
 
 function mapStateToProps ({activeEvent, userDetails}) {
   return {
     userDetails,
-    guests: activeEvent.guests,
-    eventDetails: activeEvent.details
+    eventDetails: activeEvent.details,
+    registrations: activeEvent.registrations
   }
 }
 

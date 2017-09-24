@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/users')
 const eventRoutes = require('./routes/events')
-const guestRoutes = require('./routes/guests')
+const registrationRoutes = require('./routes/registrations')
 const offeringRoutes = require('./routes/offerings')
 
 const server = express()
@@ -15,7 +15,7 @@ server.use(bodyParser.json())
 server.use('/api/v1/auth', authRoutes)
 server.use('/api/v1/users', userRoutes)
 server.use('/api/v1/events', eventRoutes)
-server.use('/api/v1/guests', guestRoutes.router)
+server.use('/api/v1/registrations', registrationRoutes.router)
 server.use('/api/v1/offerings', offeringRoutes.router)
 
 // Default route for non-API requests

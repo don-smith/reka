@@ -41,7 +41,7 @@ test('getOfferings returns all offerings at an event', () => {
 test('createOffering creates a new offering at an event', () => {
   const eventId = 2
   const newOffering = {
-    guestIds: [5],
+    registrationIds: [5],
     name: 'new offering',
     description: 'new description',
     photoUrl: '/new-offering.jpg'

@@ -6,16 +6,16 @@ const router = express.Router()
 
 module.exports = {
   router,
-  getGuests,
-  createGuest,
-  deleteGuest
+  getRegistrations,
+  createRegistration,
+  deleteRegistration
 }
 
-// GET /guests/:id
+// GET /registrations/:id
 router.get('/:id', (req, res) => {
-  db.getGuest(Number(req.params.id))
-    .then(guest => {
-      res.json(guest)
+  db.getRegistration(Number(req.params.id))
+    .then(registration => {
+      res.json(registration)
     })
     .catch(err => {
       res.status(500).send(err.message)
@@ -23,11 +23,11 @@ router.get('/:id', (req, res) => {
 })
 
 // used in events route
-// GET /events/:id/guests
-function getGuests (req, res) {
-  db.getGuests(Number(req.params.id))
-    .then(guests => {
-      res.json(guests)
+// GET /events/:id/registrations
+function getRegistrations (req, res) {
+  db.getRegistrations(Number(req.params.id))
+    .then(registrations => {
+      res.json(registrations)
     })
     .catch(err => {
       res.status(500).send(err.message)
@@ -35,9 +35,9 @@ function getGuests (req, res) {
 }
 
 // used in events route
-// POST /events/:id/guests
-function createGuest (req, res) {
-  db.createGuest(req.body, Number(req.params.id))
+// POST /events/:id/registrations
+function createRegistration (req, res) {
+  db.createRegistration(req.body, Number(req.params.id))
     .then(() => {
       res.status(201).end()
     })
@@ -47,11 +47,11 @@ function createGuest (req, res) {
 }
 
 // used in events route
-// DELETE /events/:id/guests
-function deleteGuest (req, res) {
-  const guestName = req.body.name
+// DELETE /events/:id/registrations
+function deleteRegistration (req, res) {
+  const registrationName = req.body.name
   const eventId = Number(req.params.id)
-  db.deleteGuest(guestName, eventId)
+  db.deleteRegistration(registrationName, eventId)
     .then(() => {
       res.status(204).end()
     })

@@ -1,5 +1,5 @@
 const {createOffering, getOfferings, getOffering} = require('./offerings')
-const {createGuest, getGuests, getGuest, deleteGuest} = require('./guests')
+const {createRegistration, getRegistrations, getRegistration, deleteRegistration} = require('./registrations')
 const {createEvent, getEvent, getHostedEvents, getAttendedEvents} = require('./events')
 const {createUser, userExists, getUserById, getUserByName, updateUser} = require('./users')
 
@@ -8,10 +8,10 @@ module.exports = {
   getHostedEvents,
   getAttendedEvents,
   getEvent,
-  createGuest,
-  deleteGuest,
-  getGuests,
-  getGuest,
+  createRegistration,
+  deleteRegistration,
+  getRegistrations,
+  getRegistration,
   createOffering,
   getOfferings,
   getOffering,

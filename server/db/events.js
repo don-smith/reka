@@ -34,12 +34,12 @@ function getHostedEvents (id, conn) {
 function getAttendedEvents (id, conn) {
   const db = conn || connection
   return db('events')
-    .join('guests', 'event_id', 'events.id')
+    .join('registrations', 'event_id', 'events.id')
     .select('events.id as id', 'events.name',
       'events.user_id as userId',
       'offering_type as offeringType',
       'location', 'description')
-    .where('guests.user_id', id)
+    .where('registrations.user_id', id)
 }
 
 function getEvent (id, conn) {

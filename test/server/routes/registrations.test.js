@@ -3,33 +3,33 @@ import request from 'supertest'
 import getToken from './get-token'
 
 jest.mock('../../../server/db', () => ({
-  getGuests: (eventId) => Promise.resolve([
-    {id: 1, name: 'guest1', userId: 1, eventId: eventId},
-    {id: 2, name: 'guest2', userId: 2, eventId: eventId}
+  getRegistrations: (eventId) => Promise.resolve([
+    {id: 1, name: 'registration1', userId: 1, eventId: eventId},
+    {id: 2, name: 'registration2', userId: 2, eventId: eventId}
   ]),
-  getGuest: (id) => Promise.resolve(
+  getRegistration: (id) => Promise.resolve(
     {id: id, name: 'host ' + id, userId: 4, eventId: 1}
   ),
-  createGuest: (newGuest, eventId) => Promise.resolve()
+  createRegistration: (newRegistration, eventId) => Promise.resolve()
 }))
 
 // This line must go after mocking out the database
 const server = require('../../../server/server')
 
-test('GET /events/:id/guests returns all of event guests', () => {
+test('GET /events/:id/registrations returns all of event registrations', () => {
   return request(server)
-    .get('/api/v1/events/2/guests')
+    .get('/api/v1/events/2/registrations')
     .expect(200)
     .then(res => {
       expect(res.body.length).toBe(2)
-      expect(res.body[1].name).toBe('guest2')
+      expect(res.body[1].name).toBe('registration2')
     })
     .catch(err => expect(err).toBeNull())
 })
 
-test('GET /guests/:id returns a specific guest', () => {
+test('GET /registrations/:id returns a specific registration', () => {
   return request(server)
-    .get('/api/v1/guests/44')
+    .get('/api/v1/registrations/44')
     .expect(200)
     .then(res => {
       expect(res.body.id).toBe(44)
@@ -37,9 +37,9 @@ test('GET /guests/:id returns a specific guest', () => {
     .catch(err => expect(err).toBeNull())
 })
 
-test('POST /events/:id/guests creates a new event guests', () => {
+test('POST /events/:id/registrations creates a new event registrations', () => {
   return request(server)
-    .post('/api/v1/events/5/guests')
+    .post('/api/v1/events/5/registrations')
     .send({name: 'testname'})
     .set('Authorization', `Bearer ${getToken()}`)
     .expect(201)

@@ -25,7 +25,7 @@ function getOfferings (eventId, conn) {
 
 function createOffering (offering, eventId, conn) {
   const db = conn || connection
-  const createGuestRelations = associate.bind(null, offering.guestIds, db)
+  const createRegistrationRelations = associate.bind(null, offering.registrationIds, db)
   const newOffering = {
     name: offering.name,
     description: offering.description,
@@ -34,21 +34,21 @@ function createOffering (offering, eventId, conn) {
   }
   return db('offerings')
     .insert(newOffering)
-    .then(createGuestRelations)
+    .then(createRegistrationRelations)
 
   // The associate function below is partially applied earlier in this function
-  // (the first 2 parameters to be specific) and called createGuestRelations.
+  // (the first 2 parameters to be specific) and called createRegistrationRelations.
   // The third parameter is supplied by the knex insert function, which is an
   // array of the new IDs created during the insert. There will only be a single
   // ID in the array and this array is called newOfferingIds.
 }
 
-function associate (guestIds, db, newOfferingIds) {
+function associate (registrationIds, db, newOfferingIds) {
   const newOfferingId = newOfferingIds[0]
-  const promises = guestIds.map(guestId => {
-    return db('guest_offerings')
+  const promises = registrationIds.map(registrationId => {
+    return db('registration_offerings')
       .insert({
-        guest_id: guestId,
+        registration_id: registrationId,
         offering_id: newOfferingId
       })
   })

@@ -130,7 +130,7 @@ Response:
     userId: string,
     dateTime: number
   },
-  guests: [{
+  registrations: [{
     id: number,
     name: string,
     userId: number,
@@ -140,7 +140,7 @@ Response:
 ```
 
 
-## `GET /events/:id/guests`
+## `GET /events/:id/registrations`
 
 Response:
 
@@ -154,7 +154,7 @@ Response:
 ```
 
 
-## `POST /events/:id/guests`
+## `POST /events/:id/registrations`
 
 Request:
 
@@ -168,7 +168,7 @@ Request:
 Response: HTTP status `202` or `500`
 
 
-## `DELETE /events/:id/guests`
+## `DELETE /events/:id/registrations`
 
 Request:
 
@@ -181,7 +181,7 @@ Request:
 Response: HTTP status `204` or `500`
 
 
-## `GET /guests/:id`
+## `GET /registrations/:id`
 
 Response:
 
@@ -205,7 +205,7 @@ Response:
   name: string,
   description: string,
   photoUrl: string,
-  guestIds: array<number>,
+  registrationIds: array<number>,
   eventId: number
 }]
 ```
@@ -220,7 +220,7 @@ Request:
   name: string,
   description: string,
   photoUrl: string,
-  guestIds: array<number>
+  registrationIds: array<number>
 }
 ```
 
@@ -236,7 +236,7 @@ Response: HTTP status `202` or `500`
   name: string,
   description: string,
   photoUrl: string,
-  guestIds: array<number>,
+  registrationIds: array<number>,
   eventId: number
 }
 ```
