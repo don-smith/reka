@@ -23,7 +23,7 @@ export function register (isRegistering, registration) {
     dispatch(requestRegistration())
     if (isRegistering) {
       return request('post', `/events/${eventId}/registrations`, payload)
-        .then(res => {
+        .then(() => {
           dispatch(receiveRegistration())
           dispatch(clearError())
         })
@@ -32,7 +32,7 @@ export function register (isRegistering, registration) {
         })
     } else {
       return request('delete', `/events/${eventId}/registrations`, payload)
-        .then(res => {
+        .then(() => {
           dispatch(receiveRegistration())
           dispatch(clearError())
         })

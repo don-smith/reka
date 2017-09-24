@@ -7,6 +7,9 @@ import {
   REQUEST_USER_REGISTRATION,
   RECEIVE_USER_REGISTRATION} from '../../../client/actions/auth'
 import {
+  REQUEST_EVENT_REGISTRATION,
+  RECEIVE_EVENT_REGISTRATION} from '../../../client/actions/registrations'
+import {
   RECEIVE_ADD_EVENT,
   REQUEST_ADD_EVENT} from '../../../client/actions/events'
 import busy from '../../../client/reducers/busy'
@@ -57,6 +60,18 @@ test('busy returns true for REQUEST_USER_DETAILS', () => {
 
 test('busy returns false for RECEIVE_USER_DETAILS', () => {
   const action = {type: RECEIVE_USER_DETAILS}
+  const newState = busy(state, action)
+  expect(newState).toBe(false)
+})
+
+test('busy returns true for REQUEST_EVENT_REGISTRATION', () => {
+  const action = {type: REQUEST_EVENT_REGISTRATION}
+  const newState = busy(state, action)
+  expect(newState).toBe(true)
+})
+
+test('busy returns false for RECEIVE_EVENT_REGISTRATION', () => {
+  const action = {type: RECEIVE_EVENT_REGISTRATION}
   const newState = busy(state, action)
   expect(newState).toBe(false)
 })

@@ -6,6 +6,9 @@ import {
   RECEIVE_USER_DETAILS,
   REQUEST_USER_REGISTRATION,
   RECEIVE_USER_REGISTRATION} from '../actions/auth'
+import {
+  REQUEST_EVENT_REGISTRATION,
+  RECEIVE_EVENT_REGISTRATION} from '../actions/registrations'
 import {RECEIVE_ADD_EVENT, REQUEST_ADD_EVENT} from '../actions/events'
 
 const busy = (state = false, action) => {
@@ -32,6 +35,12 @@ const busy = (state = false, action) => {
       return true
 
     case RECEIVE_USER_DETAILS:
+      return false
+
+    case REQUEST_EVENT_REGISTRATION:
+      return true
+
+    case RECEIVE_EVENT_REGISTRATION:
       return false
 
     case SHOW_ERROR:

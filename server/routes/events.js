@@ -4,7 +4,7 @@ const token = require('../auth/token')
 const {getOfferings, createOffering} = require('./offerings')
 const {getRegistrations, createRegistration, deleteRegistration} = require('./registrations')
 
-const db = require('../db')
+const db = require('../db/events')
 
 const router = express.Router()
 
@@ -60,7 +60,7 @@ router.post('/', token.decode, (req, res) => {
 router.get('/:id/registrations', getRegistrations)
 
 // POST /events/:id/registrations
-router.post('/:id/registrations', token.decode, createRegistration)
+router.post('/:id/registrations', createRegistration)
 
 // DELETE /events/:id/registrations
 router.delete('/:id/registrations', token.decode, deleteRegistration)

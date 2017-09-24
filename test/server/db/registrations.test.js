@@ -50,3 +50,17 @@ test('createRegistration creates a new registration for an event', () => {
     .then(validateNewRegistration)
     .catch(err => expect(err).toBeNull())
 })
+
+test('deleteRegistration deletes an event registration', () => {
+  const eventId = 3
+  const registrationName = 'Julie'
+  const validateDeletedRegistration = () => {
+    return db.getRegistrations(eventId, testDb)
+      .then(registrations => {
+        expect(registrations.length).toBe(0)
+      })
+  }
+  return db.deleteRegistration(registrationName, eventId, testDb)
+    .then(validateDeletedRegistration)
+    .catch(err => expect(err).toBeNull())
+})
