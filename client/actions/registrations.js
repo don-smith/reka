@@ -18,11 +18,11 @@ const receiveRegistration = () => {
 
 export function register (isRegistering, registration) {
   const {eventId, registrationUserId: id, registrationName: name} = registration
-  const registrationPayload = {id, name}
+  const payload = {id, name}
   return (dispatch) => {
     dispatch(requestRegistration())
     if (isRegistering) {
-      request('post', `/events/${eventId}/registrations`, registrationPayload)
+      return request('post', `/events/${eventId}/registrations`, payload)
         .then(res => {
           dispatch(receiveRegistration())
           dispatch(clearError())
@@ -31,7 +31,7 @@ export function register (isRegistering, registration) {
           dispatch(showError('An unexpected error has occurred.'))
         })
     } else {
-      request('delete', `/events/${eventId}/registrations`, registrationPayload)
+      return request('delete', `/events/${eventId}/registrations`, payload)
         .then(res => {
           dispatch(receiveRegistration())
           dispatch(clearError())

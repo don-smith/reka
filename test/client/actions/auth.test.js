@@ -8,7 +8,7 @@ import {
   REQUEST_USER_REGISTRATION,
   RECEIVE_USER_REGISTRATION} from '../../../client/actions/auth'
 
-test('register() dispatches the correct actions', () => {
+test('registering a user dispatches the correct actions', () => {
   const dispatch = jest.fn()
   return register()(dispatch)
     .then(() => {
