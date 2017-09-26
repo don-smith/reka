@@ -57,12 +57,12 @@ class EventDetails extends React.PureComponent {
           <div className='registration'>
             <h3>Registration</h3>
             {isRegistered
-              ? <form className='pure-form'
+              ? <form className='unregister pure-form'
                 onSubmit={(e) => register(e, false, registration)}>
                 <input type='submit' value='Unregister'
                   className='unregister pure-button pure-button' />
               </form>
-              : <form className='pure-form'
+              : <form className='register pure-form'
                 onSubmit={(e) => register(e, true, registration)}>
                 <input name='name' value={this.state.name}
                   placeholder={`Name (e.g. ${username})`}
@@ -75,7 +75,7 @@ class EventDetails extends React.PureComponent {
         }
 
         <h3>Registered Guests</h3>
-        <ul>
+        <ul className='guests'>
           {registrations.map(registration => (
             <li key={registration.id}>
               <Link to={`/registrations/${registration.id}`}>{registration.name}</Link>

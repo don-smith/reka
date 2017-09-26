@@ -3,6 +3,12 @@ const eventListCommands = {
     return this
       .waitForElementPresent('@newEventButton')
       .click('@newEventButton')
+  },
+  clickEvent (type, num) {
+    const eventSelector = `.${type} li:nth-child(${num}) a`
+    return this
+      .waitForElementPresent(eventSelector)
+      .click(eventSelector)
   }
 }
 
