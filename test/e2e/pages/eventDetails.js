@@ -23,7 +23,7 @@ module.exports = {
       guestNameInput: '.registration input[name=name]',
       registerButton: '.register input[type=submit]',
       unregisterButton: '.unregister input[type=submit]',
-      lastGuest: '.guests li:last-child()'
+      lastGuest: '.guests'
     }
   ]
 }

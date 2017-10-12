@@ -14,7 +14,7 @@ exports.seed = function (knex, Promise) {
     {
       id: 2,
       user_id: 1,
-      date_time: moment('2017-10-08 19:30+12').toDate(),
+      date_time: moment('2018-10-08 19:30+12').toDate(),
       name: 'Does Jules beer in the woods?',
       description: 'Jules is having her first beer tasting',
       location: '123 Yum Drive',

@@ -5,6 +5,7 @@ const {getOfferings, createOffering} = require('./offerings')
 const {getRegistrations, createRegistration, deleteRegistration} = require('./registrations')
 
 const db = require('../db/events')
+const {getRegistrations: getRegistrationsFromDb} = require('../db/registrations')
 
 const router = express.Router()
 
@@ -34,7 +35,7 @@ router.get('/:id', (req, res) => {
   db.getEvent(id)
     .then(details => {
       event.details = details
-      return getRegistrations(id)
+      return getRegistrationsFromDb(id)
     })
     .then(registrations => {
       event.registrations = registrations
