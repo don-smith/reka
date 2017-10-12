@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
@@ -6,7 +7,7 @@ import {getEventList} from '../../actions/events'
 
 class EventList extends React.PureComponent {
   componentDidMount () {
-    this.props.dispatch(getEventList())
+    this.props.getEventList()
   }
 
   render () {
@@ -47,15 +48,31 @@ class EventList extends React.PureComponent {
     return (
       <ul>
         {events.map(event => (
-          <li><Link to={`/events/${event.id}`}>{event.name}</Link></li>
+          <li key={event.id}>
+            <Link to={`/events/${event.id}`}>{event.name}</Link>
+          </li>
         ))}
       </ul>
     )
   }
 }
 
+EventList.propTypes = {
+  getEventList: PropTypes.func,
+  events: PropTypes.shape({
+    hosted: PropTypes.array,
+    attended: PropTypes.array
+  })
+}
+
 function mapStateToProps ({events}) {
   return {events}
 }
 
-export default connect(mapStateToProps)(EventList)
+function mapDispatchToProps (dispatch) {
+  return {
+    getEventList: () => dispatch(getEventList())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventList)

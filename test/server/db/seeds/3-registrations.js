@@ -1,5 +1,5 @@
 exports.seed = (knex, Promise) => {
-  return knex('guests').insert([
+  return knex('registrations').insert([
     {id: 1, event_id: 1, name: 'John'},
     {id: 2, event_id: 1, name: 'Jane'},
     {id: 3, event_id: 1, name: 'Jim', user_id: 2},

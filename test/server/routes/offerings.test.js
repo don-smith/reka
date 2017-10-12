@@ -2,7 +2,7 @@ import request from 'supertest'
 
 import getToken from './get-token'
 
-jest.mock('../../../server/db', () => ({
+jest.mock('../../../server/db/offerings', () => ({
   getOfferings: (eventId) => Promise.resolve([
     {id: 1, name: 'wine1', eventId: eventId},
     {id: 2, name: 'wine2', eventId: eventId}

@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   details: {},
-  guests: []
+  registrations: []
 }
 
 const activeEvent = (state = initialState, action) => {

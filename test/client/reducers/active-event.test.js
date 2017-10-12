@@ -21,23 +21,23 @@ test('activeEvent returns the event during RECEIVE_EVENT_DETAILS', () => {
 test('activeEvent returns the initial state during REQUEST_EVENT_DETAILS', () => {
   const currentState = {
     details: {},
-    guests: ['test guest']
+    registrations: ['test registration']
   }
   const action = {
     type: REQUEST_EVENT_DETAILS
   }
   const newState = activeEvent(currentState, action)
-  expect(newState.guests.length).toBe(0)
+  expect(newState.registrations.length).toBe(0)
 })
 
 test('activeEvent returns the current state by default', () => {
   const currentState = {
     details: {},
-    guests: ['test guest']
+    registrations: ['test registration']
   }
   const action = {
     type: 'UNKNOWN_ACTION_TYPE'
   }
   const newState = activeEvent(currentState, action)
-  expect(newState.guests.length).toBe(1)
+  expect(newState.registrations.length).toBe(1)
 })

@@ -4,7 +4,7 @@ const password = 'jules'
 module.exports = {
   'User can sign in': browser => {
     const signinPage = browser.page.signin()
-    const eventsPage = browser.page.events()
+    const eventListPage = browser.page.eventList()
 
     signinPage.navigate()
       .waitForElementPresent('@headerHomeLink')
@@ -18,7 +18,7 @@ module.exports = {
       .assert.elementPresent('@headerEventsLink')
       .assert.elementPresent('@headerProfileLink')
       .assert.elementNotPresent('@headerRegisterLink')
-    eventsPage // signin page auto navigates to /events
+    eventListPage // signin page auto navigates to /events
       .assert.elementPresent('@eventsContainer')
 
     browser.end()

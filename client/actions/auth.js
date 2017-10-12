@@ -5,22 +5,22 @@ import {saveAuthToken, logOff as logOffUser} from '../lib/auth'
 export const LOG_OFF = 'LOG_OFF'
 export const REQUEST_SIGNIN = 'REQUEST_SIGNIN'
 export const RECEIVE_SIGNIN = 'RECEIVE_SIGNIN'
-export const REQUEST_REGISTRATION = 'REQUEST_REGISTRATION'
-export const RECEIVE_REGISTRATION = 'RECEIVE_REGISTRATION'
 export const REQUEST_USER_DETAILS = 'REQUEST_USER_DETAILS'
 export const RECEIVE_USER_DETAILS = 'RECEIVE_USER_DETAILS'
 export const REQUEST_UPDATE_PROFILE = 'REQUEST_UPDATE_PROFILE'
 export const RECEIVE_UPDATE_PROFILE = 'RECEIVE_UPDATE_PROFILE'
+export const REQUEST_USER_REGISTRATION = 'REQUEST_USER_REGISTRATION'
+export const RECEIVE_USER_REGISTRATION = 'RECEIVE_USER_REGISTRATION'
 
-const requestRegistration = () => {
+const requestUserRegistration = () => {
   return {
-    type: REQUEST_REGISTRATION
+    type: REQUEST_USER_REGISTRATION
   }
 }
 
-const receiveRegistration = (token) => {
+const receiveUserRegistration = (token) => {
   return {
-    type: RECEIVE_REGISTRATION,
+    type: RECEIVE_USER_REGISTRATION,
     token
   }
 }
@@ -72,11 +72,11 @@ const receiveUpdateProfile = () => {
 
 export function register (newUser) {
   return (dispatch) => {
-    dispatch(requestRegistration())
+    dispatch(requestUserRegistration())
     return request('post', '/auth/register', newUser)
       .then(res => {
         const token = saveAuthToken(res.body.token)
-        dispatch(receiveRegistration(res.body))
+        dispatch(receiveUserRegistration(res.body))
         dispatch(getUserDetails(token.id))
         dispatch(clearError())
       })

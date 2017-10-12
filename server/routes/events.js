@@ -1,10 +1,11 @@
 const express = require('express')
 
 const token = require('../auth/token')
-const {getGuests, createGuest} = require('./guests')
 const {getOfferings, createOffering} = require('./offerings')
+const {getRegistrations, createRegistration, deleteRegistration} = require('./registrations')
 
-const db = require('../db')
+const db = require('../db/events')
+const {getRegistrations: getRegistrationsFromDb} = require('../db/registrations')
 
 const router = express.Router()
 
@@ -34,10 +35,10 @@ router.get('/:id', (req, res) => {
   db.getEvent(id)
     .then(details => {
       event.details = details
-      return db.getGuests(id)
+      return getRegistrationsFromDb(id)
     })
-    .then(guests => {
-      event.guests = guests
+    .then(registrations => {
+      event.registrations = registrations
       res.json(event)
     })
     .catch(err => {
@@ -56,11 +57,14 @@ router.post('/', token.decode, (req, res) => {
     })
 })
 
-// GET /events/:id/guests
-router.get('/:id/guests', getGuests)
+// GET /events/:id/registrations
+router.get('/:id/registrations', getRegistrations)
 
-// POST /events/:id/guests
-router.post('/:id/guests', token.decode, createGuest)
+// POST /events/:id/registrations
+router.post('/:id/registrations', createRegistration)
+
+// DELETE /events/:id/registrations
+router.delete('/:id/registrations', token.decode, deleteRegistration)
 
 // GET /events/:id/offerings
 router.get('/:id/offerings', getOfferings)
