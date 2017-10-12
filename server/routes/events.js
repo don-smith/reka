@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
   db.getEvent(id)
     .then(details => {
       event.details = details
-      return db.getRegistrations(id)
+      return getRegistrations(id)
     })
     .then(registrations => {
       event.registrations = registrations
