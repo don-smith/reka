@@ -23,7 +23,6 @@ Currently, this repo targets Node.js version 6.11.3, the latest LTS (long-term s
 
 4. Add test data to the development database
 
-
   ```sh
   npm run knex seed:run
   ```
@@ -35,7 +34,6 @@ Currently, this repo targets Node.js version 6.11.3, the latest LTS (long-term s
   ```
 
 6. In a new terminal window in the same folder, ensure all the tests pass
-
 
   ```sh
   npm test
