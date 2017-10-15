@@ -2,7 +2,7 @@
 
 Feature('The homepage is visible')
 
-Scenario('to an anonymous user', (anonymousUser) => {
+Scenario('to an anonymous user', (anonymousUser, homePage) => {
   anonymousUser.isOnPage('/')
-  anonymousUser.sees('REKA', '.home .splash')
+  anonymousUser.sees('REKA', homePage.splash)
 })

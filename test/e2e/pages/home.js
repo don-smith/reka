@@ -1,3 +1,6 @@
 'use strict'
 
-module.exports = {}
+module.exports = {
+  header: '.header',
+  splash: '.home .splash'
+}
