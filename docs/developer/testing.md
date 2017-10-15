@@ -32,6 +32,3 @@
   * [Codecept](http://codeceptjs.io), which uses [Nightmare](http://www.nightmarejs.org), to run user acceptance tests that ensure integration throughout all layers of the app.
   * To run these tests: `npm run e2e`
   * To run these tests and see console.log calls: `npm run e2e:debug`
-  * To create a new test: `npm run e2e:gt name-of-test`
-  * To create a new helper: `npm run e2e:gh name-of-helper`
-  * To create a new page object: `npm run e2e:gpo name-of-page-object`
