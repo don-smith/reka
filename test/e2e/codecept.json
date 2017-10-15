@@ -1,5 +1,5 @@
 {
-  "output": "../logs",
+  "output": "./logs",
   "helpers": {
     "Nightmare": {
       "url": "http://localhost:3000",
