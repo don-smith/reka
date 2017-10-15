@@ -1,16 +1,8 @@
 'use strict'
 /* global actor */
 
+const personifiedMethods = require('./personified-methods')
+
 module.exports = function () {
-  return actor({
-    isOnPage: function () {
-      this.amOnPage.apply(this, Array.from(arguments))
-    },
-    sees: function () {
-      this.see.apply(this, Array.from(arguments))
-    },
-    doesntSee: function () {
-      this.dontSee.apply(this, Array.from(arguments))
-    }
-  })
+  return actor(personifiedMethods)
 }
