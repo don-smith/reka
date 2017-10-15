@@ -13,17 +13,15 @@ Currently, this repo targets Node.js version 6.11.3, the latest LTS (long-term s
 
   ```sh
   npm install
-  npm run e2e-init
   ```
 
-3. Apply the database migrations
+3. (Optional) Apply the database migrations - this is run during `postinstall`
 
   ```sh
   npm run knex migrate:latest
   ```
 
 4. Add test data to the development database
-
 
   ```sh
   npm run knex seed:run
@@ -37,17 +35,14 @@ Currently, this repo targets Node.js version 6.11.3, the latest LTS (long-term s
 
 6. In a new terminal window in the same folder, ensure all the tests pass
 
-
   ```sh
   npm test
   npm run e2e
+  # npm run e2e:debug if you want to see console.logs
   ```
 
-7. (Optional) Install a pre-commit hook.
 
-  ```sh
-  npm run add-pre-commit-hook
-  ```
+## NOTE: A pre-commit hook in place
 
-  This performs linting verification and runs all unit and integration tests during a `git commit`. For a commit to be permitted, there must not be any linting errors or failing tests. This check can be bypassed by using `git commit --no-verify` instead.
+By default, the linter (static code analysis) and all tests must pass before a `git commit` is permitted. If you absolutely need to, this quality gate can be bypassed by using `git commit --no-verify`.
 

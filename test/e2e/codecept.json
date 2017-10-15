@@ -1,0 +1,23 @@
+{
+  "output": "./logs",
+  "helpers": {
+    "Nightmare": {
+      "url": "http://localhost:3000",
+      "show": false,
+      "restart": false
+    }
+  },
+  "include": {
+    "anonymousUser": "./personas/anonymous-user.js",
+    "signedOutUser": "./personas/signed-out-user.js",
+    "homePage": "./pages/home.js",
+    "signinPage": "./pages/signin.js"
+  },
+  "mocha": {},
+  "bootstrap": false,
+  "teardown": null,
+  "hooks": [],
+  "tests": "./tests/*.js",
+  "timeout": 10000,
+  "name": "config"
+}

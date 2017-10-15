@@ -1,26 +1,18 @@
-const headerElements = require('./header-elements')
+'use strict'
 
-const signinCommands = {
-  signin (username, password) {
-    return this
-      .waitForElementPresent('@usernameInput')
-      .setValue('@usernameInput', username)
-      .setValue('@passwordInput', password)
-      .click('@signinButton')
-  }
-}
+/* global actor */
+
+let I
 
 module.exports = {
-  url: function () {
-    return this.api.launch_url + '/signin'
+  _init () {
+    I = actor()
   },
-  commands: [signinCommands],
-  elements: [
-    headerElements,
-    {
-      usernameInput: '#username',
-      passwordInput: '#password',
-      signinButton: '.sign-in button'
-    }
-  ]
+
+  signin (username, password) {
+    I.amOnPage('/signin')
+    I.fillField('Username', username)
+    I.fillField('Password', password)
+    I.click('sign-in-button')
+  }
 }
