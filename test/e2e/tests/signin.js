@@ -2,11 +2,11 @@
 
 Feature('Signed out user can sign in')
 
-Scenario('with existing user', (signedOutUser, homePage) => {
-  signedOutUser.signsin('jules', 'jules')
-  signedOutUser.sees('Home', homePage.header)
-  signedOutUser.sees('Events', homePage.header)
-  signedOutUser.sees('Profile', homePage.header)
-  signedOutUser.sees('Log off', homePage.header)
-  signedOutUser.doesntSee('Register', homePage.header)
+Scenario('with existing user', (registeredUser, homePage) => {
+  registeredUser.signsin('jules', 'jules')
+  registeredUser.sees('Home', homePage.header)
+  registeredUser.sees('Events', homePage.header)
+  registeredUser.sees('Profile', homePage.header)
+  registeredUser.sees('Log off', homePage.header)
+  registeredUser.doesntSee('Register', homePage.header)
 })

@@ -8,8 +8,8 @@
     }
   },
   "include": {
-    "anonymousUser": "./personas/anonymous-user.js",
-    "signedOutUser": "./personas/signed-out-user.js",
+    "unregisteredUser": "./personas/unregistered.js",
+    "registeredUser": "./personas/registered.js",
     "homePage": "./pages/home.js",
     "signinPage": "./pages/signin.js"
   },
