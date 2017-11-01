@@ -1,3 +1,24 @@
+'use strict'
+
+/* global actor */
+
+let I
+
+module.exports = {
+  _init () {
+    I = actor()
+  },
+
+  signin (username, password) {
+    I.amOnPage('/events')
+    I.fillField('Username', username)
+    I.fillField('Password', password)
+    I.click('sign-in-button')
+  }
+}
+
+/* old code below */
+
 const eventListCommands = {
   clickNewEvent () {
     return this

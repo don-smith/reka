@@ -1,3 +1,5 @@
+/* global Feature, Scenario */
+
 const username = 'jules'
 const password = 'jules'
 const guestName = 'Julie'
@@ -21,3 +23,14 @@ module.exports = {
     browser.end()
   }
 }
+
+Feature('Can register for their event')
+
+Scenario('as a host', (registeredUser, eventListingPage) => {
+  registeredUser.signsin(username, password)
+  signedInUser.isOnPage('/events')
+  registeredUser.sees('Events', homePage.header)
+  registeredUser.sees('Profile', homePage.header)
+  registeredUser.sees('Log off', homePage.header)
+  registeredUser.doesntSee('Register', homePage.header)
+})
