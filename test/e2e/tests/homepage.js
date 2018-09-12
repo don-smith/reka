@@ -1,3 +1,4 @@
+'use strict'
 /* global Feature, Scenario */
 
 Feature('The homepage is visible')

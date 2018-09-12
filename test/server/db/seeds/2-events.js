@@ -23,7 +23,7 @@ exports.seed = function (knex, Promise) {
     {
       id: 3,
       user_id: 2,
-      date_time: moment('2017-10-08 19:30+12').toDate(),
+      date_time: moment('2018-10-08 19:30+12').toDate(),
       name: 'Jimmy and the chocolate factory',
       description: 'Once you go dark, you never go back',
       location: '123 Cocoa Road',

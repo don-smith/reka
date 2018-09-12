@@ -1,29 +1,27 @@
-const eventDetailsCommands = {
-  register (name) {
-    return this
-      .waitForElementPresent('@guestNameInput')
-      .setValue('@guestNameInput', name)
-      .click('@registerButton')
-  },
-  unregister () {
-    return this
-      .waitForElementPresent('@unregisterButton')
-      .click('@unregisterButton')
-  }
+'use strict'
+/* global actor */
+
+let I
+
+const elements = {
+  guestNameInput: '.registration input[name=name]',
+  registerButton: '.registration input[value=Register]',
+  unregisterButton: '.registration input[value=Unregister]'
 }
 
 module.exports = {
-  url: function () {
-    return this.api.launch_url + '/events/2'
+  _init () {
+    I = actor()
   },
-  commands: [eventDetailsCommands],
-  elements: [
-    {
-      eventListContainer: '.event-details',
-      guestNameInput: '.registration input[name=name]',
-      registerButton: '.register input[type=submit]',
-      unregisterButton: '.unregister input[type=submit]',
-      lastGuest: '.guests'
-    }
-  ]
+
+  register (name) {
+    I.fillField(elements.guestNameInput, name)
+    I.click(elements.registerButton)
+  },
+
+  unregister () {
+    I.click(elements.unregisterButton)
+  },
+
+  ...elements
 }

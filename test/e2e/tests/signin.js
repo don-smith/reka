@@ -1,3 +1,4 @@
+'use strict'
 /* global Feature, Scenario */
 
 Feature('Signed out user can sign in')

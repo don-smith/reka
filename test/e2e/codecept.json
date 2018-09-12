@@ -11,7 +11,9 @@
     "unregisteredUser": "./personas/unregistered.js",
     "registeredUser": "./personas/registered.js",
     "homePage": "./pages/home.js",
-    "signinPage": "./pages/signin.js"
+    "signinPage": "./pages/signin.js",
+    "eventListingPage": "./pages/eventList.js",
+    "eventDetails": "./pages/eventDetails.js"
   },
   "mocha": {},
   "bootstrap": false,

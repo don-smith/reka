@@ -14,11 +14,14 @@
     "lint": "eslint client server test --ignore-pattern 'bundle.js' && exit 0",
     "postinstall": "webpack --config ./client/webpack.config.js && npm run knex migrate:latest",
     "test": "jest test/client test/server && exit 0",
-    "knex": "knex --knexfile ./server/db/knexfile.js",
     "start": "node server"
   },
   "babel": {
-    "presets": ["es2015", "react", "stage-0"]
+    "presets": [
+      "env",
+      "react",
+      "stage-0"
+    ]
   },
   "jest": {
     "moduleNameMapper": {
@@ -30,7 +33,7 @@
     "babel-core": "^6.13.2",
     "babel-jest": "^21.0.2",
     "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.24.1",
     "body-parser": "^1.17.2",
