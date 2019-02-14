@@ -17,10 +17,9 @@ function createUser (username, password, conn) {
         return Promise.reject(new Error('User exists'))
       }
     })
-    .then(() => {
-      const passwordHash = hash.generate(password)
-      return db('users')
-        .insert({username, hash: passwordHash})
+    .then(() => hash.generate(password))
+    .then(passwordHash => {
+      return db('users').insert({username, hash: passwordHash})
     })
 }
 
