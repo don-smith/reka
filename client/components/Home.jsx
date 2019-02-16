@@ -20,7 +20,7 @@ const Home = () => {
       <div className='home-content-wrapper'>
         <div className='content'>
           <p>Reka helps you manage tasting events. Tasting events are heaps of fun to organise and participate in. They are a great opportunity to meet new people and enjoy the company of friends, all while experiencing new sensations of taste and smell. Some themes you might consider are: wine, beer, chocolate, cheese and soup, but the list is long.</p>
-          <p>Specifically, Reka helps you manage blind tastings. That way your guests won't be influenced by personal biases, labels, prices or who brought the sample when they cast their votes and opinions. Reka makes these events easy by providing:</p>
+          <p>Specifically, Reka helps you manage blind tastings. That way your guests won&quot;t be influenced by personal biases, labels, prices or who brought the sample when they cast their votes and opinions. Reka makes these events easy by providing:</p>
           <ul>
             <li>A home page for your event</li>
             <li>Guest registration</li>
@@ -30,7 +30,7 @@ const Home = () => {
             <li>Control when the results are available</li>
           </ul>
           <p><Link to='/events/new'>Register your next event now</Link></p>
-          <p>Reka means <a href='http://maoridictionary.co.nz/search?keywords=reka' target='_blank'>pleasing, tasty, and flavour</a> in Maori.</p>
+          <p>Reka means <a href='http://maoridictionary.co.nz/search?keywords=reka' target='_blank' rel="noopener noreferrer">pleasing, tasty, and flavour</a> in Maori.</p>
         </div>
       </div>
     </div>
