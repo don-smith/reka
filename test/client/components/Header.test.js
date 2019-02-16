@@ -10,7 +10,7 @@ test('<Header /> shows log off link when signed in', () => {
   jest.doMock('../../../client/lib/auth', () => ({
     isAuthenticated: () => true
   }))
-  const Header = require('../../../client/components/Header').default
+  const { Header } = require('../../../client/components/Header')
   const mockStore = configureStore()({
     busy: false,
     userDetails: {
@@ -31,10 +31,10 @@ test('<Header /> shows log off link when signed in', () => {
 })
 
 test('<Header /> shows Register link when not signed in', () => {
-  jest.doMock('../../../client/lib/auth', () => {
-    return {isAuthenticated: () => false}
-  })
-  const Header = require('../../../client/components/Header').default
+  jest.doMock('../../../client/lib/auth', () => ({
+    isAuthenticated: () => false
+  }))
+  const { Header } = require('../../../client/components/Header')
   const mockStore = configureStore()({
     userDetails: null,
     busy: false
