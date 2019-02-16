@@ -7,7 +7,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "build": "webpack --config ./client/webpack.config.js",
-    "dev": "nodemon --watch server & npm run build --watch",
+    "dev": "npm run build --watch & nodemon --watch server",
     "e2e:sh": "cd ./test/e2e && codeceptjs shell",
     "e2e:debug": "codeceptjs run -c ./test/e2e/codecept.json --debug",
     "e2e": "codeceptjs run -c ./test/e2e/codecept.json && exit 0",
