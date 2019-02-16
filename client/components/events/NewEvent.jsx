@@ -152,7 +152,12 @@ class NewEvent extends React.Component {
   }
 }
 
-function mapStateToProps ({userDetails}) {
+NewEvent.propTypes = {
+  userId: PropTypes.string,
+  dispatch: PropTypes.func
+}
+
+function mapStateToProps ({ userDetails }) {
   // Set to zero until the userDetails are populated (like during a refresh)
   return {
     userId: userDetails ? userDetails.id : 0

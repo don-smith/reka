@@ -10,8 +10,12 @@ const BusyIndicator = ({ busy }) => {
   )
 }
 
-function mapStateToProps ({busy}) {
-  return {busy}
+BusyIndicator.propTypes = {
+  busy: PropTypes.bool
+}
+
+function mapStateToProps ({ busy }) {
+  return { busy }
 }
 
 export default connect(mapStateToProps)(BusyIndicator)

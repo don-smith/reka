@@ -93,7 +93,13 @@ class Profile extends React.Component {
   }
 }
 
-function mapStateToProps ({userDetails}) {
+Profile.propTypes = {
+  id: PropTypes.number,
+  username: PropTypes.string,
+  updateProfile: PropTypes.func
+}
+
+function mapStateToProps ({ userDetails }) {
   return userDetails || {}
 }
 
