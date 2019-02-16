@@ -19,7 +19,7 @@ function createUser (username, password, conn) {
     })
     .then(() => hash.generate(password))
     .then(passwordHash => {
-      return db('users').insert({username, hash: passwordHash})
+      return db('users').insert({ username, hash: passwordHash })
     })
 }
 
@@ -62,7 +62,7 @@ function updateUser (id, username, currentPassword, newPassword, conn) {
       const newPasswordHash = hash.generate(newPassword)
       if (id !== user.id) Promise.reject(new Error('Username and ID mismatch'))
       return db('users')
-        .update({username, hash: newPasswordHash})
+        .update({ username, hash: newPasswordHash })
         .where('id', user.id)
     })
 }

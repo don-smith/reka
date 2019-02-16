@@ -1,5 +1,5 @@
 import request from '../lib/api'
-import {showError, clearError} from './error'
+import { showError, clearError } from './error'
 
 export const REQUEST_EVENT_REGISTRATION = 'REQUEST_EVENT_REGISTRATION'
 export const RECEIVE_EVENT_REGISTRATION = 'RECEIVE_EVENT_REGISTRATION'
@@ -17,8 +17,8 @@ const receiveRegistration = () => {
 }
 
 export function register (isRegistering, registration) {
-  const {eventId, registrationUserId: id, registrationName: name} = registration
-  const payload = {id, name}
+  const { eventId, registrationUserId: id, registrationName: name } = registration
+  const payload = { id, name }
   return (dispatch) => {
     dispatch(requestRegistration())
     if (isRegistering) {

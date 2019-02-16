@@ -1,11 +1,12 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import ReactModal from 'react-modal'
 import InputMoment from 'input-moment'
 import moment from 'moment'
 import 'input-moment/dist/input-moment.css'
 
-import {addNewEvent} from '../../actions/events'
+import { addNewEvent } from '../../actions/events'
 
 class NewEvent extends React.Component {
   constructor (props) {
@@ -29,7 +30,7 @@ class NewEvent extends React.Component {
   }
 
   handleChange (e) {
-    const {name, value} = e.target
+    const { name, value } = e.target
     const showOther = name === 'offeringType'
       ? value === 'other'
       : this.state.showingOtherOffering
@@ -40,7 +41,7 @@ class NewEvent extends React.Component {
   }
 
   handleDateTimeChange (m) {
-    this.setState({m})
+    this.setState({ m })
   }
 
   handleDateTimeSave () {

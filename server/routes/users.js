@@ -21,7 +21,7 @@ router.get('/:id', token.decode, (req, res) => {
 // PUT /users/:id
 router.put('/:id', token.decode, (req, res) => {
   const id = Number(req.params.id)
-  const {username, currentPassword, newPassword} = req.body
+  const { username, currentPassword, newPassword } = req.body
   db.updateUser(id, username, currentPassword, newPassword)
     .then(() => {
       res.status(202).end()

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {signIn} from '../actions/auth'
-import {clearError} from '../actions/error'
-import {withRouter} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { signIn } from '../actions/auth'
+import { clearError } from '../actions/error'
+import { withRouter } from 'react-router-dom'
 
 class SignIn extends React.Component {
   constructor (props) {
@@ -17,7 +17,7 @@ class SignIn extends React.Component {
   }
 
   render () {
-    const {username, password} = this.state
+    const { username, password } = this.state
     return (
       <div className='sign-in'>
         <div className='page-content-wrapper'>
@@ -46,14 +46,14 @@ class SignIn extends React.Component {
   }
 
   handleChange (e) {
-    const {name, value} = e.target
+    const { name, value } = e.target
     this.setState({
       [name]: value
     })
   }
 
   handleSubmit (e) {
-    const {username, password} = this.state
+    const { username, password } = this.state
     const goToEvents = () => this.props.history.push('/events')
     this.props.signIn(username, password, goToEvents)
     e.preventDefault()
@@ -71,7 +71,7 @@ function mapDispatchToProps (dispatch) {
   return {
     signIn: (username, password, onSuccess) => {
       dispatch(clearError())
-      dispatch(signIn({username, password}, onSuccess))
+      dispatch(signIn({ username, password }, onSuccess))
     }
   }
 }

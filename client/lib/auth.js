@@ -1,6 +1,6 @@
 import decode from 'jwt-decode'
 
-import {saveToken, getToken} from './token'
+import { saveToken, getToken } from './token'
 
 export function isAuthenticated () {
   const authToken = getToken()

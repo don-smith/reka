@@ -9,8 +9,8 @@ test('events returns the event during RECEIVE_EVENT_LIST', () => {
   const action = {
     type: RECEIVE_EVENT_LIST,
     events: {
-      hosted: [{name: 'test hosted event'}],
-      attended: [{name: 'test attended event'}]
+      hosted: [{ name: 'test hosted event' }],
+      attended: [{ name: 'test attended event' }]
     }
   }
   const newState = events(currentState, action)
@@ -20,8 +20,8 @@ test('events returns the event during RECEIVE_EVENT_LIST', () => {
 
 test('events returns the initial state during REQUEST_EVENT_LIST', () => {
   const currentState = {
-    hosted: [{name: 'test hosted event'}],
-    attended: [{name: 'test attended event'}]
+    hosted: [{ name: 'test hosted event' }],
+    attended: [{ name: 'test attended event' }]
   }
   const action = {
     type: REQUEST_EVENT_LIST

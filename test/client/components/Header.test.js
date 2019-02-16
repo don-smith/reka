@@ -1,8 +1,8 @@
 import React from 'react'
-import {mount} from 'enzyme'
-import {Provider} from 'react-redux'
+import { mount } from 'enzyme'
+import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
-import {MemoryRouter as Router} from 'react-router'
+import { MemoryRouter as Router } from 'react-router'
 
 afterEach(jest.resetModules)
 

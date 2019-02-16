@@ -3,7 +3,7 @@ const express = require('express')
 const {
   userExists,
   getUserByName,
-  createUser} = require('../db/users')
+  createUser } = require('../db/users')
 const token = require('../auth/token')
 const hash = require('../auth/hash')
 

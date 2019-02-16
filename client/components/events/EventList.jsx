@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import {getEventList} from '../../actions/events'
+import { getEventList } from '../../actions/events'
 
 class EventList extends React.PureComponent {
   componentDidMount () {
@@ -65,8 +65,8 @@ EventList.propTypes = {
   })
 }
 
-function mapStateToProps ({events}) {
-  return {events}
+function mapStateToProps ({ events }) {
+  return { events }
 }
 
 function mapDispatchToProps (dispatch) {

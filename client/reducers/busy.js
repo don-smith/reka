@@ -1,15 +1,15 @@
-import {SHOW_ERROR} from '../actions/error'
+import { SHOW_ERROR } from '../actions/error'
 import {
   REQUEST_SIGNIN,
   RECEIVE_SIGNIN,
   REQUEST_USER_DETAILS,
   RECEIVE_USER_DETAILS,
   REQUEST_USER_REGISTRATION,
-  RECEIVE_USER_REGISTRATION} from '../actions/auth'
+  RECEIVE_USER_REGISTRATION } from '../actions/auth'
 import {
   REQUEST_EVENT_REGISTRATION,
-  RECEIVE_EVENT_REGISTRATION} from '../actions/registrations'
-import {RECEIVE_ADD_EVENT, REQUEST_ADD_EVENT} from '../actions/events'
+  RECEIVE_EVENT_REGISTRATION } from '../actions/registrations'
+import { RECEIVE_ADD_EVENT, REQUEST_ADD_EVENT } from '../actions/events'
 
 const busy = (state = false, action) => {
   switch (action.type) {

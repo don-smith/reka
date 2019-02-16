@@ -1,8 +1,9 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import {updateProfile} from '../actions/auth'
-import {showError, clearError} from '../actions/error'
+import { updateProfile } from '../actions/auth'
+import { showError, clearError } from '../actions/error'
 
 class Profile extends React.Component {
   constructor (props) {
@@ -25,7 +26,10 @@ class Profile extends React.Component {
   }
 
   render () {
-    const {username, currentPassword, newPassword, confirm, showMatch, match} = this.state
+    const {
+      username, currentPassword, newPassword, confirm, showMatch, match
+    } = this.state
+
     return (
       <div className='profile'>
         <div className='page-content-wrapper'>
@@ -65,7 +69,7 @@ class Profile extends React.Component {
   }
 
   handleChange (e) {
-    const {name, value} = e.target
+    const { name, value } = e.target
     let match = this.state.match
     match = name === 'newPassword' ? value === this.state.confirm : match
     match = name === 'confirm' ? value === this.state.newPassword : match
@@ -77,8 +81,8 @@ class Profile extends React.Component {
   }
 
   handleSubmit (e) {
-    const {id, updateProfile} = this.props
-    const {username, currentPassword, newPassword, confirm} = this.state
+    const { id, updateProfile } = this.props
+    const { username, currentPassword, newPassword, confirm } = this.state
     updateProfile(id, username, currentPassword, newPassword, confirm)
     e.preventDefault()
     this.setState({
@@ -98,7 +102,9 @@ function mapDispatchToProps (dispatch) {
     updateProfile: (id, username, currentPassword, newPassword, confirm) => {
       if (newPassword === confirm) {
         dispatch(clearError())
-        return dispatch(updateProfile({id, username, currentPassword, newPassword}))
+        return dispatch(updateProfile(
+          { id, username, currentPassword, newPassword }
+        ))
       }
       dispatch(showError('New password and confirmation don\'t match'))
     }

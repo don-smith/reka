@@ -1,11 +1,17 @@
 const express = require('express')
 
 const token = require('../auth/token')
-const {getOfferings, createOffering} = require('./offerings')
-const {getRegistrations, createRegistration, deleteRegistration} = require('./registrations')
+const { getOfferings, createOffering } = require('./offerings')
+const {
+  getRegistrations,
+  createRegistration,
+  deleteRegistration
+} = require('./registrations')
 
 const db = require('../db/events')
-const {getRegistrations: getRegistrationsFromDb} = require('../db/registrations')
+const {
+  getRegistrations: getRegistrationsFromDb
+} = require('../db/registrations')
 
 const router = express.Router()
 

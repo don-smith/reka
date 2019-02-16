@@ -1,5 +1,5 @@
 import request from '../lib/api'
-import {showError, clearError} from './error'
+import { showError, clearError } from './error'
 
 export const REQUEST_ADD_EVENT = 'REQUEST_ADD_EVENT'
 export const RECEIVE_ADD_EVENT = 'RECEIVE_ADD_EVENT'
