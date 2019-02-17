@@ -38,7 +38,7 @@ test('getRegistrations returns all registrations for an event', () => {
 
 test('createRegistration creates a new registration for an event', () => {
   const eventId = 2
-  const newRegistration = {name: 'newtestregistration'}
+  const newRegistration = { name: 'newtestregistration' }
   const validateNewRegistration = newIds => {
     const id = newIds[0]
     return db.getRegistration(id, testDb)
