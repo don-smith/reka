@@ -7,8 +7,7 @@ module.exports = {
   getAttendedEvents
 }
 
-function createEvent (event, conn) {
-  const db = conn || connection
+function createEvent (event, db = connection) {
   const newEvent = {
     name: event.name,
     user_id: event.userId,
@@ -21,8 +20,7 @@ function createEvent (event, conn) {
     .insert(newEvent)
 }
 
-function getHostedEvents (id, conn) {
-  const db = conn || connection
+function getHostedEvents (id, db = connection) {
   return db('events')
     .select('id', 'name',
       'user_id as userId',
@@ -31,8 +29,7 @@ function getHostedEvents (id, conn) {
     .where('user_id', id)
 }
 
-function getAttendedEvents (id, conn) {
-  const db = conn || connection
+function getAttendedEvents (id, db = connection) {
   return db('events')
     .join('registrations', 'event_id', 'events.id')
     .select('events.id as id', 'events.name',
@@ -42,8 +39,7 @@ function getAttendedEvents (id, conn) {
     .where('registrations.user_id', id)
 }
 
-function getEvent (id, conn) {
-  const db = conn || connection
+function getEvent (id, db = connection) {
   return db('events')
     .select(
       'id',

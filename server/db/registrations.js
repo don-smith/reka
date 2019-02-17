@@ -7,23 +7,20 @@ module.exports = {
   deleteRegistration
 }
 
-function getRegistration (id, conn) {
-  const db = conn || connection
+function getRegistration (id, db = connection) {
   return db('registrations')
     .select('id', 'name', 'user_id as userId', 'event_id as eventId')
     .where('id', id)
     .first()
 }
 
-function getRegistrations (eventId, conn) {
-  const db = conn || connection
+function getRegistrations (eventId, db = connection) {
   return db('registrations')
     .select('id', 'name', 'user_id as userId', 'event_id as eventId')
     .where('event_id', eventId)
 }
 
-function createRegistration (registration, eventId, conn) {
-  const db = conn || connection
+function createRegistration (registration, eventId, db = connection) {
   const newRegistration = {
     name: registration.name,
     user_id: registration.id,
@@ -33,8 +30,7 @@ function createRegistration (registration, eventId, conn) {
     .insert(newRegistration)
 }
 
-function deleteRegistration (registrationName, eventId, conn) {
-  const db = conn || connection
+function deleteRegistration (registrationName, eventId, db = connection) {
   return db('registrations')
     .delete()
     .where({
