@@ -35,7 +35,7 @@ class SignIn extends React.Component {
                   type='password' placeholder='password'
                   onChange={this.handleChange} value={password} />
 
-                <button name='sign-in-button' className='pure-button pure-button-primary'
+                <button name='sign-in-button' id='sign-in-button' className='pure-button pure-button-primary'
                   onClick={this.handleSubmit}>Sign in</button>
               </fieldset>
             </form>

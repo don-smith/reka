@@ -1,9 +1,11 @@
 {
   "env": {
     "node": true,
-    "jest": true
+    "jest": true,
+    "cypress/globals": true
   },
   "extends": [
+    "plugin:cypress/recommended",
     "plugin:react/recommended",
     "standard"
   ],
@@ -11,6 +13,12 @@
     "node",
     "promise",
     "react",
-    "standard"
-  ]
+    "cypress",
+    "standard",
+    "chai-friendly"
+  ],
+  "rules": {
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2
+  }
 }

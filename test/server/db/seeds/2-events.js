@@ -5,7 +5,7 @@ exports.seed = function (knex, Promise) {
     {
       id: 1,
       user_id: 1,
-      date_time: moment('2017-08-08 19:30+12').toDate(),
+      date_time: moment().add(10, 'days').toDate(),
       name: 'Jules on wine',
       location: '123 Happy Lane',
       description: 'Jules is having another wine tasting party',
@@ -14,7 +14,7 @@ exports.seed = function (knex, Promise) {
     {
       id: 2,
       user_id: 1,
-      date_time: moment('2018-10-08 19:30+12').toDate(),
+      date_time: moment().subtract(30, 'days').toDate(),
       name: 'Does Jules beer in the woods?',
       description: 'Jules is having her first beer tasting',
       location: '123 Yum Drive',
@@ -23,7 +23,7 @@ exports.seed = function (knex, Promise) {
     {
       id: 3,
       user_id: 2,
-      date_time: moment('2018-10-08 19:30+12').toDate(),
+      date_time: moment().subtract(45, 'days').toDate(),
       name: 'Jimmy and the chocolate factory',
       description: 'Once you go dark, you never go back',
       location: '123 Cocoa Road',

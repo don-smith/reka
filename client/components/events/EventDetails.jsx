@@ -15,17 +15,16 @@ class EventDetails extends React.PureComponent {
   }
 
   componentDidMount (prevProps) {
+    // When the component mounts, we make an API call to get the event details,
+    // which includes the registrations.
     this.props.getEventDetails(this.props.match.params.id)
 
-    // When the component mounts, we make an API call to get the event details,
-    // which includes the registrations. If the signed in user has registered, we need
-    // to set the state with their name so they are able to unregister.
-    if (prevProps.registrations !== this.props.registrations) {
-      const registration = prevProps.registrations.find(registration => {
-        return registration.userId === this.props.userDetails.id
-      })
-      this.setState({ name: (registration && registration.name) || '' })
-    }
+    // If the signed in user has registered, we need to set the state with
+    // their name so they are able to unregister.
+    const hostRegistration = this.props.registrations.find(registration => {
+      return registration.userId === this.props.userDetails.id
+    })
+    this.setState({ name: (hostRegistration && hostRegistration.name) || '' })
   }
 
   render () {
