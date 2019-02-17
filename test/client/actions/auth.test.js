@@ -1,12 +1,13 @@
 import '../mocks/api'
 import '../mocks/save-auth-token'
 
-import {CLEAR_ERROR} from '../../../client/actions/error'
+import { CLEAR_ERROR } from '../../../client/actions/error'
 
 import {
   register,
   REQUEST_USER_REGISTRATION,
-  RECEIVE_USER_REGISTRATION} from '../../../client/actions/auth'
+  RECEIVE_USER_REGISTRATION
+} from '../../../client/actions/auth'
 
 test('registering a user dispatches the correct actions', () => {
   const dispatch = jest.fn()

@@ -1,6 +1,6 @@
 import request from '../lib/api'
-import {showError, clearError} from './error'
-import {saveAuthToken, logOff as logOffUser} from '../lib/auth'
+import { showError, clearError } from './error'
+import { saveAuthToken, logOff as logOffUser } from '../lib/auth'
 
 export const LOG_OFF = 'LOG_OFF'
 export const REQUEST_SIGNIN = 'REQUEST_SIGNIN'

@@ -1,4 +1,4 @@
-import {SHOW_ERROR, CLEAR_ERROR} from '../../../client/actions/error'
+import { SHOW_ERROR, CLEAR_ERROR } from '../../../client/actions/error'
 import errorMessage from '../../../client/reducers/error-message'
 
 test('errorMessage returns the error message during SHOW_ERROR', () => {
@@ -11,14 +11,14 @@ test('errorMessage returns the error message during SHOW_ERROR', () => {
 })
 
 test('errorMessage returns an empty string during CLEAR_ERROR', () => {
-  const action = {type: CLEAR_ERROR}
+  const action = { type: CLEAR_ERROR }
   const newState = errorMessage('current error message', action)
   expect(newState).toBe('')
 })
 
 test('errorMessage returns the current state by default', () => {
   const currentState = 'current error message'
-  const action = {type: 'UNKNOWN_ACTION_TYPE'}
+  const action = { type: 'UNKNOWN_ACTION_TYPE' }
   const newState = errorMessage(currentState, action)
   expect(newState).toBe(currentState)
 })

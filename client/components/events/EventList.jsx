@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import {getEventList} from '../../actions/events'
+import { getEventList } from '../../actions/events'
 
 class EventList extends React.PureComponent {
   componentDidMount () {
@@ -13,11 +13,11 @@ class EventList extends React.PureComponent {
   render () {
     const noneHostedMessage = (
       <p>
-        You haven't hosted any events yet. Would you like to {' '}
+        You haven&apos;t hosted any events yet. Would you like to {' '}
         <Link to='/events/new'>host one now</Link>?
       </p>
     )
-    const noneAttendedMessage = <p>You haven't attended any events yet.</p>
+    const noneAttendedMessage = <p>You haven&apos;t attended any events yet.</p>
 
     return (
       <div className='event-list'>
@@ -27,11 +27,11 @@ class EventList extends React.PureComponent {
           </Link>
         </div>
         <div className='hosted'>
-          <h2>Events I've hosted</h2>
+          <h2>Events I&apos;ve hosted</h2>
           {this.getEvents(this.props.events.hosted, noneHostedMessage)}
         </div>
         <div className='attended'>
-          <h2>Events I've attended</h2>
+          <h2>Events I&apos;ve attended</h2>
           {this.getEvents(this.props.events.attended, noneAttendedMessage)}
         </div>
       </div>
@@ -65,8 +65,8 @@ EventList.propTypes = {
   })
 }
 
-function mapStateToProps ({events}) {
-  return {events}
+function mapStateToProps ({ events }) {
+  return { events }
 }
 
 function mapDispatchToProps (dispatch) {

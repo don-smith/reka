@@ -1,12 +1,13 @@
 import '../mocks/api'
 import '../mocks/save-auth-token'
 
-import {CLEAR_ERROR} from '../../../client/actions/error'
+import { CLEAR_ERROR } from '../../../client/actions/error'
 
 import {
   register,
   REQUEST_EVENT_REGISTRATION,
-  RECEIVE_EVENT_REGISTRATION} from '../../../client/actions/registrations'
+  RECEIVE_EVENT_REGISTRATION
+} from '../../../client/actions/registrations'
 
 test('registering for an event dispatches the correct actions', () => {
   const dispatch = jest.fn()

@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-import {isAuthenticated, getEncodedToken} from './auth'
+import { isAuthenticated, getEncodedToken } from './auth'
 
 const baseUrl = '/api/v1'
 

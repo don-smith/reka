@@ -6,8 +6,7 @@ module.exports = {
   createOffering
 }
 
-function getOffering (id, conn) {
-  const db = conn || connection
+function getOffering (id, db = connection) {
   return db('offerings')
     .select('id', 'name', 'description',
       'photo_url as photoUrl', 'event_id as eventId')
@@ -15,16 +14,14 @@ function getOffering (id, conn) {
     .first()
 }
 
-function getOfferings (eventId, conn) {
-  const db = conn || connection
+function getOfferings (eventId, db = connection) {
   return db('offerings')
     .select('id', 'name', 'description',
       'photo_url as photoUrl', 'event_id as eventId')
     .where('event_id', eventId)
 }
 
-function createOffering (offering, eventId, conn) {
-  const db = conn || connection
+function createOffering (offering, eventId, db = connection) {
   const createRegistrationRelations = associate.bind(null, offering.registrationIds, db)
   const newOffering = {
     name: offering.name,

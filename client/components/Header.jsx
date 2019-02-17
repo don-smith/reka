@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link, withRouter} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 
-import {getUserDetails, logOff} from '../actions/auth'
-import {isAuthenticated, getAuthToken} from '../lib/auth'
+import { getUserDetails, logOff } from '../actions/auth'
+import { isAuthenticated, getAuthToken } from '../lib/auth'
 import BusyIndicator from './BusyIndicator'
 
-class Header extends React.Component {
+export class Header extends React.Component {
   constructor (props) {
     super(props)
     this.handleLogOff = this.handleLogOff.bind(this)
@@ -22,7 +22,7 @@ class Header extends React.Component {
   }
 
   render () {
-    const {signedIn, atHome, atEvents, atProfile} = this.props
+    const { signedIn, atHome, atEvents, atProfile } = this.props
     return (
       <div className='header'>
         <div className='home-menu pure-menu pure-menu-horizontal pure-menu-fixed'>
@@ -54,7 +54,7 @@ class Header extends React.Component {
   }
 
   handleLogOff (e) {
-    const {dispatch, history} = this.props
+    const { dispatch, history } = this.props
     e.preventDefault()
     dispatch(logOff())
     history.push('/')
@@ -73,7 +73,7 @@ Header.propTypes = {
   atProfile: PropTypes.bool
 }
 
-function mapStateToProps ({userDetails}, ownProps) {
+function mapStateToProps ({ userDetails }, ownProps) {
   const path = ownProps.history.location.pathname
   return {
     atHome: path === '/',

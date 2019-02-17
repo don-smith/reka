@@ -1,8 +1,9 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import {register} from '../actions/auth'
-import {showError, clearError} from '../actions/error'
+import { register } from '../actions/auth'
+import { showError, clearError } from '../actions/error'
 
 class Register extends React.Component {
   constructor (props) {
@@ -24,7 +25,7 @@ class Register extends React.Component {
   }
 
   render () {
-    const {username, password, confirm, showMatch, match} = this.state
+    const { username, password, confirm, showMatch, match } = this.state
     return (
       <div className='register'>
         <div className='page-content-wrapper'>
@@ -59,7 +60,7 @@ class Register extends React.Component {
   }
 
   handleChange (e) {
-    const {name, value} = e.target
+    const { name, value } = e.target
     let match = this.state.match
     match = name === 'password' ? value === this.state.confirm : match
     match = name === 'confirm' ? value === this.state.password : match
@@ -71,11 +72,15 @@ class Register extends React.Component {
   }
 
   handleSubmit (e) {
-    const {register} = this.props
-    const {username, password, confirm} = this.state
+    const { register } = this.props
+    const { username, password, confirm } = this.state
     register(username, password, confirm)
     e.preventDefault()
   }
+}
+
+Register.propTypes = {
+  register: PropTypes.func
 }
 
 function mapDispatchToProps (dispatch) {
@@ -83,7 +88,7 @@ function mapDispatchToProps (dispatch) {
     register: (username, password, confirm) => {
       if (password === confirm) {
         dispatch(clearError())
-        return dispatch(register({username, password}))
+        return dispatch(register({ username, password }))
       }
       dispatch(showError('Password and confirmation don\'t match'))
     }

@@ -1,6 +1,5 @@
 const path = require('path')
 const express = require('express')
-const bodyParser = require('body-parser')
 
 const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/users')
@@ -10,7 +9,7 @@ const offeringRoutes = require('./routes/offerings')
 
 const server = express()
 server.use(express.static(path.join(__dirname, 'public')))
-server.use(bodyParser.json())
+server.use(express.json())
 
 server.use('/api/v1/auth', authRoutes)
 server.use('/api/v1/users', userRoutes)

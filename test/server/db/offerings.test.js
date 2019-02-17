@@ -16,7 +16,6 @@ test('getOffering returns an offering given its id', () => {
       expect(offering.name).toBe('beer 2')
       expect(offering.eventId).toBe(2)
     })
-    .catch(err => expect(err).toBeNull())
 })
 
 test('getOffering returns undefined for a nonexistent offering id', () => {
@@ -24,7 +23,6 @@ test('getOffering returns undefined for a nonexistent offering id', () => {
     .then(offering => {
       expect(offering).toBeFalsy()
     })
-    .catch(err => expect(err).toBeNull())
 })
 
 test('getOfferings returns all offerings at an event', () => {
@@ -35,7 +33,6 @@ test('getOfferings returns all offerings at an event', () => {
       expect(offerings[1].photoUrl).toBe('/beer2.jpg')
       expect(offerings[1].description).toBe('Very nice beer')
     })
-    .catch(err => expect(err).toBeNull())
 })
 
 test('createOffering creates a new offering at an event', () => {
@@ -55,5 +52,4 @@ test('createOffering creates a new offering at an event', () => {
   }
   return db.createOffering(newOffering, eventId, testDb)
     .then(validateNewOffering)
-    .catch(err => expect(err).toBeNull())
 })

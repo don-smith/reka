@@ -9,23 +9,20 @@ module.exports = {
   updateUser
 }
 
-function createUser (username, password, conn) {
-  const db = conn || connection
+function createUser (username, password, db = connection) {
   return userExists(username, db)
     .then(exists => {
       if (exists) {
         return Promise.reject(new Error('User exists'))
       }
     })
-    .then(() => {
-      const passwordHash = hash.generate(password)
-      return db('users')
-        .insert({username, hash: passwordHash})
+    .then(() => hash.generate(password))
+    .then(passwordHash => {
+      return db('users').insert({ username, hash: passwordHash })
     })
 }
 
-function userExists (username, conn) {
-  const db = conn || connection
+function userExists (username, db = connection) {
   return db('users')
     .count('id as n')
     .where('username', username)
@@ -34,24 +31,21 @@ function userExists (username, conn) {
     })
 }
 
-function getUserById (id, conn) {
-  const db = conn || connection
+function getUserById (id, db = connection) {
   return db('users')
     .select('id', 'username')
     .where('id', id)
     .first()
 }
 
-function getUserByName (username, conn) {
-  const db = conn || connection
+function getUserByName (username, db = connection) {
   return db('users')
     .select()
     .where('username', username)
     .first()
 }
 
-function updateUser (id, username, currentPassword, newPassword, conn) {
-  const db = conn || connection
+function updateUser (id, username, currentPassword, newPassword, db = connection) {
   return getUserByName(username, db)
     .then(user => {
       if (!user || !hash.verify(user.hash, currentPassword)) {
@@ -63,7 +57,7 @@ function updateUser (id, username, currentPassword, newPassword, conn) {
       const newPasswordHash = hash.generate(newPassword)
       if (id !== user.id) Promise.reject(new Error('Username and ID mismatch'))
       return db('users')
-        .update({username, hash: newPasswordHash})
+        .update({ username, hash: newPasswordHash })
         .where('id', user.id)
     })
 }

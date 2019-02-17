@@ -1,39 +1,36 @@
 import React from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-import {register} from '../../actions/registrations'
-import {getEventDetails} from '../../actions/events'
+import { register } from '../../actions/registrations'
+import { getEventDetails } from '../../actions/events'
 
 class EventDetails extends React.PureComponent {
   constructor (props) {
     super(props)
-    this.state = {name: ''}
+    this.state = { name: '' }
     this.handleChange = this.handleChange.bind(this)
   }
 
-  componentDidMount () {
-    this.props.getEventDetails(this.props.match.params.id)
-  }
-
-  componentWillReceiveProps (nextProps) {
+  componentDidMount (prevProps) {
     // When the component mounts, we make an API call to get the event details,
-    // which includes the registrations. If the signed in user has registered, we need
-    // to set the state with their name so they are able to unregister.
-    if (nextProps.registrations !== this.props.registrations) {
-      const registration = nextProps.registrations.find(registration => {
-        return registration.userId === this.props.userDetails.id
-      })
-      this.setState({name: (registration && registration.name) || ''})
-    }
+    // which includes the registrations.
+    this.props.getEventDetails(this.props.match.params.id)
+
+    // If the signed in user has registered, we need to set the state with
+    // their name so they are able to unregister.
+    const hostRegistration = this.props.registrations.find(registration => {
+      return registration.userId === this.props.userDetails.id
+    })
+    this.setState({ name: (hostRegistration && hostRegistration.name) || '' })
   }
 
   render () {
-    const {eventDetails, registrations, register, userDetails} = this.props
-    const {name, description} = eventDetails
-    const {id: userId, username} = userDetails || {}
+    const { eventDetails, registrations, register, userDetails } = this.props
+    const { name, description } = eventDetails
+    const { id: userId, username } = userDetails || {}
     const dateTime = moment(eventDetails.dateTime)
     const date = dateTime.format('dddd, MMMM Do YYYY [at] hh:mm a')
     const isRegistrationOpen = dateTime.add(5, 'hours') > moment()
@@ -87,7 +84,7 @@ class EventDetails extends React.PureComponent {
   }
 
   handleChange (e) {
-    const {name, value} = e.target
+    const { name, value } = e.target
     this.setState({
       [name]: value
     })
@@ -107,7 +104,7 @@ EventDetails.propTypes = {
   eventDetails: PropTypes.object
 }
 
-function mapStateToProps ({activeEvent, userDetails}) {
+function mapStateToProps ({ activeEvent, userDetails }) {
   return {
     userDetails,
     eventDetails: activeEvent.details,
