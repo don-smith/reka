@@ -19,6 +19,7 @@
     "test": "jest test/client test/server && exit 0",
     "start": "node server"
   },
+  "precommit": "lint, test, e2e",
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -33,7 +34,6 @@
       "./test/client/setup.js"
     ]
   },
-  "precommit": "lint, test, e2e",
   "dependencies": {
     "dotenv": "^6.2.0",
     "express": "^4.15.3",
