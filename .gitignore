@@ -5,3 +5,4 @@ bundle*
 *.log
 logs
 .env
+*.mp4
