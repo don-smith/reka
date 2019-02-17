@@ -20,5 +20,10 @@
   "rules": {
     "no-unused-expressions": 0,
     "chai-friendly/no-unused-expressions": 2
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
