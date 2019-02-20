@@ -19,16 +19,16 @@ module.exports = router
 
 // GET /events
 router.get('/', token.decode, (req, res) => {
-  const events = {}
-  db.getHostedEvents(req.user.id)
-    .then(hosted => {
-      events.hosted = hosted
-      return db.getAttendedEvents(req.user.id)
-    })
-    .then(attended => {
-      events.attended = attended
-      res.json(events)
-    })
+  const { id: userId } = req.user
+  return Promise.all([
+    db.getUpcomingEvents(userId),
+    db.getHostedEvents(userId),
+    db.getAttendedEvents(userId)
+  ])
+    .then(([upcoming, hosted, attended]) => ({
+      upcoming, hosted, attended
+    }))
+    .then(events => res.json(events))
     .catch(err => {
       res.status(500).send(err.message)
     })

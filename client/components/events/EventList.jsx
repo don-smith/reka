@@ -11,6 +11,7 @@ class EventList extends React.PureComponent {
   }
 
   render () {
+    const noneUpcomingMessage = <p>You don&apos;t have any upcoming events.</p>
     const noneHostedMessage = (
       <p>
         You haven&apos;t hosted any events yet. Would you like to {' '}
@@ -26,11 +27,15 @@ class EventList extends React.PureComponent {
             Host a new event
           </Link>
         </div>
-        <div className='hosted'>
+        <div id='upcoming' className='upcoming'>
+          <h2>My upcoming events</h2>
+          {this.getEvents(this.props.events.upcoming, noneUpcomingMessage)}
+        </div>
+        <div id='hosted' className='hosted'>
           <h2>Events I&apos;ve hosted</h2>
           {this.getEvents(this.props.events.hosted, noneHostedMessage)}
         </div>
-        <div className='attended'>
+        <div id='attended' className='attended'>
           <h2>Events I&apos;ve attended</h2>
           {this.getEvents(this.props.events.attended, noneAttendedMessage)}
         </div>
@@ -60,6 +65,7 @@ class EventList extends React.PureComponent {
 EventList.propTypes = {
   getEventList: PropTypes.func,
   events: PropTypes.shape({
+    upcoming: PropTypes.array,
     hosted: PropTypes.array,
     attended: PropTypes.array
   })

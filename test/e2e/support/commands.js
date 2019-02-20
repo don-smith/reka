@@ -12,10 +12,14 @@
 // -- This is a parent command --
 //
 Cypress.Commands.add('login', (username, password) => {
-  cy.visit('/signin')
-  cy.get('#username').type(username)
-  cy.get('#password').type(password)
-  cy.get('#sign-in-button').click()
+  cy.request({
+    method: 'POST',
+    url: 'http://localhost:3000/api/v1/auth/signin',
+    body: { username, password }
+  })
+    .then(res => {
+      window.localStorage.setItem('token', res.body.token)
+    })
 })
 
 Cypress.Commands.add('resetDb', () => {

@@ -4,6 +4,7 @@ import {
 } from '../actions/events'
 
 const initialState = {
+  upcoming: [],
   hosted: [],
   attended: []
 }

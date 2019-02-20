@@ -9,17 +9,20 @@ test('events returns the event during RECEIVE_EVENT_LIST', () => {
   const action = {
     type: RECEIVE_EVENT_LIST,
     events: {
+      upcoming: [{ name: 'test upcoming event' }],
       hosted: [{ name: 'test hosted event' }],
       attended: [{ name: 'test attended event' }]
     }
   }
   const newState = events(currentState, action)
+  expect(newState.upcoming[0]).toBe(action.events.upcoming[0])
   expect(newState.hosted[0]).toBe(action.events.hosted[0])
   expect(newState.attended[0]).toBe(action.events.attended[0])
 })
 
 test('events returns the initial state during REQUEST_EVENT_LIST', () => {
   const currentState = {
+    upcoming: [{ name: 'test upcoming event' }],
     hosted: [{ name: 'test hosted event' }],
     attended: [{ name: 'test attended event' }]
   }
@@ -27,6 +30,7 @@ test('events returns the initial state during REQUEST_EVENT_LIST', () => {
     type: REQUEST_EVENT_LIST
   }
   const newState = events(currentState, action)
+  expect(newState.upcoming.length).toBe(0)
   expect(newState.hosted.length).toBe(0)
   expect(newState.attended.length).toBe(0)
 })

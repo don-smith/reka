@@ -26,12 +26,22 @@ test('getEvent returns undefined for a nonexistent event id', () => {
     .catch(err => expect(err).toBeNull())
 })
 
+test('getUpcomingEvents returns all upcoming events', () => {
+  const userId = 1
+  return db.getUpcomingEvents(userId, testDb)
+    .then(events => {
+      expect(events.length).toBe(1)
+      expect(events[0].location).toBe('123 Happy Lane')
+    })
+    .catch(err => expect(err).toBeNull())
+})
+
 test('getHostedEvents returns all hosted events', () => {
   const userId = 1
   return db.getHostedEvents(userId, testDb)
     .then(events => {
-      expect(events.length).toBe(2)
-      expect(events[1].location).toBe('123 Yum Drive')
+      expect(events.length).toBe(1)
+      expect(events[0].location).toBe('123 Yum Drive')
     })
     .catch(err => expect(err).toBeNull())
 })

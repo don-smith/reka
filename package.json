@@ -17,6 +17,7 @@
     "lint": "eslint client server test --ignore-pattern 'bundle.js' && exit 0",
     "postinstall": "npm run build && npm run knex migrate:latest",
     "test": "jest test/client test/server && exit 0",
+    "test:watch": "jest test/client test/server --watch",
     "start": "node server"
   },
   "precommit": "lint, test, e2e",
