@@ -13,6 +13,7 @@ import Register from './Register'
 import Profile from './Profile'
 import Events from './events/Events'
 import ErrorMessage from './ErrorMessage'
+import Registration from './Registration'
 
 const App = () => {
   // TODO: Style the ErrorMessage
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='/signin' component={SignIn} />
         <Route path='/profile' component={Profile} />
         <Route path='/events' component={Events} />
+        <Route path='/registrations/:id' component={Registration} />
       </div>
     </Router>
   )

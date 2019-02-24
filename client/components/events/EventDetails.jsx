@@ -17,7 +17,7 @@ class EventDetails extends React.PureComponent {
   componentDidMount (prevProps) {
     // When the component mounts, we make an API call to get the event details,
     // which includes the registrations.
-    this.props.getEventDetails(this.props.match.params.id)
+    this.props.getEventDetails(Number(this.props.match.params.id))
 
     // If the signed in user has registered, we need to set the state with
     // their name so they are able to unregister.
@@ -107,7 +107,7 @@ EventDetails.propTypes = {
 function mapStateToProps ({ activeEvent, userDetails }) {
   return {
     userDetails,
-    eventDetails: activeEvent.details,
+    eventDetails: activeEvent.details || {},
     registrations: activeEvent.registrations
   }
 }

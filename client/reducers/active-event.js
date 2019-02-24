@@ -4,7 +4,7 @@ import {
 } from '../actions/events'
 
 const initialState = {
-  details: {},
+  details: null,
   registrations: []
 }
 
