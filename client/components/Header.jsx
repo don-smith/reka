@@ -25,7 +25,7 @@ export class Header extends React.Component {
     const { signedIn, atHome, atEvents, atProfile } = this.props
     return (
       <div className='header'>
-        <div className='home-menu pure-menu pure-menu-horizontal pure-menu-fixed'>
+        <div className='home-menu pure-menu pure-menu-horizontal'>
           <Link to='/' className='pure-menu-heading'>Reka</Link>
           <BusyIndicator />
           <ul className='pure-menu-list'>
