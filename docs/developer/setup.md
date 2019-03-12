@@ -9,31 +9,31 @@ Currently, this repo targets Node.js version 6.11.3, the latest LTS (long-term s
   cd reka
   ```
 
-2. Install dependencies
+1. Install dependencies
 
   ```sh
   npm install
   ```
 
-3. (Optional) Apply the database migrations - this is run during `postinstall`
+1. (Optional) Apply the database migrations - this is run during `postinstall`
 
   ```sh
   npm run knex migrate:latest
   ```
 
-4. Add test data to the development database
+1. Add test data to the development database
 
   ```sh
   npm run knex seed:run
   ```
 
-5. Start the development server
+1. Start the development server
 
   ```sh
   npm run dev
   ```
 
-6. In a new terminal window in the same folder, ensure all the tests pass
+1. In a new terminal window in the same folder, ensure all the tests pass
 
   ```sh
   npm test

@@ -5,6 +5,12 @@ import { connect } from 'react-redux'
 import { register } from '../actions/auth'
 import { showError, clearError } from '../actions/error'
 
+const style = {
+  minWidth: '350px',
+  maxWidth: '550px',
+  marginTop: '4rem'
+}
+
 class Register extends React.Component {
   constructor (props) {
     super(props)
@@ -27,33 +33,34 @@ class Register extends React.Component {
   render () {
     const { username, password, confirm, showMatch, match } = this.state
     return (
-      <div className='register'>
-        <div className='page-content-wrapper'>
-          <div className='content'>
-            <form className='pure-form pure-form-stacked'>
-              <fieldset>
-                <legend>Register</legend>
+      <div className='ui middle aligned center aligned grid'>
+        <div style={style}>
+          <form className='ui large form'>
+            <div className='ui stacked segment'>
+              <h2 className='ui header'>Register</h2>
 
-                <label htmlFor='username'>Username</label>
+              <div className='field'>
                 <input id='username' name='username' placeholder='username'
                   onChange={this.handleChange} value={username} />
+              </div>
 
-                <label htmlFor='password'>Password</label>
+              <div className='field'>
                 <input id='password' name='password'
                   type='password' placeholder='password'
                   onChange={this.handleChange} value={password} />
+              </div>
 
-                <label htmlFor='confirm'>Confirm password</label>
+              <div className='field'>
                 <input id='confirm' name='confirm'
                   type='password' placeholder='confirm password'
                   onChange={this.handleChange} value={confirm} />
+              </div>
 
-                {showMatch && !match && <span style={this.styles.match}>*</span>}
-                <button className='pure-button pure-button-primary'
-                  onClick={this.handleSubmit}>Register</button>
-              </fieldset>
-            </form>
-          </div>
+              {showMatch && !match && <span style={this.styles.match}>*</span>}
+              <button className='ui fluid large primary button'
+                onClick={this.handleSubmit}>Register</button>
+            </div>
+          </form>
         </div>
       </div>
     )

@@ -22,32 +22,25 @@ export class Header extends React.Component {
   }
 
   render () {
+    const activeItem = isSelected => {
+      return isSelected ? 'active item' : 'item'
+    }
+
     const { signedIn, atHome, atEvents, atProfile } = this.props
     return (
       <div className='header'>
-        <div className='home-menu pure-menu pure-menu-horizontal'>
-          <Link to='/' className='pure-menu-heading'>Reka</Link>
-          <BusyIndicator />
-          <ul className='pure-menu-list'>
-            <li className={`pure-menu-item ${atHome && 'pure-menu-selected'}`}>
-              <Link to='/' className='home pure-menu-link'>Home</Link>
-            </li>
-            {!signedIn && <li className='pure-menu-item'>
-              <Link to='/register' className='register pure-menu-link'>Register</Link>
-            </li>}
-            {!signedIn && <li className='pure-menu-item'>
-              <Link to='/signin' className='signin pure-menu-link'>Sign in</Link>
-            </li>}
-            {signedIn && <li className={`pure-menu-item ${atEvents && 'pure-menu-selected'}`}>
-              <Link to='/events' className='events pure-menu-link'>Events</Link>
-            </li>}
-            {signedIn && <li className={`pure-menu-item ${atProfile && 'pure-menu-selected'}`}>
-              <Link to='/profile' className='profile pure-menu-link'>Profile</Link>
-            </li>}
-            {signedIn && <li className='pure-menu-item'>
-              <a href='#' className='logoff pure-menu-link' onClick={this.handleLogOff}>Log off</a>
-            </li>}
-          </ul>
+        <div className='ui large top menu'>
+          <div className='ui container'>
+            <Link to='/' className={activeItem(atHome)}>Home</Link>
+            <BusyIndicator />
+            <div className='right menu'>
+              {!signedIn && <Link to='/register' className='item'>Register</Link>}
+              {!signedIn && <Link to='/signin' className='item'>Sign in</Link>}
+              {signedIn && <Link to='/events' className={activeItem(atEvents)}>Events</Link>}
+              {signedIn && <Link to='/profile' className={activeItem(atProfile)}>Profile</Link>}
+              {signedIn && <a href='#' className='item' onClick={this.handleLogOff}>Log off</a>}
+            </div>
+          </div>
         </div>
       </div>
     )

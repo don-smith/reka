@@ -16,6 +16,10 @@ module.exports = {
       }, {
         loader: ['style-loader', 'raw-loader'],
         test: /\.css$/
+      },
+      {
+        test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader'
       }
     ]
   },

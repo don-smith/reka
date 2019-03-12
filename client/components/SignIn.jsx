@@ -5,6 +5,12 @@ import { signIn } from '../actions/auth'
 import { clearError } from '../actions/error'
 import { withRouter } from 'react-router-dom'
 
+const style = {
+  minWidth: '350px',
+  maxWidth: '550px',
+  marginTop: '4rem'
+}
+
 class SignIn extends React.Component {
   constructor (props) {
     super(props)
@@ -19,27 +25,27 @@ class SignIn extends React.Component {
   render () {
     const { username, password } = this.state
     return (
-      <div className='sign-in'>
-        <div className='page-content-wrapper'>
-          <div className='content'>
-            <form className='pure-form pure-form-stacked'>
-              <fieldset>
-                <legend>Sign in</legend>
+      <div className='ui middle aligned center aligned grid'>
+        <div style={style}>
+          <form className='ui large form'>
+            <div className='ui stacked segment'>
+              <h2 className='ui header'>Sign In</h2>
 
-                <label htmlFor='username'>Username</label>
+              <div className='field'>
                 <input id='username' name='username' placeholder='username'
                   onChange={this.handleChange} value={username} />
+              </div>
 
-                <label htmlFor='password'>Password</label>
+              <div className='field'>
                 <input id='password' name='password'
                   type='password' placeholder='password'
                   onChange={this.handleChange} value={password} />
+              </div>
 
-                <button name='sign-in-button' id='sign-in-button' className='pure-button pure-button-primary'
-                  onClick={this.handleSubmit}>Sign in</button>
-              </fieldset>
-            </form>
-          </div>
+              <button id='sign-in-button' className='ui fluid large primary button'
+                onClick={this.handleSubmit}>Sign In</button>
+            </div>
+          </form>
         </div>
       </div>
     )
