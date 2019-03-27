@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import { Menu, Sidebar } from 'semantic-ui-react'
+import { Container, Menu, Sidebar, Icon } from 'semantic-ui-react'
 
 import { getUserDetails, logOff } from '../actions/auth'
 import { isAuthenticated, getAuthToken } from '../lib/auth'
@@ -23,16 +23,17 @@ class MobileMenu extends React.Component {
     history.push('/')
   }
 
+  handleToggle = () => this.props.handleToggle(true)
   handleSidebarHide = () => this.props.handleToggle(false)
 
   render () {
-    const { sidebarOpened, signedIn, atHome, atEvents, atProfile } = this.props
+    const { sidebarOpened, inverted, signedIn, atHome, atEvents, atProfile } = this.props
 
     return (
       <Sidebar
         as={Menu}
         animation='push'
-        inverted
+        inverted={inverted}
         onHide={this.handleSidebarHide}
         vertical
         visible={sidebarOpened}>
@@ -64,8 +65,8 @@ class MobileMenu extends React.Component {
 }
 
 MobileMenu.propTypes = {
-  fixed: PropTypes.bool,
   signedIn: PropTypes.bool,
+  inverted: PropTypes.bool,
   atHome: PropTypes.bool,
   atEvents: PropTypes.bool,
   atProfile: PropTypes.bool,
@@ -84,7 +85,7 @@ function mapStateToProps ({ userDetails }, ownProps) {
     atHome: path === '/',
     atEvents: path.includes('events'),
     atProfile: path.includes('profile'),
-    sidebarOpened: ownProps.sidebarOpened,
+    sidebarOpened: ownProps.sidebarOpened, // NEEDED?
     signedIn: isAuthenticated(),
     userDetails
   }

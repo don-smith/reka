@@ -50,11 +50,13 @@ const Home = () => {
         as={Sidebar.Pushable}
         getWidth={getWidth}
         maxWidth={Responsive.onlyMobile.maxWidth}>
-        <MobileMenu sidebarOpened={sidebarOpened} handleToggle={handleToggle} />
+        <MobileMenu inverted
+          sidebarOpened={sidebarOpened}
+          handleToggle={handleToggle} />
         <MobileHero sidebarOpened={sidebarOpened} handleToggle={handleToggle}>
           <HeroSection mobile />
+          <HomeContent />
         </MobileHero>
-        <HomeContent />
       </Responsive>
     </div>
   )

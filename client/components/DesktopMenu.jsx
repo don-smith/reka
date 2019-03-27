@@ -30,8 +30,8 @@ class DesktopMenu extends React.Component {
       <Menu
         fixed={fixed ? 'top' : null}
         inverted={!fixed}
-        pointing={!fixed}
-        secondary={!fixed}
+        pointing={true}
+        secondary={true}
         size='large'>
         <Container>
           <Menu.Item>
@@ -83,6 +83,7 @@ DesktopMenu.propTypes = {
 function mapStateToProps ({ userDetails }, ownProps) {
   const path = ownProps.history.location.pathname
   return {
+    fixed: ownProps.fixed,
     atHome: path === '/',
     atEvents: path.includes('events'),
     atProfile: path.includes('profile'),
