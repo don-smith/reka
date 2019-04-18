@@ -32,17 +32,17 @@ class SignIn extends React.Component {
               <h2 className='ui header'>Sign In</h2>
 
               <div className='field'>
-                <input id='username' name='username' placeholder='username'
+                <input data-e2e='username' name='username' placeholder='username'
                   onChange={this.handleChange} value={username} />
               </div>
 
               <div className='field'>
-                <input id='password' name='password'
+                <input data-e2e='password' name='password'
                   type='password' placeholder='password'
                   onChange={this.handleChange} value={password} />
               </div>
 
-              <button id='sign-in-button' className='ui fluid large primary button'
+              <button data-e2e='sign-in-button' className='ui fluid large primary button'
                 onClick={this.handleSubmit}>Sign In</button>
             </div>
           </form>

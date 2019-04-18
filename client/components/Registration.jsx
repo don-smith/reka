@@ -39,7 +39,7 @@ class Registration extends React.PureComponent {
     const registration = this.getActiveRegistration()
 
     return (
-      <div id='registration' className='registration'>
+      <div data-e2e='registration' className='registration'>
         <h2>{registration && registration.name}</h2>
         <p>{activeEvent.description}</p>
         <p>{userDetails && userDetails.username}</p>

@@ -39,15 +39,15 @@ class EventList extends React.PureComponent {
         <Button as={Link} to='/events/new'>Host a new event</Button>
 
         <Segment vertical style={ { padding: '1em 0em' } }>
-          <div id='upcoming'>
+          <div data-e2e='upcoming'>
             <h2>My upcoming events</h2>
             {this.getEvents(upcoming, noneUpcomingMessage)}
           </div>
-          <div id='hosted'>
+          <div data-e2e='hosted'>
             <h2>Events I&apos;ve hosted</h2>
             {this.getEvents(hosted, noneHostedMessage)}
           </div>
-          <div id='attended'>
+          <div data-e2e='attended'>
             <h2>Events I&apos;ve attended</h2>
             {this.getEvents(attended, noneAttendedMessage)}
           </div>
