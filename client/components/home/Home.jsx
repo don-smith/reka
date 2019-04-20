@@ -12,7 +12,12 @@ const getWidth = () => window.innerWidth
 
 const Home = () => {
   const HomeContent = () => (
-    <Segment style={ { padding: '3em 0em' } }vertical>
+    <Segment style={ {
+      textAlign: 'start',
+      padding: '3em 0em',
+      borderWidth: '0px',
+      borderRadius: '0px'
+    } }>
       <Container text>
         <Header as='h3' style={{ fontSize: '2em' }}>
           What we mean by <em>flavourful interactions</em>

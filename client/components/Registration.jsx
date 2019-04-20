@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { getEventDetails } from '../actions/events'
+import ResponsiveContainer from './ResponsiveContainer'
 
 class Registration extends React.PureComponent {
   constructor (props) {
@@ -39,11 +40,13 @@ class Registration extends React.PureComponent {
     const registration = this.getActiveRegistration()
 
     return (
-      <div data-e2e='registration' className='registration'>
-        <h2>{registration && registration.name}</h2>
-        <p>{activeEvent.description}</p>
-        <p>{userDetails && userDetails.username}</p>
-      </div>
+      <ResponsiveContainer>
+        <div data-e2e='registration' className='registration'>
+          <h2>Registered attendee: {registration && registration.name}</h2>
+          <p>{activeEvent.details && activeEvent.details.description}</p>
+          <p>Logged in user: {userDetails && userDetails.username}</p>
+        </div>
+      </ResponsiveContainer>
     )
   }
 

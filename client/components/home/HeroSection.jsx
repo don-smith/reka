@@ -17,7 +17,7 @@ const HeroSection = ({ mobile }) => (
         fontSize: mobile ? '2em' : '4em',
         fontWeight: 'normal',
         marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em'
+        marginTop: mobile ? '0em' : '2em'
       }}
     />
     <Header

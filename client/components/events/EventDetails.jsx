@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 import { register } from '../../actions/registrations'
 import { getEventDetails } from '../../actions/events'
+import ResponsiveContainer from '../ResponsiveContainer'
 
 class EventDetails extends React.PureComponent {
   constructor (props) {
@@ -43,43 +44,45 @@ class EventDetails extends React.PureComponent {
       registrationName: this.state.name
     }
     return (
-      <div className='event-details'>
-        <h2>{name}</h2>
-        <p>{description}</p>
-        <div className='date'>{date}</div>
-        <div className='location'>{eventDetails.location}</div>
-        <div className='offering'>Tasting: {eventDetails.offeringType}</div>
+      <ResponsiveContainer>
+        <div className='event-details'>
+          <h2>{name}</h2>
+          <p>{description}</p>
+          <div className='date'>{date}</div>
+          <div className='location'>{eventDetails.location}</div>
+          <div className='offering'>Tasting: {eventDetails.offeringType}</div>
 
-        {isRegistrationOpen &&
-          <div className='registration'>
-            <h3>Registration</h3>
-            {isRegistered
-              ? <form className='unregister pure-form'
-                onSubmit={(e) => register(e, false, registration)}>
-                <input type='submit' value='Unregister'
-                  className='unregister pure-button pure-button' />
-              </form>
-              : <form className='register pure-form'
-                onSubmit={(e) => register(e, true, registration)}>
-                <input name='name' value={this.state.name}
-                  placeholder={`Name (e.g. ${username})`}
-                  onChange={this.handleChange} /> {' '}
-                <input type='submit' value='Register'
-                  className='register pure-button pure-button' />
-              </form>
-            }
-          </div>
-        }
+          {isRegistrationOpen &&
+            <div className='registration'>
+              <h3>Registration</h3>
+              {isRegistered
+                ? <form className='unregister pure-form'
+                  onSubmit={(e) => register(e, false, registration)}>
+                  <input type='submit' value='Unregister'
+                    className='unregister pure-button pure-button' />
+                </form>
+                : <form className='register pure-form'
+                  onSubmit={(e) => register(e, true, registration)}>
+                  <input name='name' value={this.state.name}
+                    placeholder={`Name (e.g. ${username})`}
+                    onChange={this.handleChange} /> {' '}
+                  <input type='submit' value='Register'
+                    className='register pure-button pure-button' />
+                </form>
+              }
+            </div>
+          }
 
-        <h3>Registered Guests</h3>
-        <ul className='guests'>
-          {registrations.map(registration => (
-            <li key={registration.id}>
-              <Link to={`/registrations/${registration.id}`}>{registration.name}</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+          <h3>Registered Guests</h3>
+          <ul className='guests'>
+            {registrations.map(registration => (
+              <li key={registration.id}>
+                <Link to={`/registrations/${registration.id}`}>{registration.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </ResponsiveContainer>
     )
   }
 

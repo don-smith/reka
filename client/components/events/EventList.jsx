@@ -2,13 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Button, Segment, Container, Header, Responsive, Sidebar } from 'semantic-ui-react'
+import { Button, Segment, Container, Header } from 'semantic-ui-react'
 
 import { getEventList } from '../../actions/events'
 
-import DesktopMenu from '../DesktopMenu'
-import MobileMenu from '../MobileMenu'
-import MobilePusher from '../MobilePusher'
+import ResponsiveContainer from '../ResponsiveContainer'
 
 class EventList extends React.PureComponent {
   state = { sidebarOpened: false }
@@ -20,8 +18,6 @@ class EventList extends React.PureComponent {
   }
 
   render () {
-    const { sidebarOpened } = this.state
-    const getWidth = () => window.innerWidth
     const { upcoming, hosted, attended } = this.props.events
 
     const noneUpcomingMessage = <p>You don&apos;t have any upcoming events.</p>
@@ -56,31 +52,9 @@ class EventList extends React.PureComponent {
     )
 
     return (
-      <div>
-        <Responsive
-          getWidth={getWidth}
-          minWidth={Responsive.onlyTablet.minWidth}>
-          <DesktopMenu fixed />
-          <Segment style={ { padding: '8em 3em' } } vertical>
-            <EventListContent />
-          </Segment>
-        </Responsive>
-        <Responsive
-          as={Sidebar.Pushable}
-          getWidth={getWidth}
-          maxWidth={Responsive.onlyMobile.maxWidth}>
-          <MobileMenu
-            sidebarOpened={sidebarOpened}
-            handleToggle={this.handleToggle} />
-          <MobilePusher
-            sidebarOpened={sidebarOpened}
-            handleToggle={this.handleToggle}>
-            <Segment style={ { padding: '3em 3em' } } vertical>
-              <EventListContent />
-            </Segment>
-          </MobilePusher>
-        </Responsive>
-      </div>
+      <ResponsiveContainer>
+        <EventListContent />
+      </ResponsiveContainer>
     )
   }
 

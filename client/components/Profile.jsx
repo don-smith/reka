@@ -4,71 +4,25 @@ import { connect } from 'react-redux'
 
 import { updateProfile } from '../actions/auth'
 import { showError, clearError } from '../actions/error'
+import ResponsiveContainer from './ResponsiveContainer'
 
 class Profile extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      username: props.username,
-      currentPassword: '',
-      newPassword: '',
-      confirm: '',
-      match: false,
-      showMatch: false
-    }
-    this.styles = {
-      match: {
-        color: 'red'
-      }
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+  state = {
+    username: this.props.username,
+    currentPassword: '',
+    newPassword: '',
+    confirm: '',
+    match: false,
+    showMatch: false
   }
 
-  render () {
-    const {
-      username, currentPassword, newPassword, confirm, showMatch, match
-    } = this.state
-
-    return (
-      <div className='profile'>
-        <div className='page-content-wrapper'>
-          <div className='content'>
-            <form className='pure-form pure-form-stacked'>
-              <fieldset>
-                <legend>Profile</legend>
-
-                <label htmlFor='username'>Username</label>
-                <input id='username' name='username' placeholder='username'
-                  onChange={this.handleChange} value={username} />
-
-                <label htmlFor='currentPassword'>Current password</label>
-                <input id='currentPassword' name='currentPassword'
-                  type='password' placeholder='current password'
-                  onChange={this.handleChange} value={currentPassword} />
-
-                <label htmlFor='newPassword'>New password</label>
-                <input id='newPassword' name='newPassword'
-                  type='password' placeholder='newPassword'
-                  onChange={this.handleChange} value={newPassword} />
-
-                <label htmlFor='confirm'>Confirm new password</label>
-                <input id='confirm' name='confirm'
-                  type='password' placeholder='confirm password'
-                  onChange={this.handleChange} value={confirm} />
-
-                {showMatch && !match && <span style={this.styles.match}>*</span>}
-                <button className='pure-button pure-button-primary'
-                  onClick={this.handleSubmit}>Update profile</button>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-    )
+  styles = {
+    match: {
+      color: 'red'
+    }
   }
 
-  handleChange (e) {
+  handleChange = e => {
     const { name, value } = e.target
     let match = this.state.match
     match = name === 'newPassword' ? value === this.state.confirm : match
@@ -80,7 +34,7 @@ class Profile extends React.Component {
     })
   }
 
-  handleSubmit (e) {
+  handleSubmit = e => {
     const { id, updateProfile } = this.props
     const { username, currentPassword, newPassword, confirm } = this.state
     updateProfile(id, username, currentPassword, newPassword, confirm)
@@ -90,6 +44,51 @@ class Profile extends React.Component {
       newPassword: '',
       confirm: ''
     })
+  }
+
+  render () {
+    const {
+      username, currentPassword, newPassword, confirm, showMatch, match
+    } = this.state
+
+    return (
+      <ResponsiveContainer>
+        <div className='ui grid'>
+          <form className='ui large form'>
+            <div className='ui stacked'>
+              <h2 className='ui header'>Profile</h2>
+
+              <div className='field'>
+                <input id='username' name='username' placeholder='username'
+                  onChange={this.handleChange} value={username} />
+              </div>
+
+              <div className='field'>
+                <input id='currentPassword' name='currentPassword'
+                  type='password' placeholder='current password'
+                  onChange={this.handleChange} value={currentPassword} />
+              </div>
+
+              <div className='field'>
+                <input id='newPassword' name='newPassword'
+                  type='password' placeholder='newPassword'
+                  onChange={this.handleChange} value={newPassword} />
+              </div>
+
+              <div className='field'>
+                <input id='confirm' name='confirm'
+                  type='password' placeholder='confirm password'
+                  onChange={this.handleChange} value={confirm} />
+              </div>
+
+              {showMatch && !match && <span style={this.styles.match}>*</span>}
+              <button data-e2e='update-button' className='ui fluid large primary button'
+                onClick={this.handleSubmit}>Update profile</button>
+            </div>
+          </form>
+        </div>
+      </ResponsiveContainer>
+    )
   }
 }
 
