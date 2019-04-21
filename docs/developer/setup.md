@@ -15,16 +15,23 @@ Currently, this repo targets Node.js version 6.11.3, the latest LTS (long-term s
   npm install
   ```
 
+1. Create a `.env` file
+
+  ```sh
+  # from the root project folder
+  cp .env.example .env
+  ```
+
 1. (Optional) Apply the database migrations - this is run during `postinstall`
 
   ```sh
-  npm run knex migrate:latest
+  npm run db:migrate
   ```
 
 1. Add test data to the development database
 
   ```sh
-  npm run knex seed:run
+  npm run db:seed
   ```
 
 1. Start the development server
