@@ -17,10 +17,10 @@
     "db:seed": "npm run knex seed:run",
     "db:delete": "rm server/db/dev.sqlite",
     "db:reset": "run-s db:delete db:migrate db:seed",
-    "lint": "eslint client server test --ignore-pattern 'bundle.js' && exit 0",
+    "lint": "eslint client server tests --ignore-pattern 'bundle.js' && exit 0",
     "postinstall": "run-s build db:migrate",
-    "test": "jest test/client test/server && exit 0",
-    "test:watch": "jest test/client test/server --watch",
+    "test": "jest tests/client tests/server && exit 0",
+    "test:watch": "jest tests/client tests/server --watch",
     "start": "node server"
   },
   "precommit": "lint, test, e2e",
@@ -38,7 +38,7 @@
       "\\.(css|less)$": "identity-obj-proxy"
     },
     "setupFiles": [
-      "./test/client/setup.js"
+      "./tests/client/setup.js"
     ]
   },
   "dependencies": {
