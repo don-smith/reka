@@ -1,0 +1,701 @@
+{
+	"info": {
+		"_postman_id": "35e172d1-b95d-4ef6-8b4b-67e0ce6d8a4c",
+		"name": "Reka",
+		"description": "All of the web API routes in Reka",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0c3f1fd-b513-4881-b53b-dbcf455b6692",
+								"exec": [
+									"pm.test(\"Response has a token and a message\", function () {",
+									"    pm.response.to.have.jsonBody(\"token\")",
+									"    pm.response.to.have.jsonBody(\"message\", \"Authentication successful.\")",
+									"})",
+									"",
+									"pm.environment.set(\"token\", pm.response.json().token)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"postman\",\n\t\"password\": \"postman\"\n}"
+						},
+						"url": {
+							"raw": "{{rooturl}}/api/v1/auth/register",
+							"host": [
+								"{{rooturl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a 'postman' user"
+					},
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"postman\",\n\t\"password\": \"postman\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "216"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d8-8RCqpDv4qZJqJNNSy0FfNuJpskI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Apr 2019 05:18:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Authentication successful.\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJwb3N0bWFuIiwiaWF0IjoxNTU1ODIzODk1LCJleHAiOjE1NTU5MTAyOTV9.AxlkI2ZoufPUi6lmRQXDJO4M0iXAUOlBkaDK_ed_1v0\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Sign in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6591cd74-00f1-467c-b161-c797910f13de",
+								"exec": [
+									"pm.test(\"Response has a token and a message\", function () {",
+									"    pm.response.to.have.jsonBody(\"token\")",
+									"    pm.response.to.have.jsonBody(\"message\", \"Authentication successful.\")",
+									"})",
+									"",
+									"pm.environment.set(\"token\", pm.response.json().token)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"postman\",\n\t\"password\": \"postman\"\n}"
+						},
+						"url": {
+							"raw": "{{rooturl}}/api/v1/auth/signin",
+							"host": [
+								"{{rooturl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signin"
+							]
+						},
+						"description": "Sign in using the 'postman' user"
+					},
+					"response": [
+						{
+							"name": "Sign in",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"postman\",\n\t\"password\": \"postman\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/auth/signin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "216"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d8-m062tn0L97xpMBnSYyrISZd93LQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Apr 2019 05:04:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Authentication successful.\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJwb3N0bWFuIiwiaWF0IjoxNTU1ODIzMDgyLCJleHAiOjE1NTU5MDk0ODJ9.JCuIc0jvQVkkVWPkDpk2dLAxUOqMv9faN_d_mjThTp0\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Auth related endpoints for registering and signing in."
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GET id 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "76ed99de-7c31-47b5-b442-c1913444da70",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200)",
+									"});",
+									"",
+									"pm.test(\"The correct user is returned\", function () {",
+									"    pm.response.to.have.jsonBody(\"id\", 4)",
+									"    pm.response.to.have.jsonBody(\"username\", \"postman\")",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"postman\",\n\t\"password\": \"postman\"\n}"
+						},
+						"url": {
+							"raw": "{{rooturl}}/api/v1/users/4",
+							"host": [
+								"{{rooturl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"4"
+							]
+						},
+						"description": "GET the user with the ID of 4"
+					},
+					"response": [
+						{
+							"name": "GET id 4",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"postman\",\n\t\"password\": \"postman\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/users/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d-iovvOp3BrgTdu6QfgqOmc6w9Vyk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Apr 2019 05:19:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"username\": \"postman\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT id 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0b848c00-c8c1-4af3-b4e0-4755451c19ad",
+								"exec": [
+									"pm.test(\"Status code is 202\", function () {",
+									"    pm.response.to.have.status(202);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"postman\",\n\t\"currentPassword\": \"postman\",\n\t\"newPassword\": \"samepostman\"\n}"
+						},
+						"url": {
+							"raw": "{{rooturl}}/api/v1/users/4",
+							"host": [
+								"{{rooturl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"4"
+							]
+						},
+						"description": "Updates the user with the ID of 4. This is primarily used to change the user's password."
+					},
+					"response": [
+						{
+							"name": "PUT id 4",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"postman\",\n\t\"currentPassword\": \"postman\",\n\t\"newPassword\": \"samepostman\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/users/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"4"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Apr 2019 05:20:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"description": "Endpoints related to users.\n\nAll of these routes require an Authorization header, which is set as a Postman environment variable when you run either the Auth/Register or Auth/Sign in routes.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ae360ef7-1a8c-41f8-91e5-a10751db6a93",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "42a6344d-c2b8-41d6-9018-c5e9c5948ef5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "GET all events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{rooturl}}/api/v1/events",
+							"host": [
+								"{{rooturl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"events"
+							]
+						},
+						"description": "Retrieves all of the signed in user's events."
+					},
+					"response": [
+						{
+							"name": "GET events",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{rooturl}}/api/v1/events",
+									"host": [
+										"{{rooturl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "521"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"209-VBmjZrB/h8Kr+2m6c75GaVx04ko\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Apr 2019 06:15:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"upcoming\": [\n        {\n            \"id\": 1,\n            \"name\": \"Jules on wine\",\n            \"userId\": 1,\n            \"offeringType\": \"wine\",\n            \"location\": \"123 Happy Lane\",\n            \"description\": \"Jules is having another wine tasting party\"\n        }\n    ],\n    \"hosted\": [\n        {\n            \"id\": 2,\n            \"name\": \"Does Jules beer in the woods?\",\n            \"userId\": 1,\n            \"offeringType\": \"beer\",\n            \"location\": \"123 Yum Drive\",\n            \"description\": \"Jules is having her first beer tasting\"\n        }\n    ],\n    \"attended\": [\n        {\n            \"id\": 3,\n            \"name\": \"Jimmy and the chocolate factory\",\n            \"userId\": 2,\n            \"offeringType\": \"chocolate\",\n            \"location\": \"123 Cocoa Road\",\n            \"description\": \"Once you go dark, you never go back\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "POST a new event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8dfb354c-3bcb-4c0f-a9e2-5f92b50a1863",
+								"exec": [
+									"const date = new Date()",
+									"const day = date.getDate()",
+									"pm.environment.set(\"past-event-timestamp\", date.setDate(day - 7))",
+									"pm.environment.set(\"future-event-timestamp\", date.setDate(day + 7))"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Post-man chocolate\",\n  \"userId\": 4,\n  \"location\": \"789 Cocoa Place\",\n  \"dateTime\": {{future-event-timestamp}},\n  \"description\": \"Bring your favourite vegan varieties\",\n  \"offeringType\": \"chocolate\"\n}\n"
+						},
+						"url": {
+							"raw": "{{rooturl}}/api/v1/events",
+							"host": [
+								"{{rooturl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"events"
+							]
+						},
+						"description": "Adds a new event for the current user."
+					},
+					"response": []
+				},
+				{
+					"name": "GET event 4",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cebe85a5-0e54-46cf-b203-70f2db0829a0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{rooturl}}/api/v1/events/4",
+							"host": [
+								"{{rooturl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"events",
+								"4"
+							]
+						},
+						"description": "Gets the details of the event with the ID of 3."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for adding and retrieving event information.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "736d6976-25c1-44c4-b378-745105f29a2d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "52772570-dbaf-4897-a7cd-4424b1764c82",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,5 +1,10 @@
 # The Reka API
 
+> Note: The API documentation is being moved to a Postman collection.
+> This document will be updated with details about how to use the collection
+> in a future commit. For now, it is being kept as a reference until the
+> collection and the associated documentation is complete.
+
 `*` indicates an endpoint protected with an `Authorization` header
 
 ## `POST /auth/register`
@@ -77,6 +82,14 @@ Response:
 
 ```js
 {
+  upcoming: [{
+    id: number,
+    name: string,
+    userId: number,
+    offeringType: string,
+    location: string,
+    description: string
+  }],
   hosted: [{
     id: number,
     name: string,
