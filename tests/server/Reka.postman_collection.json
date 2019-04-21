@@ -10,7 +10,7 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "Register",
+					"name": "Register new user",
 					"event": [
 						{
 							"listen": "test",
@@ -124,7 +124,7 @@
 					]
 				},
 				{
-					"name": "Sign in",
+					"name": "Sign in new user",
 					"event": [
 						{
 							"listen": "test",
@@ -244,7 +244,7 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "GET id 4",
+					"name": "User #4 details",
 					"event": [
 						{
 							"listen": "test",
@@ -253,7 +253,7 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200)",
-									"});",
+									"})",
 									"",
 									"pm.test(\"The correct user is returned\", function () {",
 									"    pm.response.to.have.jsonBody(\"id\", 4)",
@@ -273,8 +273,8 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -362,7 +362,7 @@
 					]
 				},
 				{
-					"name": "PUT id 4",
+					"name": "Change password",
 					"event": [
 						{
 							"listen": "test",
@@ -502,7 +502,41 @@
 			"name": "Events",
 			"item": [
 				{
-					"name": "GET all events",
+					"name": "All events",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ba6f387d-3f64-4522-af37-955b94252fcc",
+								"exec": [
+									"// See the Event folder settings for pre-request scripting"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6f2771b3-5e44-47db-8e39-a4bad701e722",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Response body has correct properties', function () {",
+									"    const json = pm.response.json()",
+									"    pm.response.to.have.jsonBody(\"upcoming\")",
+									"    pm.response.to.have.jsonBody(\"hosted\")",
+									"    pm.response.to.have.jsonBody(\"attended\")",
+									"    pm.expect(json.upcoming).to.be.an('array')",
+									"    pm.expect(json.hosted).to.be.an('array')",
+									"    pm.expect(json.attended).to.be.an('array')",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -580,17 +614,29 @@
 					]
 				},
 				{
-					"name": "POST a new event",
+					"name": "New event",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"id": "8dfb354c-3bcb-4c0f-a9e2-5f92b50a1863",
 								"exec": [
+									"// See the Event folder settings for additional pre-request scripting",
 									"const date = new Date()",
 									"const day = date.getDate()",
-									"pm.environment.set(\"past-event-timestamp\", date.setDate(day - 7))",
 									"pm.environment.set(\"future-event-timestamp\", date.setDate(day + 7))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "883342dd-aa92-45c4-89ec-e236f4b22f3f",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201)",
+									"})"
 								],
 								"type": "text/javascript"
 							}
@@ -602,8 +648,8 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
@@ -623,23 +669,99 @@
 						},
 						"description": "Adds a new event for the current user."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "New event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Post-man chocolate\",\n  \"userId\": 4,\n  \"location\": \"789 Cocoa Place\",\n  \"dateTime\": {{future-event-timestamp}},\n  \"description\": \"Bring your favourite vegan varieties\",\n  \"offeringType\": \"chocolate\"\n}\n"
+								},
+								"url": {
+									"raw": "{{rooturl}}/api/v1/events",
+									"host": [
+										"{{rooturl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"events"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Apr 2019 11:39:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
-					"name": "GET event 4",
+					"name": "Event #3 details",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"id": "cebe85a5-0e54-46cf-b203-70f2db0829a0",
 								"exec": [
-									""
+									"// See the Event folder settings for pre-request scripting"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "70fc69e7-9e19-4719-9b19-6dfb9eafde7f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200)",
+									"})",
+									"",
+									"pm.test('Response body has correct properties', function () {",
+									"    const json = pm.response.json()",
+									"    pm.response.to.have.jsonBody(\"details\")",
+									"    pm.response.to.have.jsonBody(\"registrations\")",
+									"    pm.expect(json.details).to.be.an('object')",
+									"    pm.expect(json.registrations).to.be.an('array')",
+									"})"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -647,7 +769,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{rooturl}}/api/v1/events/4",
+							"raw": "{{rooturl}}/api/v1/events/3",
 							"host": [
 								"{{rooturl}}"
 							],
@@ -655,12 +777,67 @@
 								"api",
 								"v1",
 								"events",
-								"4"
+								"3"
 							]
 						},
 						"description": "Gets the details of the event with the ID of 3."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Event #3 details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{rooturl}}/api/v1/events/3",
+									"host": [
+										"{{rooturl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"events",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "269"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10d-uCrL5rh/Pf6wJnQ2PosfILjU2SY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Apr 2019 11:42:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"details\": {\n        \"id\": 3,\n        \"name\": \"Jimmy and the chocolate factory\",\n        \"description\": \"Once you go dark, you never go back\",\n        \"location\": \"123 Cocoa Road\",\n        \"userID\": 2,\n        \"dateTime\": 1551940263843,\n        \"offeringType\": \"chocolate\"\n    },\n    \"registrations\": [\n        {\n            \"id\": 7,\n            \"name\": \"Julie\",\n            \"userId\": 1,\n            \"eventId\": 3\n        }\n    ]\n}"
+						}
+					]
 				}
 			],
 			"description": "Endpoints for adding and retrieving event information.",
@@ -673,7 +850,51 @@
 						"type": "string"
 					}
 				]
-			}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2aa7821d-0157-4234-b5a9-970930835462",
+						"type": "text/javascript",
+						"exec": [
+							"/* The purpose of this script is to sign in with an existing user",
+							" * in order to set the 'token' global environment variable to be ",
+							" * used by the routes in this folder.",
+							" */",
+							" ",
+							"const rooturl = pm.environment.get('rooturl')",
+							"const signInRequest = {",
+							"  url: rooturl + '/api/v1/auth/signin',",
+							"  method: 'POST',",
+							"  header: 'Content-Type:application/json',",
+							"  body: {",
+							"    mode: 'raw',",
+							"    raw: JSON.stringify({",
+							"        username: 'jules',",
+							"        password: 'jules'",
+							"    })",
+							"  }",
+							"}",
+							"",
+							"pm.sendRequest(signInRequest, function (err, res) {",
+							"    const token = res.json().token",
+							"    pm.environment.set('token', token)",
+							"})"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac78df93-909b-4cb7-adef-29c4d522a66b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		}
 	],
 	"event": [

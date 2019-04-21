@@ -20,10 +20,12 @@
     "lint": "eslint client server tests --ignore-pattern 'bundle.js' && exit 0",
     "postinstall": "run-s build db:migrate",
     "test": "jest tests/client tests/server && exit 0",
+    "test:api": "run-s db:reset postman:run db:reset",
+    "postman:run": "newman run tests/server/Reka.postman_collection.json --environment tests/server/Reka-Dev.postman_environment.json",
     "test:watch": "jest tests/client tests/server --watch",
     "start": "node server"
   },
-  "precommit": "lint, test, e2e",
+  "precommit": "lint, test, test:api, e2e",
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -77,6 +79,7 @@
     "input-moment": "^0.4.0",
     "jest": "^24.1.0",
     "jsdom": "^13.2.0",
+    "newman": "^4.4.1",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.1.5",
     "pre-commit": "^1.2.2",
