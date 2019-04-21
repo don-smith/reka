@@ -5,7 +5,6 @@ import 'semantic-ui-css/semantic.min.css'
 
 import AllRoutes from './AllRoutes'
 import Home from './home/Home'
-// import Header from './Header'
 import SignIn from './SignIn'
 import Register from './Register'
 import Profile from './Profile'
@@ -18,8 +17,8 @@ const App = () => {
   return (
     <Router>
       <div>
-        {/* <Route path='/' component={Header} /> */}
         {/* <Route path='/' component={ErrorMessage} /> */}
+        <Route path='/' component={AllRoutes} />
         <Route exact path='/' component={Home} />
         <Route path='/register' component={Register} />
         <Route path='/signin' component={SignIn} />
