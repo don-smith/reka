@@ -47,32 +47,32 @@ class EventDetails extends React.PureComponent {
     return (
       <ResponsiveContainer>
         <div className='event-details'>
-          <h2>{name}</h2>
+          <Header as='h2'>{name}</Header>
           <p>{description}</p>
           <div className='date'>{date}</div>
           <div className='location'>{eventDetails.location}</div>
           <div className='offering'>Tasting: {eventDetails.offeringType}</div>
 
           {isRegistrationOpen &&
-            <div className='registration'>
+            <React.Fragment>
               <Header as='h3'>Registration</Header>
               {isRegistered
                 ? <Form className='unregister'
                   onSubmit={(e) => register(e, false, registration)}>
-                  <Form.Input type='submit' as={Button}>Unregister</Form.Input>
+                  <Button type='submit'>Unregister</Button>
                 </Form>
                 : <Form className='register'
                   onSubmit={(e) => register(e, true, registration)}>
                   <Form.Input name='name' value={this.state.name}
                     placeholder={`Name (e.g. ${username})`} label='Name'
                     onChange={this.handleChange} /> {' '}
-                  <Form.Input type='submit' as={Button}>Register</Form.Input>
+                  <Button type='submit'>Register</Button>
                 </Form>
               }
-            </div>
+            </React.Fragment>
           }
 
-          <h3>Registered Guests</h3>
+          <Header as='h3'>Registered Guests</Header>
           <ul className='guests'>
             {registrations.map(registration => (
               <li key={registration.id}>
