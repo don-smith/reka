@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import 'semantic-ui-css/semantic.min.css'
 
+import AllRoutes from './AllRoutes'
 import Home from './home/Home'
 // import Header from './Header'
 import SignIn from './SignIn'
