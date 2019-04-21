@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import {
   Button,
   Container,
@@ -30,7 +31,7 @@ const HeroSection = ({ mobile }) => (
         marginTop: mobile ? '0.5em' : '1.5em'
       }}
     />
-    <Button primary size='huge'>
+    <Button as={Link} to='/events/new' primary size='huge'>
       Create your next event
       <Icon name='right arrow' />
     </Button>

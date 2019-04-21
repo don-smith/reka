@@ -34,7 +34,7 @@ class EventList extends React.PureComponent {
         <Header as='h1'>Events</Header>
         <Button as={Link} to='/events/new'>Host a new event</Button>
 
-        <Segment vertical style={ { padding: '1em 0em' } }>
+        <Segment vertical style={{ padding: '1em 0em' }}>
           <div data-e2e='upcoming'>
             <h2>My upcoming events</h2>
             {this.getEvents(upcoming, noneUpcomingMessage)}

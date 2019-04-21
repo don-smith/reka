@@ -3,6 +3,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Button, Form, Header } from 'semantic-ui-react'
 
 import { register } from '../../actions/registrations'
 import { getEventDetails } from '../../actions/events'
@@ -54,21 +55,19 @@ class EventDetails extends React.PureComponent {
 
           {isRegistrationOpen &&
             <div className='registration'>
-              <h3>Registration</h3>
+              <Header as='h3'>Registration</Header>
               {isRegistered
-                ? <form className='unregister pure-form'
+                ? <Form className='unregister'
                   onSubmit={(e) => register(e, false, registration)}>
-                  <input type='submit' value='Unregister'
-                    className='unregister pure-button pure-button' />
-                </form>
-                : <form className='register pure-form'
+                  <Form.Input type='submit' as={Button}>Unregister</Form.Input>
+                </Form>
+                : <Form className='register'
                   onSubmit={(e) => register(e, true, registration)}>
-                  <input name='name' value={this.state.name}
-                    placeholder={`Name (e.g. ${username})`}
+                  <Form.Input name='name' value={this.state.name}
+                    placeholder={`Name (e.g. ${username})`} label='Name'
                     onChange={this.handleChange} /> {' '}
-                  <input type='submit' value='Register'
-                    className='register pure-button pure-button' />
-                </form>
+                  <Form.Input type='submit' as={Button}>Register</Form.Input>
+                </Form>
               }
             </div>
           }

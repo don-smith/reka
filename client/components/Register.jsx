@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Button, Form, Header, Segment } from 'semantic-ui-react'
+import ResponsiveContainer from './ResponsiveContainer'
 
 import { register } from '../actions/auth'
 import { showError, clearError } from '../actions/error'
@@ -33,36 +35,36 @@ class Register extends React.Component {
   render () {
     const { username, password, confirm, showMatch, match } = this.state
     return (
-      <div className='ui middle aligned center aligned grid'>
-        <div style={style}>
-          <form className='ui large form'>
-            <div className='ui stacked segment'>
-              <h2 className='ui header'>Register</h2>
+      <ResponsiveContainer>
+        <div className='ui middle aligned center aligned grid'>
+          <div style={style}>
+            <Form size='large'>
+              <Segment>
+                <Header as='h2'>Register</Header>
 
-              <div className='field'>
-                <input id='username' name='username' placeholder='username'
+                <Form.Input data-e2e='username' name='username' placeholder='username'
                   onChange={this.handleChange} value={username} />
-              </div>
 
-              <div className='field'>
-                <input id='password' name='password'
+                <Form.Input data-e2e='password' name='password'
                   type='password' placeholder='password'
                   onChange={this.handleChange} value={password} />
-              </div>
 
-              <div className='field'>
-                <input id='confirm' name='confirm'
+                <Form.Input data-e2e='confirm' name='confirm'
                   type='password' placeholder='confirm password'
                   onChange={this.handleChange} value={confirm} />
-              </div>
 
-              {showMatch && !match && <span style={this.styles.match}>*</span>}
-              <button className='ui fluid large primary button'
-                onClick={this.handleSubmit}>Register</button>
-            </div>
-          </form>
+                {showMatch && !match && <span style={this.styles.match}>*</span>}
+
+                <Button fluid primary
+                  onClick={this.handleSubmit}
+                  data-e2e='submit-button'>
+                  Register
+                </Button>
+              </Segment>
+            </Form>
+          </div>
         </div>
-      </div>
+      </ResponsiveContainer>
     )
   }
 

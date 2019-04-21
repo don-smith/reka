@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import { signIn } from '../actions/auth'
 import { clearError } from '../actions/error'
 import { withRouter } from 'react-router-dom'
+import { Button, Form, Header, Segment } from 'semantic-ui-react'
+
+import ResponsiveContainer from './ResponsiveContainer'
 
 const style = {
   minWidth: '350px',
@@ -34,29 +37,27 @@ class SignIn extends React.Component {
   render () {
     const { username, password } = this.state
     return (
-      <div className='ui middle center aligned grid'>
-        <div style={style}>
-          <form className='ui large form'>
-            <div className='ui stacked segment'>
-              <h2 className='ui header'>Sign In</h2>
+      <ResponsiveContainer>
+        <div className='ui middle center aligned grid'>
+          <div style={style}>
+            <Form size='large'>
+              <Segment>
+                <Header as='h2'>Sign In</Header>
 
-              <div className='field'>
-                <input data-e2e='username' name='username' placeholder='username'
+                <Form.Input data-e2e='username' name='username' label='Username'
                   onChange={this.handleChange} value={username} />
-              </div>
 
-              <div className='field'>
-                <input data-e2e='password' name='password'
-                  type='password' placeholder='password'
+                <Form.Input data-e2e='password' name='password'
+                  type='password' label='Password'
                   onChange={this.handleChange} value={password} />
-              </div>
 
-              <button data-e2e='sign-in-button' className='ui fluid large primary button'
-                onClick={this.handleSubmit}>Sign In</button>
-            </div>
-          </form>
+                <Button data-e2e='sign-in-button' fluid primary
+                  onClick={this.handleSubmit}>Sign In</Button>
+              </Segment>
+            </Form>
+          </div>
         </div>
-      </div>
+      </ResponsiveContainer>
     )
   }
 }

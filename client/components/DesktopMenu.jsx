@@ -24,10 +24,13 @@ class DesktopMenu extends React.Component {
   }
 
   render () {
-    const { fixed, signedIn, atHome, atEvents, atProfile } = this.props
+    const {
+      fixed, signedIn, atHome, atEvents, atProfile, atSignIn, atRegister
+    } = this.props
 
     return (
       <Menu
+        style={{ backgroundColor: atHome ? 'transparent' : 'white' }}
         fixed={fixed ? 'top' : null}
         inverted={!fixed}
         pointing={true}
@@ -55,10 +58,12 @@ class DesktopMenu extends React.Component {
               onClick={this.handleLogOff}>Log off</Menu.Item> }
             {!signedIn && <Menu.Item
               as={Link}
-              to='/register'>Register</Menu.Item> }
+              to='/register'
+              active={atRegister}>Register</Menu.Item> }
             {!signedIn && <Menu.Item
               as={Link}
-              to='/signin'>Sign in</Menu.Item> }
+              to='/signin'
+              active={atSignIn}>Sign in</Menu.Item> }
           </Menu.Item>
         </Container>
       </Menu>
@@ -77,6 +82,8 @@ DesktopMenu.propTypes = {
   atHome: PropTypes.bool,
   atEvents: PropTypes.bool,
   atProfile: PropTypes.bool,
+  atSignIn: PropTypes.bool,
+  atRegister: PropTypes.bool,
   userDetails: PropTypes.object
 }
 
@@ -87,6 +94,8 @@ function mapStateToProps ({ userDetails }, ownProps) {
     atHome: path === '/',
     atEvents: path.includes('events'),
     atProfile: path.includes('profile'),
+    atSignIn: path.includes('signin'),
+    atRegister: path.includes('register'),
     signedIn: isAuthenticated(),
     userDetails
   }

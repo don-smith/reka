@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Button, Form } from 'semantic-ui-react'
 
 import { updateProfile } from '../actions/auth'
 import { showError, clearError } from '../actions/error'
@@ -54,38 +55,30 @@ class Profile extends React.Component {
     return (
       <ResponsiveContainer>
         <div className='ui grid'>
-          <form className='ui large form'>
+          <Form size='large'>
             <div className='ui stacked'>
               <h2 className='ui header'>Profile</h2>
 
-              <div className='field'>
-                <input id='username' name='username' placeholder='username'
-                  onChange={this.handleChange} value={username} />
-              </div>
+              <Form.Input data-e2e='username' name='username' label='Username'
+                onChange={this.handleChange} value={username} />
 
-              <div className='field'>
-                <input id='currentPassword' name='currentPassword'
-                  type='password' placeholder='current password'
-                  onChange={this.handleChange} value={currentPassword} />
-              </div>
+              <Form.Input data-e2e='currentPassword' name='currentPassword'
+                type='password' label='Current password'
+                onChange={this.handleChange} value={currentPassword} />
 
-              <div className='field'>
-                <input id='newPassword' name='newPassword'
-                  type='password' placeholder='newPassword'
-                  onChange={this.handleChange} value={newPassword} />
-              </div>
+              <Form.Input data-e2e='newPassword' name='newPassword'
+                type='password' label='New password'
+                onChange={this.handleChange} value={newPassword} />
 
-              <div className='field'>
-                <input id='confirm' name='confirm'
-                  type='password' placeholder='confirm password'
-                  onChange={this.handleChange} value={confirm} />
-              </div>
+              <Form.Input data-e2e='confirm' name='confirm'
+                type='password' label='Confirm password'
+                onChange={this.handleChange} value={confirm} />
 
               {showMatch && !match && <span style={this.styles.match}>*</span>}
-              <button data-e2e='update-button' className='ui fluid large primary button'
-                onClick={this.handleSubmit}>Update profile</button>
+              <Button data-e2e='update-button' fluid primary
+                onClick={this.handleSubmit}>Update profile</Button>
             </div>
-          </form>
+          </Form>
         </div>
       </ResponsiveContainer>
     )
