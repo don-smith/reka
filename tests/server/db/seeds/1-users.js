@@ -1,10 +1,10 @@
-const hash = require('../../../../server/auth/hash')
+const { generateHash } = require('authenticare/server')
 
 exports.seed = (knex, Promise) => {
   return Promise.all([
-    hash.generate('jules'),
-    hash.generate('jimbo'),
-    hash.generate('janej')
+    generateHash('jules'),
+    generateHash('jimbo'),
+    generateHash('janej')
   ]).then(([julesHash, jimboHash, janejHash]) => {
     return knex('users').insert([
       { id: 1, username: 'jules', hash: julesHash },

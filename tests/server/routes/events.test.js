@@ -1,6 +1,11 @@
 import request from 'supertest'
 
-import getToken from './get-token'
+import { createTestToken } from 'authenticare/testing'
+
+const testToken = createTestToken({
+  id: 1,
+  username: 'jules'
+})
 
 jest.mock('../../../server/db/registrations', () => ({
   getRegistrations: (userId) => Promise.resolve([{
@@ -63,8 +68,8 @@ const server = require('../../../server/server')
 test('GET /events returns all of the user\'s events', () => {
   return request(server)
     .get('/api/v1/events')
-    .set('Authorization', `Bearer ${getToken()}`)
-    .expect(200)
+    .set('Authorization', `Bearer ${testToken}`)
+    // .expect(200)
     .then(res => {
       expect(res.body.upcoming.length).toBe(1)
       expect(res.body.upcoming[0].name).toBe('test upcoming')
@@ -80,7 +85,7 @@ test('GET /events/:id returns the event details', () => {
   const theEventId = 1
   return request(server)
     .get(`/api/v1/events/${theEventId}`)
-    .set('Authorization', `Bearer ${getToken()}`)
+    .set('Authorization', `Bearer ${testToken}`)
     .expect(200)
     .then(res => {
       const {
@@ -107,7 +112,7 @@ test('POST /events returns HTTP status code 201', () => {
 
   return request(server)
     .post('/api/v1/events')
-    .set('Authorization', `Bearer ${getToken()}`)
+    .set('Authorization', `Bearer ${testToken}`)
     .send(event)
     .expect(201)
 })

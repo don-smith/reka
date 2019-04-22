@@ -1,5 +1,5 @@
 const connection = require('./connection')
-const hash = require('../auth/hash')
+const { generateHash, verifyHash } = require('authenticare/server')
 
 module.exports = {
   createUser,
@@ -16,7 +16,7 @@ function createUser (username, password, db = connection) {
         return Promise.reject(new Error('User exists'))
       }
     })
-    .then(() => hash.generate(password))
+    .then(() => generateHash(password))
     .then(passwordHash => {
       return db('users').insert({ username, hash: passwordHash })
     })
@@ -48,13 +48,13 @@ function getUserByName (username, db = connection) {
 function updateUser (id, username, currentPassword, newPassword, db = connection) {
   return getUserByName(username, db)
     .then(user => {
-      if (!user || !hash.verify(user.hash, currentPassword)) {
+      if (!user || !verifyHash(user.hash, currentPassword)) {
         return Promise.reject(new Error('Username password match not found'))
       }
       return Promise.resolve(user)
     })
     .then(user => {
-      const newPasswordHash = hash.generate(newPassword)
+      const newPasswordHash = generateHash(newPassword)
       if (id !== user.id) Promise.reject(new Error('Username and ID mismatch'))
       return db('users')
         .update({ username, hash: newPasswordHash })

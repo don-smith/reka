@@ -1,6 +1,11 @@
 import request from 'supertest'
 
-import getToken from './get-token'
+import { createTestToken } from 'authenticare/testing'
+
+const testToken = createTestToken({
+  id: 1,
+  username: 'jules'
+})
 
 jest.mock('../../../server/db/offerings', () => ({
   getOfferings: (eventId) => Promise.resolve([
@@ -41,7 +46,7 @@ test('POST /events/:id/offerings creates a new event offering', () => {
   return request(server)
     .post('/api/v1/events/5/offerings')
     .send({ name: 'test beverage' })
-    .set('Authorization', `Bearer ${getToken()}`)
+    .set('Authorization', `Bearer ${testToken}`)
     .expect(201)
     .then(res => {
       expect(res).toBeDefined()

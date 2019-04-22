@@ -1,6 +1,6 @@
 const express = require('express')
+const { decodeToken } = require('authenticare/server')
 
-const token = require('../auth/token')
 const { getOfferings, createOffering } = require('./offerings')
 const {
   getRegistrations,
@@ -18,7 +18,7 @@ const router = express.Router()
 module.exports = router
 
 // GET /events
-router.get('/', token.decode, (req, res) => {
+router.get('/', decodeToken, (req, res) => {
   const { id: userId } = req.user
   return Promise.all([
     db.getUpcomingEvents(userId),
@@ -53,7 +53,7 @@ router.get('/:id', (req, res) => {
 })
 
 // POST /events
-router.post('/', token.decode, (req, res) => {
+router.post('/', decodeToken, (req, res) => {
   db.createEvent(req.body)
     .then(() => {
       res.status(201).end()
@@ -70,10 +70,10 @@ router.get('/:id/registrations', getRegistrations)
 router.post('/:id/registrations', createRegistration)
 
 // DELETE /events/:id/registrations
-router.delete('/:id/registrations', token.decode, deleteRegistration)
+router.delete('/:id/registrations', decodeToken, deleteRegistration)
 
 // GET /events/:id/offerings
 router.get('/:id/offerings', getOfferings)
 
 // POST /events/:id/offerings
-router.post('/:id/offerings', token.decode, createOffering)
+router.post('/:id/offerings', decodeToken, createOffering)

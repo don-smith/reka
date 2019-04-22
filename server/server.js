@@ -16,6 +16,9 @@ server.use('/api/v1/users', userRoutes)
 server.use('/api/v1/events', eventRoutes)
 server.use('/api/v1/registrations', registrationRoutes.router)
 server.use('/api/v1/offerings', offeringRoutes.router)
+server.use((err, req, res, next) => {
+  console.error('Uncaught routing error:', err)
+})
 
 // Default route for non-API requests
 server.get('*', (req, res) => {
