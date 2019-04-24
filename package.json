@@ -36,12 +36,13 @@
     ]
   },
   "jest": {
+    "setupFilesAfterEnv": [
+      "./tests/client/setup.js",
+      "./tests/server/setup.js"
+    ],
     "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy"
-    },
-    "setupFiles": [
-      "./tests/client/setup.js"
-    ]
+    }
   },
   "dependencies": {
     "authenticare": "^0.1.0",
