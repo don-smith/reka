@@ -1,6 +1,12 @@
-import request from '../lib/api'
+import clientAuth from 'authenticare/client'
+
+import { callApi, baseUrl } from '../api'
 import { showError, clearError } from './error'
-import { saveAuthToken, logOff as logOffUser } from '../lib/auth'
+
+const {
+  signIn: signInUser,
+  logOff: logOffUser,
+  register: registerUser } = clientAuth
 
 export const LOG_OFF = 'LOG_OFF'
 export const REQUEST_SIGNIN = 'REQUEST_SIGNIN'
@@ -18,10 +24,9 @@ const requestUserRegistration = () => {
   }
 }
 
-const receiveUserRegistration = (token) => {
+const receiveUserRegistration = () => {
   return {
-    type: RECEIVE_USER_REGISTRATION,
-    token
+    type: RECEIVE_USER_REGISTRATION
   }
 }
 
@@ -31,10 +36,9 @@ const requestSignIn = () => {
   }
 }
 
-const receiveSignIn = (token) => {
+const receiveSignIn = () => {
   return {
-    type: RECEIVE_SIGNIN,
-    token
+    type: RECEIVE_SIGNIN
   }
 }
 
@@ -73,10 +77,9 @@ const receiveUpdateProfile = () => {
 export function register (newUser) {
   return (dispatch) => {
     dispatch(requestUserRegistration())
-    return request('post', '/auth/register', newUser)
-      .then(res => {
-        const token = saveAuthToken(res.body.token)
-        dispatch(receiveUserRegistration(res.body))
+    return registerUser(newUser, { baseUrl })
+      .then(token => {
+        dispatch(receiveUserRegistration())
         dispatch(getUserDetails(token.id))
         dispatch(clearError())
       })
@@ -94,10 +97,9 @@ export function register (newUser) {
 export function signIn (user, confirmSuccess) {
   return (dispatch) => {
     dispatch(requestSignIn())
-    request('post', '/auth/signin', user)
-      .then(res => {
-        const token = saveAuthToken(res.body.token)
-        dispatch(receiveSignIn(res.body))
+    signInUser(user, { baseUrl })
+      .then(token => {
+        dispatch(receiveSignIn())
         dispatch(getUserDetails(token.id))
         dispatch(clearError())
         confirmSuccess()
@@ -116,7 +118,7 @@ export function signIn (user, confirmSuccess) {
 export function getUserDetails (userId) {
   return (dispatch) => {
     dispatch(requestUserDetails())
-    request('get', `/users/${userId}`)
+    callApi('get', `/users/${userId}`)
       .then(res => {
         dispatch(receiveUserDetails(res.body))
         dispatch(clearError())
@@ -130,7 +132,7 @@ export function getUserDetails (userId) {
 export function updateProfile (profile) {
   return (dispatch) => {
     dispatch(requestUpdateProfile())
-    request('put', `/users/${profile.id}`, profile)
+    callApi('put', `/users/${profile.id}`, profile)
       .then(res => {
         dispatch(receiveUpdateProfile())
         dispatch(getUserDetails(profile.id))

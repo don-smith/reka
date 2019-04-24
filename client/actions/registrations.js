@@ -1,4 +1,4 @@
-import request from '../lib/api'
+import { callApi } from '../api'
 import { showError, clearError } from './error'
 
 export const REQUEST_EVENT_REGISTRATION = 'REQUEST_EVENT_REGISTRATION'
@@ -22,7 +22,7 @@ export function register (isRegistering, registration) {
   return (dispatch) => {
     dispatch(requestRegistration())
     if (isRegistering) {
-      return request('post', `/events/${eventId}/registrations`, payload)
+      return callApi('post', `/events/${eventId}/registrations`, payload)
         .then(() => {
           dispatch(receiveRegistration())
           dispatch(clearError())
@@ -31,7 +31,7 @@ export function register (isRegistering, registration) {
           dispatch(showError('An unexpected error has occurred.'))
         })
     } else {
-      return request('delete', `/events/${eventId}/registrations`, payload)
+      return callApi('delete', `/events/${eventId}/registrations`, payload)
         .then(() => {
           dispatch(receiveRegistration())
           dispatch(clearError())

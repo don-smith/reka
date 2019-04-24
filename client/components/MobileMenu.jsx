@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Menu, Sidebar } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom'
-import { Container, Menu, Sidebar, Icon } from 'semantic-ui-react'
+import { isAuthenticated, getToken } from 'authenticare/client'
 
 import { getUserDetails, logOff } from '../actions/auth'
-import { isAuthenticated, getAuthToken } from '../lib/auth'
 
 class MobileMenu extends React.Component {
   componentDidMount () {
     // populate the store with user details if an auth token is in localStorage
     if (this.props.signedIn && !this.props.userDetails) {
-      const token = getAuthToken()
+      const token = getToken()
       this.props.dispatch(getUserDetails(token.id))
     }
   }

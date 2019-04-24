@@ -1,8 +1,6 @@
-/* eslint-env jest */
-
-jest.mock('../../../client/lib/auth', () => {
-  const testToken = { id: 'test token id' }
+jest.mock('authenticare/client', () => {
   return {
-    saveAuthToken: () => testToken
+    register: () => Promise.resolve({ id: 1 }),
+    signIn: () => Promise.resolve({ id: 1 })
   }
 })

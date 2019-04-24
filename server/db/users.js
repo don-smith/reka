@@ -54,10 +54,15 @@ function updateUser (id, username, currentPassword, newPassword, db = connection
       return Promise.resolve(user)
     })
     .then(user => {
-      const newPasswordHash = generateHash(newPassword)
-      if (id !== user.id) Promise.reject(new Error('Username and ID mismatch'))
-      return db('users')
-        .update({ username, hash: newPasswordHash })
-        .where('id', user.id)
+      if (user.id !== id) {
+        return Promise.reject(new Error('Username and ID mismatch'))
+      }
+
+      return generateHash(newPassword)
+        .then(newPasswordHash => {
+          return db('users')
+            .update({ username, hash: newPasswordHash })
+            .where('id', user.id)
+        })
     })
 }

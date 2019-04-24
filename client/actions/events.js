@@ -1,4 +1,4 @@
-import request from '../lib/api'
+import { callApi } from '../api'
 import { showError, clearError } from './error'
 
 export const REQUEST_ADD_EVENT = 'REQUEST_ADD_EVENT'
@@ -49,7 +49,7 @@ const receiveEventDetails = (event) => {
 export function addNewEvent (event) {
   return (dispatch) => {
     dispatch(requestAddEvent())
-    request('post', '/events', event)
+    callApi('post', '/events', event)
       .then(res => {
         dispatch(receiveAddEvent())
         dispatch(clearError())
@@ -63,7 +63,7 @@ export function addNewEvent (event) {
 export function getEventList () {
   return (dispatch) => {
     dispatch(requestEventList())
-    request('get', '/events')
+    callApi('get', '/events')
       .then(res => {
         dispatch(receiveEventList(res.body))
         dispatch(clearError())
@@ -77,7 +77,7 @@ export function getEventList () {
 export function getEventDetails (id) {
   return (dispatch) => {
     dispatch(requestEventDetails())
-    request('get', `/events/${id}`)
+    callApi('get', `/events/${id}`)
       .then(res => {
         dispatch(receiveEventDetails(res.body))
         dispatch(clearError())

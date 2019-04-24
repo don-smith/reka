@@ -1,10 +1,10 @@
 const express = require('express')
+const { applyAuthRoutes } = require('authenticare/server')
 
 const {
   userExists,
   getUserByName,
   createUser } = require('../db/users')
-const { applyAuthRoutes } = require('authenticare/server')
 
 const router = express.Router()
 

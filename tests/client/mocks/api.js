@@ -1,6 +1,6 @@
-/* eslint-env jest */
-
-jest.mock('../../../client/lib/api', () => {
+jest.mock('../../../client/api', () => {
   const testToken = { id: 'test token id' }
-  return () => Promise.resolve({ body: { token: testToken } })
+  return {
+    callApi: () => Promise.resolve({ body: { token: testToken } })
+  }
 })
