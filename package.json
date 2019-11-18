@@ -99,7 +99,7 @@
     "sqlite3": "^4.0.6",
     "style-loader": "^0.23.1",
     "superagent": "^4.1.0",
-    "supertest": "^3.0.0",
+    "supertest": "^4.0.2",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"
