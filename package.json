@@ -52,7 +52,7 @@
     "knex": "^0.19.5",
     "libsodium-wrappers-sumo": "^0.7.4",
     "moment": "^2.18.1",
-    "pg": "^7.2.0"
+    "pg": "^8.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
