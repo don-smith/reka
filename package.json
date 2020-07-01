@@ -96,7 +96,7 @@
     "redux-thunk": "^2.1.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0",
-    "sqlite3": "^4.0.6",
+    "sqlite3": "^5.0.0",
     "style-loader": "^0.23.1",
     "superagent": "^4.1.0",
     "supertest": "^4.0.2",
