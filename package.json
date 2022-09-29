@@ -23,7 +23,9 @@
     "test:api": "run-s db:reset postman:run db:reset",
     "postman:run": "newman run tests/server/Reka.postman_collection.json --environment tests/server/Reka-Dev.postman_environment.json",
     "test:watch": "jest tests/client tests/server --watch",
-    "start": "node server"
+    "start": "node server",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "precommit": "lint, test, test:api, e2e",
   "babel": {
@@ -46,13 +48,14 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.15.3",
-    "express-jwt": "^5.3.0",
+    "express-jwt": "^6.0.0",
     "jsonwebtoken": "^8.4.0",
     "jwt-decode": "^2.2.0",
     "knex": "^0.19.5",
     "libsodium-wrappers-sumo": "^0.7.4",
-    "moment": "^2.18.1",
-    "pg": "^7.2.0"
+    "moment": "^2.29.4",
+    "pg": "^7.2.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -103,5 +106,6 @@
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"
-  }
+  },
+  "snyk": true
 }
